@@ -22,7 +22,7 @@ const HomePage = () => {
                   href="prop.js"
                   className="hover:text-gold transition duration-200"
                 >
-                  Properties
+                  About Us
                 </a>
               </li>
               <li>
@@ -30,7 +30,7 @@ const HomePage = () => {
                   href="#communities"
                   className="hover:text-gold transition duration-200"
                 >
-                  Communities
+                  Properties
                 </a>
               </li>
               <li>
@@ -38,7 +38,7 @@ const HomePage = () => {
                   href="#testimonials"
                   className="hover:text-gold transition duration-200"
                 >
-                  Testimonials
+                  Communities
                 </a>
               </li>
               <li>
@@ -289,17 +289,17 @@ const HomePage = () => {
                 </li>
                 <li>
                   <a href="#properties" className="hover:text-white">
-                    Properties
+                    About Us
                   </a>
                 </li>
                 <li>
                   <a href="#communities" className="hover:text-white">
-                    Communities
+                    Properties
                   </a>
                 </li>
                 <li>
                   <a href="#testimonials" className="hover:text-white">
-                    Testimonials
+                    Communities
                   </a>
                 </li>
               </ul>
