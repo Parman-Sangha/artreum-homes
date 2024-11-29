@@ -19,7 +19,7 @@ const HomePage = () => {
               </li>
               <li>
                 <a
-                  href="prop.js"
+                  href="pages/prop.js"
                   className="hover:text-gold transition duration-200"
                 >
                   Properties
