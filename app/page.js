@@ -100,7 +100,7 @@ const HomePage = () => {
                 neighborhood.
               </p>
               <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                $550,000
+                $1,000,000
               </p>
               <button className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700">
                 Learn More
