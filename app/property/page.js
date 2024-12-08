@@ -8,44 +8,34 @@ const PropertiesPage = () => {
         <div className="container mx-auto flex justify-between items-center px-6">
           <h1 className="text-3xl font-bold">
             <Link href="/">
-              <a className="hover:text-gold">Artreum Homes</a>
+              <span className="hover:text-gold">Artreum Homes</span>
             </Link>
           </h1>
           <nav>
             <ul className="flex space-x-6 font-medium">
               <li>
-                <Link href="/page">
-                  <a className="hover:text-gold transition duration-200">
-                    Home
-                  </a>
+                <Link href="/">
+                  <span className="hover:text-gold">Home</span>
                 </Link>
               </li>
               <li>
                 <Link href="/about">
-                  <a className="hover:text-gold transition duration-200">
-                    About Us
-                  </a>
+                  <span className="hover:text-gold">About Us</span>
                 </Link>
               </li>
               <li>
-                <Link href="/properties">
-                  <a className="hover:text-gold transition duration-200">
-                    Properties
-                  </a>
+                <Link href="/property">
+                  <span className="hover:text-gold">Properties</span>
                 </Link>
               </li>
               <li>
                 <Link href="/communities">
-                  <a className="hover:text-gold transition duration-200">
-                    Communities
-                  </a>
+                  <span className="hover:text-gold">Communities</span>
                 </Link>
               </li>
               <li>
                 <Link href="/contact">
-                  <a className="hover:text-gold transition duration-200">
-                    Contact
-                  </a>
+                  <span className="hover:text-gold">Contact</span>
                 </Link>
               </li>
             </ul>
@@ -53,44 +43,104 @@ const PropertiesPage = () => {
         </div>
       </header>
 
+      {/* Hero Section */}
+      <section className="relative">
+        <img
+          src="/path-to-your-hero-image.jpg"
+          alt="Properties"
+          className="w-full h-[400px] object-cover"
+        />
+      </section>
+
       {/* Properties Section */}
       <main className="container mx-auto px-6 py-12">
-        <h1 className="text-5xl font-bold text-gold">Our Properties</h1>
-        <p className="text-gray-400 mt-4">
-          Explore our range of exquisite homes tailored to meet every lifestyle
-          and preference.
+        <h1 className="text-5xl font-bold text-gold text-center mb-6">
+          Find Your Property
+        </h1>
+        <p className="text-center text-gray-400 mb-8">
+          Find the best Front-Garage Houses, Townhouses, and Laned Houses
+          tailored for Modern Living.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-          {[
-            {
-              title: "Luxury Villa",
-              price: "$1,500,000",
-              details: "5-bedroom villa with a private pool.",
-            },
-            {
-              title: "Modern Laned Home",
-              price: "$750,000",
-              details: "3-bedroom home with open-concept living.",
-            },
-            {
-              title: "Spacious Townhouse",
-              price: "$950,000",
-              details: "4-bedroom townhouse in a gated community.",
-            },
-          ].map((property, index) => (
-            <div
-              key={index}
-              className="p-6 bg-gray-900 border border-gold rounded-lg"
-            >
-              <h3 className="text-xl font-bold text-white">{property.title}</h3>
-              <p className="text-gray-400 mt-2">{property.details}</p>
-              <p className="text-gold font-bold mt-4">{property.price}</p>
-              <button className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700">
-                Learn More
-              </button>
-            </div>
-          ))}
-        </div>
+
+        {/* Front-Garage Houses */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-gold mb-6">
+            Front-Garage Houses
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((house) => (
+              <div
+                key={house}
+                className="p-6 bg-gray-900 border border-gold rounded-lg"
+              >
+                <div className="h-48 bg-gray-700 rounded mb-4"></div>{" "}
+                {/* Placeholder for Image */}
+                <h3 className="text-xl font-bold text-white">
+                  House Name {house}
+                </h3>
+                <p className="text-gray-400">Description goes here.</p>
+                <p className="text-gold font-bold mt-4">$Price</p>
+                <Link href={`/property/front-garage-house-${house}`}>
+                  <span className="mt-4 px-4 py-2 bg-gold text-black font-bold rounded-md hover:bg-yellow-600 block text-center">
+                    View Property Details
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Laned Houses */}
+        <section className="mb-12">
+          <h2 className="text-3xl font-bold text-gold mb-6">Laned Houses</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((house) => (
+              <div
+                key={house}
+                className="p-6 bg-gray-900 border border-gold rounded-lg"
+              >
+                <div className="h-48 bg-gray-700 rounded mb-4"></div>{" "}
+                {/* Placeholder for Image */}
+                <h3 className="text-xl font-bold text-white">
+                  Laned House {house}
+                </h3>
+                <p className="text-gray-400">Description goes here.</p>
+                <p className="text-gold font-bold mt-4">$Price</p>
+                <Link href={`/property/laned-house-${house}`}>
+                  <span className="mt-4 px-4 py-2 bg-gold text-black font-bold rounded-md hover:bg-yellow-600 block text-center">
+                    View Property Details
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Town Houses */}
+        <section>
+          <h2 className="text-3xl font-bold text-gold mb-6">Town Houses</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((house) => (
+              <div
+                key={house}
+                className="p-6 bg-gray-900 border border-gold rounded-lg"
+              >
+                <div className="h-48 bg-gray-700 rounded mb-4"></div>{" "}
+                {/* Placeholder for Image */}
+                <h3 className="text-xl font-bold text-white">
+                  Town House {house}
+                </h3>
+                <p className="text-gray-400">Description goes here.</p>
+                <p className="text-gold font-bold mt-4">$Price</p>
+                <Link href={`/property/town-house-${house}`}>
+                  <span className="mt-4 px-4 py-2 bg-gold text-black font-bold rounded-md hover:bg-yellow-600 block text-center">
+                    View Property Details
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
+        </section>
       </main>
 
       {/* Footer */}
