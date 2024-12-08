@@ -67,7 +67,7 @@ const HomePage = () => {
           </p>
           <div className="mt-8 space-x-4">
             <Link
-              href="/properties"
+              href="/property"
               className="px-6 py-3 font-bold rounded-md shadow-md hover:bg-gray-600 hover:text-white transition duration-200"
               style={{ backgroundColor: "#1A1A1A", color: "#ffffff" }}
             >
@@ -91,7 +91,7 @@ const HomePage = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             <div
               className="rounded-lg shadow-lg p-6"
-              style={{ backgroundColor: "#1A1A1A", borderColor: "#CDB937" }}
+              style={{ backgroundColor: "#1A1A1A" }}
             >
               <h4 className="text-xl font-bold text-white">
                 Front Drive Homes
@@ -104,7 +104,7 @@ const HomePage = () => {
                 $1,000,000
               </p>
               <Link
-                href="/properties/front-drive-homes"
+                href="/property/front-drive-homes"
                 className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 block text-center"
               >
                 Learn More
@@ -112,7 +112,7 @@ const HomePage = () => {
             </div>
             <div
               className="rounded-lg shadow-lg p-6"
-              style={{ backgroundColor: "#1A1A1A", borderColor: "#CDB937" }}
+              style={{ backgroundColor: "#1A1A1A" }}
             >
               <h4 className="text-xl font-bold text-white">Laned Homes</h4>
               <p className="text-gray-400">
@@ -123,7 +123,7 @@ const HomePage = () => {
                 $550,000
               </p>
               <Link
-                href="/properties/laned-homes"
+                href="/property/laned-homes"
                 className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 block text-center"
               >
                 Learn More
@@ -131,7 +131,7 @@ const HomePage = () => {
             </div>
             <div
               className="rounded-lg shadow-lg p-6"
-              style={{ backgroundColor: "#1A1A1A", borderColor: "#CDB937" }}
+              style={{ backgroundColor: "#1A1A1A" }}
             >
               <h4 className="text-xl font-bold text-white">Town Houses</h4>
               <p className="text-gray-400">
@@ -142,11 +142,133 @@ const HomePage = () => {
                 $550,000
               </p>
               <Link
-                href="/properties/town-houses"
+                href="/property/town-houses"
                 className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 block text-center"
               >
                 Learn More
               </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Communities Section */}
+      <section id="communities" className="py-20">
+        <div className="container mx-auto px-6">
+          <h3 className="text-4xl font-bold mb-8 text-white">Communities</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div
+              className="rounded-lg p-6"
+              style={{ backgroundColor: "#1A1A1A" }}
+            >
+              <h4 className="text-xl font-bold text-white">
+                Waterford Estates
+              </h4>
+              <p className="text-gray-400">
+                Waterford Estates offers a suburban drive with tree-lined roads
+                and minimal traffic, creating a peaceful commute.
+              </p>
+              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
+                $1,000,000
+              </p>
+              <Link
+                href="/communities/waterford-estates"
+                className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 block text-center"
+              >
+                View Community
+              </Link>
+            </div>
+            <div
+              className="rounded-lg p-6"
+              style={{ backgroundColor: "#1A1A1A" }}
+            >
+              <h4 className="text-xl font-bold text-white">Langdon</h4>
+              <p className="text-gray-400">
+                Langdon provides scenic open countryside roads, a perfect escape
+                from city congestion.
+              </p>
+              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
+                $650,000
+              </p>
+              <Link
+                href="/communities/langdon"
+                className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 block text-center"
+              >
+                View Community
+              </Link>
+            </div>
+            <div
+              className="rounded-lg p-6"
+              style={{ backgroundColor: "#1A1A1A" }}
+            >
+              <h4 className="text-xl font-bold text-white">Sattlepeace</h4>
+              <p className="text-gray-400">
+                The Sattlepeace commute blends urban and suburban elements with
+                smooth access to main roads.
+              </p>
+              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
+                $700,000
+              </p>
+              <Link
+                href="/communities/sattlepeace"
+                className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 block text-center"
+              >
+                View Community
+              </Link>
+            </div>
+            <div
+              className="rounded-lg p-6"
+              style={{ backgroundColor: "#1A1A1A" }}
+            >
+              <h4 className="text-xl font-bold text-white">
+                Condridge - Knight's Bridge
+              </h4>
+              <p className="text-gray-400">
+                Condridge offers city convenience with scenic bridge views over
+                the waterway.
+              </p>
+              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
+                $1,250,000
+              </p>
+              <Link
+                href="/communities/condridge"
+                className="mt-4 px-4 py-2 bg-gray-800 text-white rounded-md hover:bg-gray-700 block text-center"
+              >
+                View Community
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Testimonials Section */}
+      <section id="testimonials" className="py-20">
+        <div className="container mx-auto px-6">
+          <h3 className="text-4xl font-bold mb-8 text-white">Testimonials</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-6" style={{ backgroundColor: "#1A1A1A" }}>
+              <p className="italic text-gray-400">
+                "Exceptional service! The team was friendly and professional."
+              </p>
+              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
+                - Wade Warren
+              </p>
+            </div>
+            <div className="p-6" style={{ backgroundColor: "#1A1A1A" }}>
+              <p className="italic text-gray-400">
+                "Highly reliable and efficient. Everything went smoothly."
+              </p>
+              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
+                - Emelie Thomson
+              </p>
+            </div>
+            <div className="p-6" style={{ backgroundColor: "#1A1A1A" }}>
+              <p className="italic text-gray-400">
+                "Trusted advisors who made the buying process simple."
+              </p>
+              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
+                - John Mason
+              </p>
             </div>
           </div>
         </div>
