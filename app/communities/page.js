@@ -171,7 +171,7 @@ const CommunitiesPage = () => {
       {/* Hero Section */}
       <section className="relative">
         <Image
-          src="/path-to-your-hero-image.jpg"
+          src="/images/c4.jpeg"
           alt="Communities"
           width={1920}
           height={400}
@@ -196,42 +196,94 @@ const CommunitiesPage = () => {
       </section>
 
       {/* Communities Section */}
-      <main className="container mx-auto px-6 py-12" id="communities">
-        <h1 className="text-5xl font-bold text-[#CDB937] text-center mb-6">
-          Explore Our Communities
-        </h1>
-        <p className="text-center text-gray-400 mb-8">
-          Find the best communities that suit your lifestyle, from serene
-          suburban areas to vibrant urban landscapes.
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {communities.map((community, index) => (
-            <div
-              key={index}
-              className="p-6 bg-[#1A1A1A] border border-gray-700 rounded-lg hover:shadow-2xl transition duration-300"
-            >
-              <Image
-                src={community.image}
-                alt={community.name}
-                width={400}
-                height={192}
-                className="h-48 w-full object-cover rounded mb-6"
+      <section id="communities" className="py-20">
+        <div className="container mx-auto px-6">
+          <h3 className="text-4xl font-bold mb-8 text-white">Communities</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Waterford Estates */}
+            <div className="rounded-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/com.png"
+                alt="Waterford Estates"
+                className="h-48 w-full object-cover rounded-md mb-4"
               />
-              <h3 className="text-2xl font-bold text-[#CDB937] mb-4">
-                {community.name}
-              </h3>
-              <p className="text-gray-400 mb-4">{community.description}</p>
-              <p className="text-blue-500 font-bold mb-4">{community.price}</p>
-              <Link href={community.link}>
-                <span className="block w-full px-6 py-3 bg-[#CDB937] text-black font-bold rounded-md text-center hover:bg-yellow-600 transition duration-200">
-                  Learn More
-                </span>
+              <h4 className="text-xl font-bold text-white">
+                Waterford Estates
+              </h4>
+              <p className="text-gray-400">
+                Waterford Estates offers a suburban drive with tree-lined roads
+                and minimal traffic.
+              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$1,000,000</p>
+              <Link
+                href="/communities/waterford-estates"
+                className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
+              >
+                View Community
               </Link>
             </div>
-          ))}
+
+            {/* Langdon */}
+            <div className="rounded-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/con3.png"
+                alt="Langdon"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
+              <h4 className="text-xl font-bold text-white">Langdon</h4>
+              <p className="text-gray-400">
+                Langdon provides scenic open countryside roads, a perfect escape
+                from city congestion.
+              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$650,000</p>
+              <Link
+                href="/communities/langdon"
+                className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
+              >
+                View Community
+              </Link>
+            </div>
+            <div className="rounded-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/c1.jpeg"
+                alt="Langdon"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
+              <h4 className="text-xl font-bold text-white">Langdon</h4>
+              <p className="text-gray-400">
+                Langdon provides scenic open countryside roads, a perfect escape
+                from city congestion.
+              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$650,000</p>
+              <Link
+                href="/communities/langdon"
+                className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
+              >
+                View Community
+              </Link>
+            </div>
+            <div className="rounded-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/c2.jpeg"
+                alt="Langdon"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
+              <h4 className="text-xl font-bold text-white">Langdon</h4>
+              <p className="text-gray-400">
+                Langdon provides scenic open countryside roads, a perfect escape
+                from city congestion.
+              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$650,000</p>
+              <Link
+                href="/communities/langdon"
+                className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
+              >
+                View Community
+              </Link>
+            </div>
+          </div>
         </div>
-      </main>
+      </section>
 
       {/* Footer */}
       <footer className="bg-black py-12 mt-16">

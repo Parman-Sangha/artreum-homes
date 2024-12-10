@@ -3,13 +3,12 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <div style={{ backgroundColor: "#000000", color: "#ffffff" }}>
+    <div className="bg-black text-white">
       {/* Header Section */}
       <header className="bg-black text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
-            {/* Replace with your logo image */}
             <img src="/logo.png" alt="Artreum Homes" className="h-12" />
           </div>
 
@@ -61,76 +60,6 @@ const HomePage = () => {
             </Link>
           </div>
         </div>
-
-        {/* Mobile Menu (Hamburger) */}
-        <div className="md:hidden flex items-center justify-between px-6 py-4">
-          <div className="flex items-center space-x-4">
-            {/* Replace with your logo image */}
-            <img src="/logo.png" alt="Artreum Homes" className="h-12" />
-          </div>
-          <button className="text-white focus:outline-none">
-            <svg
-              className="w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Navigation (Hidden by default) */}
-        <div className="md:hidden hidden">
-          <ul className="space-y-4 text-center py-4">
-            <li>
-              <Link
-                href="/page"
-                className="hover:text-gold transition duration-200"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                className="hover:text-gold transition duration-200"
-              >
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/property"
-                className="hover:text-gold transition duration-200"
-              >
-                Properties
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/communities"
-                className="hover:text-gold transition duration-200"
-              >
-                Communities
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/contact"
-                className="text-gold font-bold transition duration-200"
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
       </header>
 
       {/* Hero Section */}
@@ -138,7 +67,7 @@ const HomePage = () => {
         <div className="container mx-auto px-6">
           <h2 className="text-5xl md:text-6xl font-bold">
             Build Your Dream with{" "}
-            <span style={{ color: "#CDB937" }}>Artreum Homes</span>
+            <span className="text-[#CDB937]">Artreum Homes</span>
           </h2>
           <p className="mt-4 text-lg text-gray-400">
             Building Dreams, Crafting Homes – Where Quality Meets Community.
@@ -166,15 +95,13 @@ const HomePage = () => {
         <div className="container mx-auto px-6">
           <h3 className="text-4xl font-bold mb-8 text-white">What We Build</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {/* Property Cards */}
-            <div
-              className="rounded-lg shadow-lg p-6"
-              style={{ backgroundColor: "#1A1A1A" }}
-            >
-              {/* Image Placeholder */}
-              <div className="h-48 bg-gray-800 rounded-md mb-4">
-                {/* Image would go here */}
-              </div>
+            {/* Front Drive Homes */}
+            <div className="rounded-lg shadow-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/f3.jpeg"
+                alt="Front Drive Homes"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
               <h4 className="text-xl font-bold text-white">
                 Front Drive Homes
               </h4>
@@ -182,9 +109,7 @@ const HomePage = () => {
                 A stunning 4-bedroom, 4-bathroom home in a peaceful suburban
                 neighborhood.
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                $1,000,000
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$1,000,000</p>
               <Link
                 href="/property/front-drive-homes"
                 className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
@@ -192,22 +117,20 @@ const HomePage = () => {
                 Learn More
               </Link>
             </div>
-            <div
-              className="rounded-lg shadow-lg p-6"
-              style={{ backgroundColor: "#1A1A1A" }}
-            >
-              {/* Image Placeholder */}
-              <div className="h-48 bg-gray-800 rounded-md mb-4">
-                {/* Image would go here */}
-              </div>
+
+            {/* Laned Homes */}
+            <div className="rounded-lg shadow-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/f7.jpeg"
+                alt="Laned Homes"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
               <h4 className="text-xl font-bold text-white">Laned Homes</h4>
               <p className="text-gray-400">
                 A chic and fully-furnished 2-bedroom apartment with panoramic
                 city views.
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                $550,000
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$550,000</p>
               <Link
                 href="/property/laned-homes"
                 className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
@@ -215,22 +138,20 @@ const HomePage = () => {
                 Learn More
               </Link>
             </div>
-            <div
-              className="rounded-lg shadow-lg p-6"
-              style={{ backgroundColor: "#1A1A1A" }}
-            >
-              {/* Image Placeholder */}
-              <div className="h-48 bg-gray-800 rounded-md mb-4">
-                {/* Image would go here */}
-              </div>
+
+            {/* Town Houses */}
+            <div className="rounded-lg shadow-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/f11.jpeg"
+                alt="Town Houses"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
               <h4 className="text-xl font-bold text-white">Town Houses</h4>
               <p className="text-gray-400">
                 An elegant 3-bedroom, 2.5-bathroom townhouse in a gated
                 community.
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                $550,000
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$550,000</p>
               <Link
                 href="/property/town-houses"
                 className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
@@ -247,25 +168,21 @@ const HomePage = () => {
         <div className="container mx-auto px-6">
           <h3 className="text-4xl font-bold mb-8 text-white">Communities</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {/* Community Cards */}
-            <div
-              className="rounded-lg p-6"
-              style={{ backgroundColor: "#1A1A1A" }}
-            >
-              {/* Image Placeholder */}
-              <div className="h-48 bg-gray-800 rounded-md mb-4">
-                {/* Image would go here */}
-              </div>
+            {/* Waterford Estates */}
+            <div className="rounded-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/com.png"
+                alt="Waterford Estates"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
               <h4 className="text-xl font-bold text-white">
                 Waterford Estates
               </h4>
               <p className="text-gray-400">
                 Waterford Estates offers a suburban drive with tree-lined roads
-                and minimal traffic, creating a peaceful commute.
+                and minimal traffic.
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                $1,000,000
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$1,000,000</p>
               <Link
                 href="/communities/waterford-estates"
                 className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
@@ -273,22 +190,20 @@ const HomePage = () => {
                 View Community
               </Link>
             </div>
-            <div
-              className="rounded-lg p-6"
-              style={{ backgroundColor: "#1A1A1A" }}
-            >
-              {/* Image Placeholder */}
-              <div className="h-48 bg-gray-800 rounded-md mb-4">
-                {/* Image would go here */}
-              </div>
+
+            {/* Langdon */}
+            <div className="rounded-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/con3.png"
+                alt="Langdon"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
               <h4 className="text-xl font-bold text-white">Langdon</h4>
               <p className="text-gray-400">
                 Langdon provides scenic open countryside roads, a perfect escape
                 from city congestion.
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                $650,000
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$650,000</p>
               <Link
                 href="/communities/langdon"
                 className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
@@ -296,50 +211,39 @@ const HomePage = () => {
                 View Community
               </Link>
             </div>
-            <div
-              className="rounded-lg p-6"
-              style={{ backgroundColor: "#1A1A1A" }}
-            >
-              {/* Image Placeholder */}
-              <div className="h-48 bg-gray-800 rounded-md mb-4">
-                {/* Image would go here */}
-              </div>
-              <h4 className="text-xl font-bold text-white">Sattlepeace</h4>
+            <div className="rounded-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/c1.jpeg"
+                alt="Langdon"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
+              <h4 className="text-xl font-bold text-white">Langdon</h4>
               <p className="text-gray-400">
-                The Sattlepeace commute blends urban and suburban elements with
-                smooth access to main roads.
+                Langdon provides scenic open countryside roads, a perfect escape
+                from city congestion.
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                $700,000
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$650,000</p>
               <Link
-                href="/communities/sattlepeace"
+                href="/communities/langdon"
                 className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
               >
                 View Community
               </Link>
             </div>
-            {/* Added Missing Community Card */}
-            <div
-              className="rounded-lg p-6"
-              style={{ backgroundColor: "#1A1A1A" }}
-            >
-              {/* Image Placeholder */}
-              <div className="h-48 bg-gray-800 rounded-md mb-4">
-                {/* Image would go here */}
-              </div>
-              <h4 className="text-xl font-bold text-white">
-                Oakridge - Lakeside View
-              </h4>
+            <div className="rounded-lg p-6 bg-[#1A1A1A]">
+              <img
+                src="/images/c2.jpeg"
+                alt="Langdon"
+                className="h-48 w-full object-cover rounded-md mb-4"
+              />
+              <h4 className="text-xl font-bold text-white">Langdon</h4>
               <p className="text-gray-400">
-                Oakridge offers beautiful lakeside views with nearby amenities
-                and green spaces.
+                Langdon provides scenic open countryside roads, a perfect escape
+                from city congestion.
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                $850,000
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">$650,000</p>
               <Link
-                href="/communities/oakridge"
+                href="/communities/langdon"
                 className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
               >
                 View Community
@@ -354,29 +258,28 @@ const HomePage = () => {
         <div className="container mx-auto px-6">
           <h3 className="text-4xl font-bold mb-8 text-white">Testimonials</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="p-6" style={{ backgroundColor: "#1A1A1A" }}>
+            {/* Testimonial 1 */}
+            <div className="p-6 bg-[#1A1A1A]">
               <p className="italic text-gray-400">
                 "Exceptional service! The team was friendly and professional."
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                - Wade Warren
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">- Wade Warren</p>
             </div>
-            <div className="p-6" style={{ backgroundColor: "#1A1A1A" }}>
+
+            {/* Testimonial 2 */}
+            <div className="p-6 bg-[#1A1A1A]">
               <p className="italic text-gray-400">
                 "Highly reliable and efficient. Everything went smoothly."
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                - Emelie Thomson
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">- Emelie Thomson</p>
             </div>
-            <div className="p-6" style={{ backgroundColor: "#1A1A1A" }}>
+
+            {/* Testimonial 3 */}
+            <div className="p-6 bg-[#1A1A1A]">
               <p className="italic text-gray-400">
                 "Trusted advisors who made the buying process simple."
               </p>
-              <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                - Andrew Hudson
-              </p>
+              <p className="font-bold mt-4 text-[#CDB937]">- Andrew Hudson</p>
             </div>
           </div>
         </div>

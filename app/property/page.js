@@ -32,7 +32,7 @@ const PropertiesPage = () => {
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
-            {/* Replace with your logo image */}
+            {/*logo image */}
             <img src="/logo.png" alt="Artreum Homes" className="h-12" />
           </div>
 
@@ -159,7 +159,7 @@ const PropertiesPage = () => {
       {/* Hero Section */}
       <section className="relative">
         <img
-          src="/path-to-your-hero-image.jpg"
+          src="/images/c3.jpeg"
           alt="Properties"
           className="w-full h-[400px] object-cover opacity-80"
         />

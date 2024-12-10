@@ -135,7 +135,7 @@ const AboutPage = () => {
       {/* Hero Section */}
       <section className="relative">
         <img
-          src="/path-to-your-hero-image.jpg"
+          src="/images/IMG_7698.png"
           alt="About Us"
           className="w-full h-[400px] object-cover shadow-lg"
         />
@@ -158,15 +158,7 @@ const AboutPage = () => {
           enjoyable, and rewarding.
         </p>
 
-        <div className="flex justify-center items-center my-12">
-          <img
-            src="/path-to-your-logo-image.jpg"
-            alt="Artreum Logo"
-            className="h-24"
-          />
-        </div>
-
-        <section className="text-center">
+        <section className="text-center pt-6">
           <h2 className="text-3xl font-bold mb-6" style={{ color: "#CDB937" }}>
             Testimonials
           </h2>
