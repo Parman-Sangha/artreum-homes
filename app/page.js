@@ -261,7 +261,8 @@ const HomePage = () => {
             {/* Testimonial 1 */}
             <div className="p-6 bg-[#1A1A1A]">
               <p className="italic text-gray-400">
-                "Exceptional service! The team was friendly and professional."
+                &quot;Exceptional service! The team was friendly and
+                professional.&quot;
               </p>
               <p className="font-bold mt-4 text-[#CDB937]">- Wade Warren</p>
             </div>
@@ -269,7 +270,8 @@ const HomePage = () => {
             {/* Testimonial 2 */}
             <div className="p-6 bg-[#1A1A1A]">
               <p className="italic text-gray-400">
-                "Highly reliable and efficient. Everything went smoothly."
+                &quot;Highly reliable and efficient. Everything went
+                smoothly.&quot;
               </p>
               <p className="font-bold mt-4 text-[#CDB937]">- Emelie Thomson</p>
             </div>
@@ -277,7 +279,7 @@ const HomePage = () => {
             {/* Testimonial 3 */}
             <div className="p-6 bg-[#1A1A1A]">
               <p className="italic text-gray-400">
-                "Trusted advisors who made the buying process simple."
+                &quot;Trusted advisors who made the buying process simple.&quot;
               </p>
               <p className="font-bold mt-4 text-[#CDB937]">- Andrew Hudson</p>
             </div>

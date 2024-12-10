@@ -138,10 +138,10 @@ const ContactPage = () => {
           Get in Touch with Artreum
         </h1>
         <p className="text-center text-gray-400 mb-16 max-w-2xl mx-auto">
-          At Artreum Homes, we’re here to answer your questions and provide
-          solutions. Whether you're considering buying or selling a property,
-          require information on our services, or simply want to connect, we’d
-          love to hear from you.
+          At Artreum Homes, we&rsquo;re here to answer your questions and
+          provide solutions. Whether you&rsquo;re considering buying or selling
+          a property, require information on our services, or simply want to
+          connect, we&rsquo;d love to hear from you.
         </p>
 
         {/* Contact Details */}
@@ -174,7 +174,7 @@ const ContactPage = () => {
 
         {/* Contact Form */}
         <h2 className="text-4xl font-bold text-[#CDB937] text-center mb-10">
-          Let’s Connect
+          Let&rsquo;s Connect
         </h2>
         <form className="bg-[#1A1A1A] p-8 rounded-lg mx-auto shadow-lg w-full max-w-3xl">
           <div className="flex flex-wrap gap-6 mb-6">

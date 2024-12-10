@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 const AboutPage = () => {
@@ -8,8 +9,13 @@ const AboutPage = () => {
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
-            {/* Replace with your logo image */}
-            <img src="/logo.png" alt="Artreum Homes" className="h-12" />
+            <Image
+              src="/logo.png"
+              alt="Artreum Homes"
+              className="h-12"
+              width={48}
+              height={48}
+            />
           </div>
 
           {/* Navigation Links */}
@@ -60,84 +66,16 @@ const AboutPage = () => {
             </Link>
           </div>
         </div>
-
-        {/* Mobile Menu (Hamburger) */}
-        <div className="md:hidden flex items-center justify-between px-6 py-4">
-          <div className="flex items-center space-x-4">
-            {/* Replace with your logo image */}
-            <img src="/logo.png" alt="Artreum Homes" className="h-12" />
-          </div>
-          <button className="text-white focus:outline-none">
-            <svg
-              className="w-6 h-6"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M4 6h16M4 12h16M4 18h16"
-              />
-            </svg>
-          </button>
-        </div>
-
-        {/* Mobile Navigation (Hidden by default) */}
-        <div className="md:hidden hidden">
-          <ul className="space-y-4 text-center py-4">
-            <li>
-              <Link
-                href="/page"
-                className="hover:text-gold transition duration-200"
-              >
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/about"
-                className="hover:text-gold transition duration-200"
-              >
-                About Us
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/property"
-                className="hover:text-gold transition duration-200"
-              >
-                Properties
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/communities"
-                className="hover:text-gold transition duration-200"
-              >
-                Communities
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/contact"
-                className="text-gold font-bold transition duration-200"
-              >
-                Contact
-              </Link>
-            </li>
-          </ul>
-        </div>
       </header>
 
       {/* Hero Section */}
       <section className="relative">
-        <img
+        <Image
           src="/images/IMG_7698.png"
           alt="About Us"
           className="w-full h-[400px] object-cover shadow-lg"
+          width={1200}
+          height={400}
         />
       </section>
 
@@ -151,10 +89,10 @@ const AboutPage = () => {
         </h1>
         <p className="text-lg text-gray-400 text-center leading-relaxed">
           Welcome to Artreum Homes, where luxury meets lifestyle. We believe
-          that finding a home is more than a transaction – it's a journey to
-          discovering a space where your aspirations align with your everyday
-          living. Our dedicated team combines industry expertise with
-          personalized touch to make each client's experience seamless,
+          that finding a home is more than a transaction &ndash; it&apos;s a
+          journey to discovering a space where your aspirations align with your
+          everyday living. Our dedicated team combines industry expertise with a
+          personalized touch to make each client&apos;s experience seamless,
           enjoyable, and rewarding.
         </p>
 
@@ -168,10 +106,11 @@ const AboutPage = () => {
               style={{ backgroundColor: "#1A1A1A" }}
             >
               <p className="italic text-gray-400">
-                "Exceptional service! The team was friendly and professional."
+                &quot;Exceptional service! The team was friendly and
+                professional.&quot;
               </p>
               <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                - Wade Warren
+                &ndash; Wade Warren
               </p>
             </div>
             <div
@@ -179,10 +118,11 @@ const AboutPage = () => {
               style={{ backgroundColor: "#1A1A1A" }}
             >
               <p className="italic text-gray-400">
-                "Highly reliable and efficient. Everything went smoothly."
+                &quot;Highly reliable and efficient. Everything went
+                smoothly.&quot;
               </p>
               <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                - Emelie Thomson
+                &ndash; Emelie Thomson
               </p>
             </div>
             <div
@@ -190,10 +130,10 @@ const AboutPage = () => {
               style={{ backgroundColor: "#1A1A1A" }}
             >
               <p className="italic text-gray-400">
-                "Trusted advisors who made the buying process simple."
+                &quot;Trusted advisors who made the buying process simple.&quot;
               </p>
               <p className="font-bold mt-4" style={{ color: "#CDB937" }}>
-                - John Mason
+                &ndash; John Mason
               </p>
             </div>
           </div>
