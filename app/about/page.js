@@ -142,8 +142,133 @@ const AboutPage = () => {
 
       {/* Footer */}
       <footer className="bg-black py-12">
-        <div className="container mx-auto text-center text-gray-400">
-          <p>© 2024 Artreum Homes. All Rights Reserved. | Terms & Conditions</p>
+        <div className="container mx-auto text-gray-400 flex flex-col lg:flex-row lg:justify-between items-start space-y-8 lg:space-y-0">
+          {/* Left Section: Logo, Navigation Links, and Newsletter */}
+          <div className="w-full lg:w-1/2">
+            {/* Logo */}
+            <div className="mb-4">
+              <img
+                src="images/logo2.png"
+                alt="Artreum Homes"
+                className="h-12 mx-auto lg:mx-0"
+              />
+            </div>
+
+            {/* Navigation Links */}
+            <ul className="flex flex-col lg:flex-row lg:space-x-6 font-medium text-[#d1d5db] mb-6 lg:mb-0">
+              <li>
+                <Link
+                  href="/"
+                  className="hover:text-white transition duration-200"
+                >
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/about"
+                  className="text-white transition duration-200"
+                >
+                  About
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/property"
+                  className="hover:text-white transition duration-200"
+                >
+                  Properties
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/communities"
+                  className="hover:text-white transition duration-200"
+                >
+                  Communities
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/contact"
+                  className="hover:text-white transition duration-200"
+                >
+                  Contact
+                </Link>
+              </li>
+            </ul>
+
+            {/* Newsletter */}
+            <div>
+              <h4 className="text-lg font-bold text-[#CDB937] mb-2 pt-4">
+                Subscribe to Our Newsletter
+              </h4>
+              <form className="flex flex-col sm:flex-row">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="px-4 py-2 w-full sm:w-64 bg-gray-800 border border-gray-700 rounded-l-md focus:outline-none focus:border-[#CDB937]"
+                />
+                <button className="px-4 py-2 bg-[#CDB937] text-black font-bold rounded-r-md hover:bg-[#e3cc50] transition duration-200 mt-2 sm:mt-0 sm:ml-2 w-full sm:w-auto">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+
+          {/* Right Section: Empty or Reserved for Additional Content */}
+          <div className="lg:w-1/2 text-center lg:text-right"></div>
+        </div>
+
+        {/* Bottom Section: Social Media Links and Terms */}
+        <div className="container mx-auto text-center mt-8">
+          {/* Social Media Links */}
+          <div className="flex justify-center space-x-4 mb-4">
+            <a
+              href="https://facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="images/facebook-icon.png"
+                alt="Facebook"
+                className="h-6 w-6"
+              />
+            </a>
+            <a
+              href="https://instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="images/instagram-icon.png"
+                alt="Instagram"
+                className="h-6 w-6"
+              />
+            </a>
+            <a
+              href="https://twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <img
+                src="images/twitter-icon.png"
+                alt="Twitter"
+                className="h-6 w-6"
+              />
+            </a>
+          </div>
+
+          {/* Terms & Conditions */}
+          <div className="text-sm text-gray-500">
+            <p>© 2025 Artreum Homes. All Rights Reserved.</p>
+            <Link
+              href="/terms"
+              className="text-[#CDB937] hover:text-white transition duration-200"
+            >
+              Terms & Conditions
+            </Link>
+          </div>
         </div>
       </footer>
     </div>
