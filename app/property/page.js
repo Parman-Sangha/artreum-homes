@@ -1,23 +1,34 @@
 import Link from "next/link";
-
+// Main PropertiesPage Component
 const PropertiesPage = () => {
+// Data: Properties Types and Prefixes
   const properties = [
     { type: "Front-Garage Houses", prefix: "front-garage-house" },
     { type: "Laned Houses", prefix: "laned-house" },
     { type: "Town Houses", prefix: "town-house" },
   ];
-
-  const houseItems = [1, 2, 3];
-
+// Data: House Items with Descriptions and Prices
+  const houseItems = [
+    { id: 1, description: "Spacious 4-bedroom home with a modern garage.", price: "$450,000" },
+    { id: 2, description: "Elegant 3-bedroom house with luxurious interiors.", price: "$400,000" },
+    { id: 3, description: "Affordable 2-bedroom house in a prime location.", price: "$350,000" },
+  ];
+  // Component: Individual Property Card
   const PropertyCard = ({ house, type, prefix }) => (
     <div className="p-6 bg-[#1A1A1A] border border-gray-700 rounded-lg hover:shadow-2xl transition duration-300">
-      <div className="h-48 bg-gray-700 rounded mb-4"></div>
+      <div className="h-48 bg-gray-700 rounded mb-4 overflow-hidden">
+        <img
+          src={`/images/properties/${prefix}-${house.id}.jpg.webp`}
+          alt={`${type} ${house.id}`}
+          className="w-full h-full object-cover"
+        />
+      </div>
       <h3 className="text-xl font-bold text-white mb-2">
-        {type} {house}
+        {type} {house.id}
       </h3>
-      <p className="text-gray-400 mb-4">Description goes here.</p>
-      <p className="text-gold font-bold mb-4">$Price</p>
-      <Link href={`/property/${prefix}-${house}`}>
+      <p className="text-gray-400 mb-4">{house.description}</p> {/* Description */}
+      <p className="text-gold font-bold mb-4">{house.price}</p> {/* Price */}
+      <Link href={`/property/${prefix}-${house.id}`}>
         <span className="block w-full px-6 py-3 bg-[#CDB937] text-black font-bold rounded-md text-center hover:bg-yellow-600 transition duration-200">
           View Property Details
         </span>
@@ -176,7 +187,7 @@ const PropertiesPage = () => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {houseItems.map((house) => (
                 <PropertyCard
-                  key={house}
+                  key={`${prefix}-${house.id}`}
                   house={house}
                   type={type}
                   prefix={prefix}
