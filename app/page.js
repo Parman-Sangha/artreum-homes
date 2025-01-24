@@ -3,13 +3,13 @@ import Link from "next/link";
 
 const HomePage = () => {
   return (
-    <div className="bg-black text-white">
+    <div className="bg-[#141414] text-white">
       {/* Header Section */}
-      <header className="bg-black text-white shadow-md sticky top-0 z-50">
+      <header className="bg-[#1A1A1A] text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           {/* Logo Section */}
           <div className="flex items-center space-x-4">
-            <img src="/logo.png" alt="Artreum Homes" className="h-12" />
+            <img src="images/logo2.png" alt="Artreum Homes" className="h-12" />
           </div>
 
           {/* Navigation Links */}
