@@ -44,7 +44,7 @@ const AboutPage = () => {
   const testimonials = [
     {
       title: "Exceptional Service!",
-      text: "The team's professionalism and attention to detail made our home buying experience seamless and enjoyable.",
+      text: "The team&apos;s professionalism and attention to detail made our home buying experience seamless and enjoyable.",
       author: "Wade Warren",
       image: "/images/Profile1.png",
     },
@@ -206,7 +206,7 @@ const AboutPage = () => {
             <h1 className="text-5xl font-bold text-white mb-6">About Us</h1>
             <p className="text-lg text-gray-200 leading-relaxed">
               Welcome to Artreum Homes, where luxury meets lifestyle. We believe
-              that finding a home is more than a transaction – it's a journey to
+              that finding a home is more than a transaction – it&apos;s a journey to
               discovering a space where you belong, a place that matches your
               aspirations and elevates your way of living. Our dedicated team
               combines industry expertise with a personalized touch, ensuring
@@ -326,7 +326,7 @@ const AboutPage = () => {
             <p className="text-xl text-gray-300 leading-relaxed">
               Let us help you find a space where comfort, elegance, and
               lifestyle harmonize. With our refined portfolio of homes,
-              townhouses, and properties with customizable garage layouts, we're
+              townhouses, and properties with customizable garage layouts, we&apos;re
               here to make your vision of the perfect home a reality.
             </p>
           </motion.div>
@@ -348,7 +348,7 @@ const AboutPage = () => {
                 Build Dream With Artreum
               </h2>
               <p className="text-gray-300 leading-relaxed">
-                Your dream property is just a click away. Whether you're looking
+                Your dream property is just a click away. Whether you&apos;re looking
                 for a new home, a strategic investment, or expert real estate
                 advice, Artreum is here to assist you every step of the way.
                 Take the first step towards your real estate goals and explore
