@@ -4,50 +4,46 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { db } from "./firebase/firebaseConfig"; // Import Firebase DB
 import { collection, getDocs, addDoc } from "firebase/firestore"; // Firestore Methods
-import MortgageCalculator from "/MortgageCalculator";
-
 
 const HomePage = () => {
-  
   const { user, logout } = useAuth();
   const [properties, setProperties] = useState([]);
 
-    // Fetch Data from Firestore
-    useEffect(() => {
-      const fetchProperties = async () => {
-        try {
-          const querySnapshot = await getDocs(collection(db, "properties"));
-          const propertyList = querySnapshot.docs.map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }));
-          setProperties(propertyList);
-        } catch (error) {
-          console.error("Error fetching properties: ", error);
-        }
-      };
-  
-      fetchProperties();
-    }, []);
-  
-    // Function to Add a New Property
-    const addProperty = async () => {
+  // Fetch Data from Firestore
+  useEffect(() => {
+    const fetchProperties = async () => {
       try {
-        await addDoc(collection(db, "properties"), {
-          name: "New Home",
-          price: 500000,
-          location: "Toronto",
-        });
-        alert("Property Added!");
+        const querySnapshot = await getDocs(collection(db, "properties"));
+        const propertyList = querySnapshot.docs.map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }));
+        setProperties(propertyList);
       } catch (error) {
-        console.error("Error adding property: ", error);
+        console.error("Error fetching properties: ", error);
       }
     };
 
+    fetchProperties();
+  }, []);
 
-    return (
-     <div className="bg-[#141414] text-white">
-       {/* Header Section */}
+  // Function to Add a New Property
+  const addProperty = async () => {
+    try {
+      await addDoc(collection(db, "properties"), {
+        name: "New Home",
+        price: 500000,
+        location: "Toronto",
+      });
+      alert("Property Added!");
+    } catch (error) {
+      console.error("Error adding property: ", error);
+    }
+  };
+
+  return (
+    <div className="bg-[#141414] text-white">
+      {/* Header Section */}
       <header className="bg-[#1A1A1A] text-white shadow-md sticky top-0 z-50">
         <div className="container mx-auto px-6 py-4 flex justify-between items-center">
           {/* Logo Section */}
@@ -125,40 +121,53 @@ const HomePage = () => {
 
           {/* Contact and Login/Logout Buttons */}
           <div className="flex items-center space-x-4">
-            <Link href="/contact" className="bg-[#333333] hover:bg-[#444444] text-gold font-bold px-4 py-2 rounded">Contact</Link>
-            {user ? (
-              <button onClick={logout} className="bg-red-500 text-white px-4 py-2 rounded">Logout</button>
-            ) : (
-              <Link href="/auth/login" className="bg-blue-500 text-white px-4 py-2 rounded">Login</Link>
-            )}
-           </div>
-         </div>
-         
-        </header>
-        
-        {/* Mobile Navigation */}
-        <div className="md:hidden flex items-center space-x-4">
-          <button
-            className="text-white focus:outline-none"
-            aria-label="Menu Toggle"
-          >
-            <svg
-              className="w-6 h-6"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-              xmlns="http://www.w3.org/2000/svg"
+            <Link
+              href="/contact"
+              className="bg-[#333333] hover:bg-[#444444] text-gold font-bold px-4 py-2 rounded"
             >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
+              Contact
+            </Link>
+            {user ? (
+              <button
+                onClick={logout}
+                className="bg-red-500 text-white px-4 py-2 rounded"
+              >
+                Logout
+              </button>
+            ) : (
+              <Link
+                href="/auth/login"
+                className="bg-blue-500 text-white px-4 py-2 rounded"
+              >
+                Login
+              </Link>
+            )}
+          </div>
         </div>
-     
+      </header>
+
+      {/* Mobile Navigation */}
+      <div className="md:hidden flex items-center space-x-4">
+        <button
+          className="text-white focus:outline-none"
+          aria-label="Menu Toggle"
+        >
+          <svg
+            className="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            ></path>
+          </svg>
+        </button>
+      </div>
 
       {/* Hero Section */}
       <section id="home" className="relative py-20 text-center">
@@ -258,14 +267,6 @@ const HomePage = () => {
               </Link>
             </div>
           </div>
-        </div>
-      </section>
-
-   {/* Mortgage Calculator Section */}
-      <section id="mortgage-calculator" className="py-20">
-        <div className="container mx-auto px-6">
-           <h3 className="text-4xl font-bold mb-8 text-white">Mortgage Calculator</h3>
-           <MortgageCalculator />
         </div>
       </section>
 
@@ -521,11 +522,8 @@ const HomePage = () => {
           </div>
         </div>
       </footer>
-      </div>
-    );
-  
-  
+    </div>
+  );
 };
-
 
 export default HomePage;
