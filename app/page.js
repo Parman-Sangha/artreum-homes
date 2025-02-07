@@ -146,7 +146,7 @@ const HomePage = () => {
         </div>
       </header>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation test */}
       <div className="md:hidden flex items-center space-x-4">
         <button
           className="text-white focus:outline-none"
