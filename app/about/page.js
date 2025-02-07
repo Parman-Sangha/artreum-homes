@@ -91,7 +91,7 @@ const AboutPage = () => {
 
           {/* Navigation Links */}
           <nav className="hidden md:flex justify-center flex-1">
-            <ul className="flex space-x-8 font-medium">
+            <ul className="flex space-x-8 font-medium text-lg">
               {navItems.map((item, index) => (
                 <motion.li
                   key={item}
@@ -103,6 +103,10 @@ const AboutPage = () => {
                     href={
                       item === "Home"
                         ? "/"
+                        : item === "About Us"
+                        ? "/about"
+                        : item === "Properties"
+                        ? "/property"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="hover:text-[#CDB937] transition duration-200 px-2 py-1 rounded-md hover:bg-[#222222]"
@@ -170,6 +174,10 @@ const AboutPage = () => {
                   href={
                     item === "Home"
                       ? "/"
+                      : item === "About Us"
+                      ? "/about"
+                      : item === "Properties"
+                      ? "/property"
                       : `/${item.toLowerCase().replace(" ", "-")}`
                   }
                   className="hover:text-[#CDB937] transition duration-200"
@@ -204,14 +212,14 @@ const AboutPage = () => {
             className="max-w-2xl"
           >
             <h1 className="text-5xl font-bold text-white mb-6">About Us</h1>
-            <p className="text-lg text-gray-200 leading-relaxed">
+            <p className="text-2xl text-gray-200 leading-relaxed">
               Welcome to Artreum Homes, where luxury meets lifestyle. We believe
-              that finding a home is more than a transaction – it&apos;s a journey to
-              discovering a space where you belong, a place that matches your
-              aspirations and elevates your way of living. Our dedicated team
-              combines industry expertise with a personalized touch, ensuring
-              that each client experiences a seamless, enjoyable, and rewarding
-              path to homeownership.
+              that finding a home is more than a transaction – it&apos;s a
+              journey to discovering a space where you belong, a place that
+              matches your aspirations and elevates your way of living. Our
+              dedicated team combines industry expertise with a personalized
+              touch, ensuring that each client experiences a seamless,
+              enjoyable, and rewarding path to homeownership.
             </p>
           </motion.div>
         </div>
@@ -227,10 +235,10 @@ const AboutPage = () => {
             variants={fadeInUp}
             className="max-w-2xl mb-12"
           >
-            <h2 className="text-3xl font-bold mb-4 text-[#CDB937]">
+            <h2 className="text-4xl font-bold mb-4 text-[#CDB937]">
               Testimonials
             </h2>
-            <p className="text-gray-400">
+            <p className="text-gray-400 text-lg">
               Read the success stories and heartfelt testimonials from our
               valued clients. Discover why they chose Artreum for their real
               estate needs.
@@ -326,8 +334,8 @@ const AboutPage = () => {
             <p className="text-xl text-gray-300 leading-relaxed">
               Let us help you find a space where comfort, elegance, and
               lifestyle harmonize. With our refined portfolio of homes,
-              townhouses, and properties with customizable garage layouts, we&apos;re
-              here to make your vision of the perfect home a reality.
+              townhouses, and properties with customizable garage layouts,
+              we&apos;re here to make your vision of the perfect home a reality.
             </p>
           </motion.div>
         </div>
@@ -344,16 +352,16 @@ const AboutPage = () => {
             className="flex flex-col md:flex-row justify-between items-start gap-8"
           >
             <div className="md:w-2/3">
-              <h2 className="text-3xl font-bold mb-6 text-[#CDB937]">
+              <h2 className="text-4xl font-bold mb-6 text-[#CDB937]">
                 Build Dream With Artreum
               </h2>
-              <p className="text-gray-300 leading-relaxed">
-                Your dream property is just a click away. Whether you&apos;re looking
-                for a new home, a strategic investment, or expert real estate
-                advice, Artreum is here to assist you every step of the way.
-                Take the first step towards your real estate goals and explore
-                our available properties or get in touch with our team for
-                personalized assistance.
+              <p className="text-gray-300 text-xl leading-relaxed">
+                Your dream property is just a click away. Whether you&apos;re
+                looking for a new home, a strategic investment, or expert real
+                estate advice, Artreum is here to assist you every step of the
+                way. Take the first step towards your real estate goals and
+                explore our available properties or get in touch with our team
+                for personalized assistance.
               </p>
             </div>
             <motion.div
@@ -365,7 +373,7 @@ const AboutPage = () => {
             >
               <Link
                 href="/properties"
-                className="inline-flex items-center bg-[#CDB937] text-black px-8 py-3 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                className=" mt-16 inline-flex items-center bg-[#CDB937] text-black px-8 py-4 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 Explore Properties
                 <ArrowRight className="ml-2 h-5 w-5" />

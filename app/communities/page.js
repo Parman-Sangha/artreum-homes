@@ -198,7 +198,7 @@ const CommunitiesPage = () => {
               </p>
               <p className="font-bold mt-4 text-[#CDB937]">$1,000,000</p>
               <Link
-                href="/communities/waterford-estates"
+                href="/communities/waterford"
                 className="mt-4 px-4 py-2 bg-[#CDB937] text-black rounded-md hover:bg-[#b49b2e] block text-center transition duration-200"
               >
                 View Community
