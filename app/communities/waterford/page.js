@@ -251,8 +251,8 @@ const WaterfordEstates = () => {
             <p className="text-2xl text-gray-300 leading-relaxed">
               Waterford Estates offers a suburban drive with tree-lined roads
               and minimal traffic. The route feels calm, with light congestion
-              at peak hours and well-placed detours. It's ideal for those who
-              enjoy peaceful, green surroundings, creating a pleasant,
+              at peak hours and well-placed detours. It&apos;s ideal for those
+              who enjoy peaceful, green surroundings, creating a pleasant,
               low-stress commute. The scenic atmosphere enhances the experience
               without major delays.
             </p>
@@ -324,7 +324,7 @@ const WaterfordEstates = () => {
                   content: `Convenience and leisure come together in Waterford with a selection of nearby shopping 
                     and dining options. Local shops, grocery stores, and cafes are within easy reach, offering 
                     everything from daily essentials to charming eateries for a night out. Located close to 
-                    Chestermere's commercial hubs, Waterford makes day-to-day errands and dining options easily accessible.`,
+                    Chestermere&apos;s commercial hubs, Waterford makes day-to-day errands and dining options easily accessible.`,
                 },
                 {
                   title: "Schools",
@@ -571,12 +571,12 @@ const WaterfordEstates = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-gray-300 text-xl leading-relaxed"
               >
-                Your dream property is just a click away. Whether you're looking
-                for a new home, a strategic investment, or expert real estate
-                advice, Artreum is here to assist you every step of the way.
-                Take the first step towards your real estate goals and explore
-                our available properties or get in touch with our team for
-                personalized assistance.
+                Your dream property is just a click away. Whether you&apos;re
+                looking for a new home, a strategic investment, or expert real
+                estate advice, Artreum is here to assist you every step of the
+                way. Take the first step towards your real estate goals and
+                explore our available properties or get in touch with our team
+                for personalized assistance.
               </motion.p>
             </div>
             <motion.div
