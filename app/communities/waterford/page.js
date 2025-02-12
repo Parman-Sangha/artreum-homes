@@ -321,9 +321,9 @@ const WaterfordEstates = () => {
                 },
                 {
                   title: "Shopping & Dining",
-                  content: `Convenience and leisure come together in Waterford with a selection of nearby shopping 
-                    and dining options. Local shops, grocery stores, and cafes are within easy reach, offering 
-                    everything from daily essentials to charming eateries for a night out. Located close to 
+                  content: `Convenience and leisure come together in Waterford with a selection of nearby shopping
+                    and dining options. Local shops, grocery stores, and cafes are within easy reach, offering
+                    everything from daily essentials to charming eateries for a night out. Located close to
                     Chestermere&apos;s commercial hubs, Waterford makes day-to-day errands and dining options easily accessible.`,
                 },
                 {

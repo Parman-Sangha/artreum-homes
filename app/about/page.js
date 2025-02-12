@@ -39,7 +39,7 @@ const AboutPage = () => {
     triggerOnce: true,
   });
 
-  const navItems = ["Home", "About Us", "Properties", "Communities"];
+  const navItems = ["Home", "About", "Property", "Communities"];
 
   const testimonials = [
     {

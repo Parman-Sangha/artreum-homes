@@ -1,17 +1,29 @@
 import Link from "next/link";
 // Main PropertiesPage Component
 const PropertiesPage = () => {
-// Data: Properties Types and Prefixes
+  // Data: Properties Types and Prefixes
   const properties = [
     { type: "Front-Garage Houses", prefix: "front-garage-house" },
     { type: "Laned Houses", prefix: "laned-house" },
     { type: "Town Houses", prefix: "town-house" },
   ];
-// Data: House Items with Descriptions and Prices
+  // Data: House Items with Descriptions and Prices
   const houseItems = [
-    { id: 1, description: "Spacious 4-bedroom home with a modern garage.", price: "$450,000" },
-    { id: 2, description: "Elegant 3-bedroom house with luxurious interiors.", price: "$400,000" },
-    { id: 3, description: "Affordable 2-bedroom house in a prime location.", price: "$350,000" },
+    {
+      id: 1,
+      description: "Spacious 4-bedroom home with a modern garage.",
+      price: "$450,000",
+    },
+    {
+      id: 2,
+      description: "Elegant 3-bedroom house with luxurious interiors.",
+      price: "$400,000",
+    },
+    {
+      id: 3,
+      description: "Affordable 2-bedroom house in a prime location.",
+      price: "$350,000",
+    },
   ];
   // Component: Individual Property Card
   const PropertyCard = ({ house, type, prefix }) => (
@@ -26,7 +38,8 @@ const PropertiesPage = () => {
       <h3 className="text-xl font-bold text-white mb-2">
         {type} {house.id}
       </h3>
-      <p className="text-gray-400 mb-4">{house.description}</p> {/* Description */}
+      <p className="text-gray-400 mb-4">{house.description}</p>{" "}
+      {/* Description */}
       <p className="text-gold font-bold mb-4">{house.price}</p> {/* Price */}
       <Link href={`/property/${prefix}-${house.id}`}>
         <span className="block w-full px-6 py-3 bg-[#CDB937] text-black font-bold rounded-md text-center hover:bg-yellow-600 transition duration-200">
