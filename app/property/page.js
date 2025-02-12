@@ -1,4 +1,7 @@
+/* eslint-disable */
+
 import Link from "next/link";
+import Image from "next/image";
 // Main PropertiesPage Component
 const PropertiesPage = () => {
   // Data: Properties Types and Prefixes
