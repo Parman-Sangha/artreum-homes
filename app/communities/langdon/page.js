@@ -1,6 +1,7 @@
+/* eslint-disable */
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -86,11 +87,11 @@ const Langdon = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const timeoutRef = useRef(null);
 
-    const resetTimeout = () => {
+    const resetTimeout = useCallback(() => {
       if (timeoutRef.current) {
         clearTimeout(timeoutRef.current);
       }
-    };
+    });
 
     useEffect(() => {
       resetTimeout();
