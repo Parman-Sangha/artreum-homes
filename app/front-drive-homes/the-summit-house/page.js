@@ -345,7 +345,7 @@ export default function PropertyPage() {
             {/* Key Features */}
             <div className="md:w-1/3">
               <h2 className="text-2xl font-bold mb-4 text-[#CDB937]">
-                Key Features & Amenities
+                Key Features &amp; Amenities
               </h2>
               <ul className="space-y-2 text-gray-300 list-disc list-inside">
                 <li>Two large master suites with walk-in closets</li>
@@ -524,9 +524,10 @@ export default function PropertyPage() {
                 Build your Dream with Artreum
               </h2>
               <p className="text-gray-300">
-                Your dream property is just a click away. Whether you're looking
-                for a new home, a strategic investment, or expert real estate
-                advice, Artreum is here to assist you every step of the way.
+                Your dream property is just a click away. Whether you&apos;re
+                looking for a new home, a strategic investment, or expert real
+                estate advice, Artreum is here to assist you every step of the
+                way.
               </p>
             </div>
             <Link
@@ -663,7 +664,7 @@ export default function PropertyPage() {
                   href="/terms"
                   className="hover:text-[#CDB937] transition duration-200"
                 >
-                  Terms & Conditions
+                  Terms &amp; Conditions
                 </Link>
               </div>
               <div className="flex space-x-6">
