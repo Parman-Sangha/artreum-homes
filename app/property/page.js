@@ -180,9 +180,15 @@ const PropertiesPage = () => {
           </p>
           <Link
             href="#properties"
-            className="px-6 py-3 bg-[#CDB937] text-black font-bold rounded-md hover:bg-yellow-600 transition duration-200"
+            className="px-6 py-3 mb-5 bg-[#CDB937] text-black font-bold rounded-md hover:bg-yellow-600 transition duration-200"
           >
             Browse Properties
+          </Link>
+          <Link
+            href="/property/canvas-house"
+            className="px-6 py-3 bg-[#CDB937] text-black font-bold rounded-md hover:bg-yellow-600 transition duration-200"
+          >
+            The Canvas House
           </Link>
         </div>
       </section>
