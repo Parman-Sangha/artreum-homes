@@ -76,32 +76,32 @@ const WaterfordEstates = () => {
 
   return (
     <div className="bg-[#141414] text-white min-h-screen">
-      {/* Header Section */}
+      {/* Header */}
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
         className="bg-[#1A1A1A] shadow-md sticky top-0 z-50"
       >
-        <div className="container mx-auto px-6 py-4 flex justify-between items-center">
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-6 flex flex-col md:flex-row justify-between items-center">
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center space-x-4"
+            className="flex items-center space-x-4 mb-4 md:mb-0"
           >
             <Link href="/" className="hover:opacity-80 transition duration-200">
               <Image
-                src="/images/logo2.png"
+                src="/images/logo1.png"
                 alt="Artreum Homes"
-                width={120}
-                height={48}
+                width={180}
+                height={72}
               />
             </Link>
           </motion.div>
 
-          <nav className="hidden md:flex justify-center flex-1">
-            <ul className="flex space-x-8 font-medium text-lg">
+          <nav className="flex justify-center flex-1">
+            <ul className="flex flex-wrap justify-center space-x-4 md:space-x-8 font-medium text-lg">
               {navItems.map((item, index) => (
                 <motion.li
                   key={item}
@@ -119,7 +119,7 @@ const WaterfordEstates = () => {
                         ? "/property"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
-                    className="hover:text-[#CDB937] transition duration-200 px-2 py-1 rounded-md hover:bg-[#222222]"
+                    className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"
                   >
                     {item}
                   </Link>
@@ -132,70 +132,16 @@ const WaterfordEstates = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
+            className="mt-4 md:mt-0"
           >
             <Link
               href="/contact"
-              className="bg-[#CDB937] text-black px-6 py-2 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="bg-[#CDB937] text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Contact Us
             </Link>
           </motion.div>
-
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-white focus:outline-none"
-              aria-label="Menu Toggle"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
-            </button>
-          </div>
         </div>
-
-        <motion.div
-          initial={false}
-          animate={{
-            height: isMenuOpen ? "auto" : 0,
-            opacity: isMenuOpen ? 1 : 0,
-          }}
-          transition={{ duration: 0.3 }}
-          className="md:hidden bg-[#1A1A1A] overflow-hidden"
-        >
-          <ul className="flex flex-col items-center py-4">
-            {[...navItems, "Contact Us"].map((item) => (
-              <li key={item} className="py-2">
-                <Link
-                  href={
-                    item === "Home"
-                      ? "/"
-                      : item === "About Us"
-                      ? "/about"
-                      : item === "Properties"
-                      ? "/property"
-                      : `/${item.toLowerCase().replace(" ", "-")}`
-                  }
-                  className="hover:text-[#CDB937] transition duration-200"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </motion.div>
       </motion.header>
 
       {/* Hero Section with Logo Overlay */}
@@ -603,7 +549,7 @@ const WaterfordEstates = () => {
             {/* Newsletter Section */}
             <div className="lg:col-span-2">
               <Image
-                src="/images/logo2.png"
+                src="/images/logo1.png"
                 alt="Artreum Homes"
                 width={120}
                 height={48}

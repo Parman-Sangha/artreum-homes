@@ -157,7 +157,7 @@ const Langdon = () => {
           >
             <Link href="/" className="hover:opacity-80 transition duration-200">
               <Image
-                src="/images/logo2.png"
+                src="/images/logo1.png"
                 alt="Artreum Homes"
                 width={180}
                 height={72}
@@ -460,7 +460,7 @@ const Langdon = () => {
             {/* Newsletter Section */}
             <div className="lg:col-span-2">
               <Image
-                src="/images/logo2.png"
+                src="/images/logo1.png"
                 alt="Artreum Homes"
                 width={120}
                 height={48}

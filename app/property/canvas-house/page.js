@@ -814,7 +814,7 @@ const CanvasHouse = () => {
             {/* Newsletter Section */}
             <div className="lg:col-span-2">
               <Image
-                src="/images/logo3.png"
+                src="/images/logo1.png"
                 alt="Artreum Homes"
                 width={120}
                 height={48}

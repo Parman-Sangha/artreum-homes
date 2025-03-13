@@ -1,12 +1,10 @@
-/* eslint-disable */
 "use client";
 
-import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Star, Facebook, Instagram, Twitter, ArrowRight } from "lucide-react";
 import { useInView } from "react-intersection-observer";
+import { Facebook, Instagram, Twitter, ArrowRight } from "lucide-react";
 
 const fadeInUp = {
   initial: { y: 60, opacity: 0 },
@@ -22,49 +20,15 @@ const fadeIn = {
   animate: { opacity: 1, transition: { duration: 0.8 } },
 };
 
-const AboutPage = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { ref: aboutRef, inView: aboutInView } = useInView({
-    triggerOnce: true,
-  });
-  const { ref: testimonialRef, inView: testimonialInView } = useInView({
-    triggerOnce: true,
-  });
-  const { ref: whyUsRef, inView: whyUsInView } = useInView({
-    triggerOnce: true,
-  });
-  const { ref: nextHomeRef, inView: nextHomeInView } = useInView({
-    triggerOnce: true,
-  });
-  const { ref: buildDreamRef, inView: buildDreamInView } = useInView({
-    triggerOnce: true,
-  });
-
+const ComingSoonPage = () => {
   const navItems = ["Home", "About Us", "Properties", "Communities"];
 
-  const testimonials = [
-    {
-      title: "Exceptional Service!",
-      text: "The team&apos;s professionalism and attention to detail made our home buying experience seamless and enjoyable.",
-      author: "Wade Warren",
-      image: "/images/Profile1.png",
-    },
-    {
-      title: "Outstanding Experience",
-      text: "Highly reliable and efficient. The entire process was smooth from start to finish.",
-      author: "Emelie Thomson",
-      image: "/images/Profile2.png",
-    },
-    {
-      title: "True Professionals",
-      text: "Their expertise and guidance made finding our dream home a wonderful journey.",
-      author: "John Mason",
-      image: "/images/Profile3.png",
-    },
-  ];
+  const { ref: contentRef, inView: contentInView } = useInView({
+    triggerOnce: true,
+  });
 
   return (
-    <div className="bg-[#141414] text-white min-h-screen">
+    <div className="bg-[#141414] text-white min-h-screen flex flex-col">
       {/* Header */}
       <motion.header
         initial={{ y: -100 }}
@@ -133,156 +97,60 @@ const AboutPage = () => {
         </div>
       </motion.header>
 
-      {/* About Us Section */}
-      <section className="relative h-[600px]">
-        <div className="absolute inset-0">
+      {/* Main Content with Background Image */}
+      <main className="flex-grow relative">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+          className="absolute inset-0"
+        >
           <Image
-            src="/images/IMG_7698.png"
-            alt="About Us"
-            fill
-            className="object-cover"
+            src="/images/coming.jpg"
+            alt="Coming Soon Background"
+            width={1344}
+            height={768}
+            className="object-cover w-full h-full"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black to-transparent opacity-90" />
-        </div>
-        <div className="relative container mx-auto px-6 h-full flex flex-col justify-center">
-          <motion.div
-            ref={aboutRef}
-            initial="initial"
-            animate={aboutInView ? "animate" : "initial"}
-            variants={fadeInUp}
-            className="max-w-2xl"
-          >
-            <h1 className="text-5xl font-bold text-white mb-6">About Us</h1>
-            <p className="text-2xl text-gray-200 leading-relaxed ">
-              Welcome to Artreum Homes, where luxury meets lifestyle. We believe
-              that finding a home is more than a transaction – it&apos;s a
-              journey to discovering a space where you belong, a place that
-              matches your aspirations and elevates your way of living. Our
-              dedicated team combines industry expertise with a personalized
-              touch, ensuring that each client experiences a seamless,
-              enjoyable, and rewarding path to homeownership.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+          <div className="absolute inset-0 bg-black bg-opacity-50" />{" "}
+          {/* Overlay for readability */}
+        </motion.div>
 
-      {/* Testimonials Section */}
-      <section className="py-20 bg-[#1A1A1A]">
-        <div className="container mx-auto px-6">
-          <motion.div
-            ref={testimonialRef}
-            initial="initial"
-            animate={testimonialInView ? "animate" : "initial"}
-            variants={fadeInUp}
-            className="max-w-2xl mb-12"
-          >
-            <h2 className="text-4xl font-bold mb-4 text-[#CDB937]">
-              Testimonials
-            </h2>
-            <p className="text-gray-400 text-lg">
-              Read the success stories and heartfelt testimonials from our
-              valued clients. Discover why they chose Artreum for their real
-              estate needs.
-            </p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            {testimonials.map((testimonial, index) => (
+        <div className="relative flex items-center justify-center h-full py-20 z-10">
+          <div className="container mx-auto px-6 text-center">
+            <motion.div
+              ref={contentRef}
+              variants={fadeInUp}
+              initial="initial"
+              animate={contentInView ? "animate" : "initial"}
+            >
+              <h1 className="text-5xl md:text-6xl font-bold text-[#CDB937] mb-10 mt-10">
+                Coming Soon
+              </h1>
+              <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+                We're working hard to bring you the details of this property.
+                Stay tuned for an exceptional real estate experience with
+                Artreum Homes.
+              </p>
               <motion.div
-                key={index}
-                varriants={fadeInUp}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                initial={{ opacity: 0, y: 20 }}
-                animate={
-                  testimonialInView
-                    ? { opacity: 1, y: 0 }
-                    : { opacity: 0, y: 20 }
-                }
-                transition={{
-                  duration: 0.1,
-
-                  hover: { duration: 0.1 },
-                }}
-                className="bg-[#222222] rounded-lg transform hover:shadow-xl"
+                variants={fadeIn}
+                initial="initial"
+                animate={contentInView ? "animate" : "initial"}
+                className="mt-10"
               >
-                <div className="p-6">
-                  <div className="flex justify-start mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-5 h-5 text-[#CDB937] fill-[#CDB937] filter drop-shadow-lg mr-1"
-                      />
-                    ))}
-                  </div>
-                  <h3 className="text-xl font-bold mb-4 text-[#CDB937]">
-                    {testimonial.title}
-                  </h3>
-                  <p className="text-gray-300 mb-6 italic">
-                    "{testimonial.text}"
-                  </p>
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 rounded-full overflow-hidden">
-                      <Image
-                        src={testimonial.image || "/placeholder.svg"}
-                        alt={testimonial.author}
-                        width={48}
-                        height={48}
-                        className="object-cover"
-                      />
-                    </div>
-                    <span className="font-medium text-white">
-                      {testimonial.author}
-                    </span>
-                  </div>
-                </div>
+                <Link
+                  href="/"
+                  className="inline-flex items-center bg-[#CDB937] text-black px-8 py-4 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                >
+                  Back to Home
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Link>
               </motion.div>
-            ))}
+            </motion.div>
           </div>
         </div>
-      </section>
-
-      {/* Build Dream Section */}
-      <section className="py-20 bg-[#141414]">
-        <div className="container mx-auto px-6">
-          <motion.div
-            ref={buildDreamRef}
-            initial="initial"
-            animate={buildDreamInView ? "animate" : "initial"}
-            variants={fadeInUp}
-            className="flex flex-col md:flex-row justify-between items-start gap-8"
-          >
-            <div className="md:w-2/3">
-              <h2 className="text-4xl font-bold mb-6 text-[#CDB937]">
-                Build Dream With Artreum
-              </h2>
-              <p className="text-gray-300 text-xl leading-relaxed">
-                Your dream property is just a click away. Whether you&apos;re
-                looking for a new home, a strategic investment, or expert real
-                estate advice, Artreum is here to assist you every step of the
-                way. Take the first step towards your real estate goals and
-                explore our available properties or get in touch with our team
-                for personalized assistance.
-              </p>
-            </div>
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={
-                buildDreamInView ? { opacity: 1, x: 0 } : { opacity: 0, x: 20 }
-              }
-              transition={{ duration: 0.6, delay: 0.3 }}
-            >
-              <Link
-                href="/property"
-                className=" mt-16 inline-flex items-center bg-[#CDB937] text-black px-8 py-4 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-              >
-                Explore Properties
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      </main>
 
       {/* Footer */}
       <footer className="bg-black py-12">
@@ -413,7 +281,7 @@ const AboutPage = () => {
                 {[
                   { icon: Facebook, href: "https://facebook.com" },
                   { icon: Instagram, href: "https://instagram.com" },
-                  { icon: Twitter, href: "https://x.com" },
+                  { icon: Twitter, href: "https://twitter.com" },
                 ].map(({ icon: Icon, href }) => (
                   <motion.a
                     key={href}
@@ -436,4 +304,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default ComingSoonPage;
