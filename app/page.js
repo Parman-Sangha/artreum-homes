@@ -345,23 +345,17 @@ const HomePage = () => {
           transition={{ duration: 1 }}
           className="absolute inset-0"
         >
-          {/* Placeholder Image until Video is added */}
-          <Image
-            src="/images/coming.jpg"
-            alt="Hero Background"
-            fill
-            className="object-cover"
-            priority
-          />
+          {/* Added */}
           <div className="absolute inset-0 bg-black bg-opacity-50" />
-          {/* Uncomment and replace with video when ready */}
-          {/* <video
-            autoPlay
-            loop
-            muted
-            className="object-cover w-full h-full"
-            src="/videos/hero-video.mp4" // Replace with your video path
-          /> */}
+          {
+            <video
+              autoPlay
+              loop
+              muted
+              className="object-cover w-full h-full"
+              src="/videos/vid.mp4"
+            />
+          }
         </motion.div>
         <div className="absolute inset-0 flex flex-col justify-center items-center text-center z-10 px-6">
           <motion.h1
