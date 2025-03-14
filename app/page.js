@@ -345,7 +345,7 @@ const HomePage = () => {
           transition={{ duration: 1 }}
           className="absolute inset-0"
         >
-          {/* Added */}
+          {/* Added video */}
           <div className="absolute inset-0 bg-black bg-opacity-50" />
           {
             <video
