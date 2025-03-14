@@ -37,7 +37,7 @@ const communities = [
       "Waterford Estates offers a suburban retreat with tree-lined roads and minimal traffic. Enjoy a calm commute with peaceful, green surroundings, ideal for a low-stress lifestyle.",
     price: "$1,000,000",
     image: "/images/com.png",
-    link: "/communities/waterford-estates",
+    link: "/communities/waterford",
   },
   {
     name: "Langdon",
