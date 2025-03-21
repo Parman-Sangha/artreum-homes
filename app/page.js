@@ -15,7 +15,7 @@ import {
   Star,
   BedDouble,
   Bath,
-  House,
+  Home,
   ArrowRight,
   ArrowDown,
 } from "lucide-react";
@@ -58,32 +58,24 @@ const testimonials = [
   },
 ];
 
-// Reusable Button Component
-const Button = ({
-  children,
-  variant = "primary",
-  href,
-  className = "",
-  ...props
-}) => {
-  const baseStyles =
-    "px-6 py-3 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5";
-  const variants = {
-    primary: "bg-[#CDB937] text-black hover:bg-[#e3cc50]",
-    secondary:
-      "border border-[#CDB937] text-[#CDB937] hover:bg-[#222222] hover:text-white",
-  };
+// Button Component
+const Button = ({ children, href, className = "", ...props }) => {
+  const baseStyle =
+    "bg-[#CDB937] text-black px-6 py-2 rounded-md hover:bg-[#B5A230] transition-colors duration-300";
 
-  const buttonContent = (
-    <button
-      className={`${baseStyles} ${variants[variant]} ${className}`}
-      {...props}
-    >
+  if (href) {
+    return (
+      <Link href={href} className={`${baseStyle} ${className}`} {...props}>
+        {children}
+      </Link>
+    );
+  }
+
+  return (
+    <button className={`${baseStyle} ${className}`} {...props}>
       {children}
     </button>
   );
-
-  return href ? <Link href={href}>{buttonContent}</Link> : buttonContent;
 };
 
 // Property Card Component
@@ -96,7 +88,10 @@ const PropertyCard = ({
   baths,
   href,
 }) => {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
 
   return (
     <motion.div
@@ -112,11 +107,13 @@ const PropertyCard = ({
         <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-0 transition-opacity duration-300" />
       </div>
       <div className="p-6">
-        <h4 className="text-xl font-bold text-white mb-2">{title}</h4>
+        <h4 className="font-serif text-xl font-bold text-white mb-2">
+          {title}
+        </h4>
         <p className="text-gray-400 mb-4 text-sm">{description}</p>
         <div className="flex items-center space-x-4 text-[#CDB937] mb-4">
           <div className="flex items-center">
-            <House className="w-5 h-5 mr-1" />${price.toLocaleString()}
+            <Home className="w-5 h-5 mr-1" />${price.toLocaleString()}
           </div>
           <div className="flex items-center">
             <BedDouble className="w-5 h-5 mr-1" />
@@ -362,7 +359,7 @@ const HomePage = () => {
             variants={fadeInUp}
             initial="initial"
             animate="animate"
-            className="text-5xl md:text-6xl font-bold mb-6"
+            className="font-serif text-5xl md:text-6xl font-bold mb-6"
           >
             Build Your Dream with{" "}
             <span className="text-[#CDB937]">Artreum Homes</span>
@@ -406,7 +403,7 @@ const HomePage = () => {
             animate={propertiesInView ? "animate" : "initial"}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-[#CDB937] mb-4">
+            <h2 className="font-serif text-4xl font-bold text-[#CDB937] mb-4">
               What We Build
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -456,7 +453,7 @@ const HomePage = () => {
             animate={communitiesInView ? "animate" : "initial"}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-[#CDB937] mb-4">
+            <h2 className="font-serif text-4xl font-bold text-[#CDB937] mb-4">
               Our Communities
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -483,7 +480,7 @@ const HomePage = () => {
                 />
               </div>
               <div className="p-6">
-                <h4 className="text-xl font-bold text-white mb-2">
+                <h4 className="font-serif text-xl font-bold text-white mb-2">
                   Waterford Estates
                 </h4>
                 <p className="text-gray-400 mb-4">
@@ -514,7 +511,9 @@ const HomePage = () => {
                 />
               </div>
               <div className="p-6">
-                <h4 className="text-xl font-bold text-white mb-2">Langdon</h4>
+                <h4 className="font-serif text-xl font-bold text-white mb-2">
+                  Langdon
+                </h4>
                 <p className="text-gray-400 mb-4">
                   A scenic retreat with quiet roads and rural charm, blending
                   convenience with serenity.
@@ -525,7 +524,7 @@ const HomePage = () => {
                 </Button>
               </div>
             </motion.div>
-            {/* Add more community cards as needed */}
+            {/* Add more community cards as many as needed*/}
           </div>
           <motion.div
             variants={fadeIn}
@@ -553,7 +552,7 @@ const HomePage = () => {
             animate={testimonialInView ? "animate" : "initial"}
             className="text-center mb-12"
           >
-            <h2 className="text-4xl font-bold text-[#CDB937] mb-4">
+            <h2 className="font-serif text-4xl font-bold text-[#CDB937] mb-4">
               Testimonials
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
@@ -584,7 +583,7 @@ const HomePage = () => {
                       />
                     ))}
                   </div>
-                  <h3 className="text-xl font-bold text-[#CDB937] mb-4">
+                  <h3 className="font-serif text-xl font-bold text-[#CDB937] mb-4">
                     {testimonial.title}
                   </h3>
                   <p className="text-gray-300 mb-6 italic">

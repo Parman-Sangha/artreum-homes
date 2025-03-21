@@ -1,4 +1,6 @@
-import { initializeApp } from "firebase/app";
+"use client";
+
+import { initializeApp, getApps } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
@@ -14,15 +16,25 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
+let app;
+if (!getApps().length) {
+  app = initializeApp(firebaseConfig);
+} else {
+  app = getApps()[0];
+}
+
 export const auth = getAuth(app);
 export const googleProvider = new GoogleAuthProvider();
 export const db = getFirestore(app);
 
-// ✅ Fix: Only initialize analytics on the client-side
-export let analytics;
+// Analytics initialization
+export let analytics = null;
 if (typeof window !== "undefined") {
   import("firebase/analytics").then(({ getAnalytics }) => {
-    analytics = getAnalytics(app);
+    try {
+      analytics = getAnalytics(app);
+    } catch (error) {
+      console.error("Analytics initialization error:", error);
+    }
   });
 }
