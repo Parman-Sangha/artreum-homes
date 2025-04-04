@@ -576,12 +576,12 @@ const WaterfordEstates = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-gray-300 text-xl leading-relaxed"
               >
-                Your dream property is just a click away. Whether you're looking
-                for a new home, a strategic investment, or expert real estate
-                advice, Artreum is here to assist you every step of the way.
-                Take the first step towards your real estate goals and explore
-                our available properties or get in touch with our team for
-                personalized assistance.
+                Your dream property is just a click away. Whether you&apos;re
+                looking for a new home, a strategic investment, or expert real
+                estate advice, Artreum is here to assist you every step of the
+                way. Take the first step towards your real estate goals and
+                explore our available properties or get in touch with our team
+                for personalized assistance.
               </motion.p>
             </div>
             <motion.div
