@@ -28,7 +28,13 @@ const fadeIn = {
   animate: { opacity: 1, transition: { duration: 0.8 } },
 };
 
-const navItems = ["Home", "About Us", "Properties", "Communities"];
+const navItems = [
+  "Home",
+  "About Us",
+  "Properties",
+  "Communities",
+  "3D Modeler",
+];
 
 const communities = [
   {
@@ -161,6 +167,8 @@ const CommunitiesPage = () => {
                         ? "/about"
                         : item === "Properties"
                         ? "/property"
+                        : item === "3D Modeler"
+                        ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"

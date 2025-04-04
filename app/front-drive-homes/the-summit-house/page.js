@@ -21,13 +21,12 @@ const MortgageCalculator = () => {
   const [loanAmount, setLoanAmount] = useState("");
   const [interestRate, setInterestRate] = useState("");
   const [loanTerm, setLoanTerm] = useState("");
-  // Removed TypeScript annotation: useState<string | null>(null)
   const [monthlyPayment, setMonthlyPayment] = useState(null);
 
   const calculateMortgage = () => {
     const principal = parseFloat(loanAmount);
-    const rate = parseFloat(interestRate) / 100 / 12; // monthly interest
-    const term = parseFloat(loanTerm) * 12; // months
+    const rate = parseFloat(interestRate) / 100 / 12;
+    const term = parseFloat(loanTerm) * 12;
 
     if (!principal || !rate || !term) {
       alert("Please enter valid values.");
@@ -39,43 +38,66 @@ const MortgageCalculator = () => {
   };
 
   return (
-    <div className="bg-[#1A1A1A] text-white p-6 rounded-lg shadow-md">
-      <h3 className="text-2xl font-bold mb-4">Mortgage Calculator</h3>
+    <motion.div
+      variants={fadeInUp}
+      initial="initial"
+      animate="animate"
+      className="bg-[#1A1A1A] p-8 rounded-lg shadow-xl"
+    >
+      <h3 className="text-2xl font-bold text-[#CDB937] mb-6">
+        Mortgage Calculator
+      </h3>
       <div className="space-y-4">
-        <input
-          type="number"
-          placeholder="Loan Amount ($)"
-          className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937]"
-          value={loanAmount}
-          onChange={(e) => setLoanAmount(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Interest Rate (%)"
-          className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937]"
-          value={interestRate}
-          onChange={(e) => setInterestRate(e.target.value)}
-        />
-        <input
-          type="number"
-          placeholder="Loan Term (Years)"
-          className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937]"
-          value={loanTerm}
-          onChange={(e) => setLoanTerm(e.target.value)}
-        />
+        <div>
+          <label className="block text-gray-400 mb-2">Loan Amount ($)</label>
+          <input
+            type="number"
+            placeholder="Enter loan amount"
+            className="w-full px-4 py-3 bg-[#141414] border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] text-white"
+            value={loanAmount}
+            onChange={(e) => setLoanAmount(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="block text-gray-400 mb-2">Interest Rate (%)</label>
+          <input
+            type="number"
+            placeholder="Enter interest rate"
+            className="w-full px-4 py-3 bg-[#141414] border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] text-white"
+            value={interestRate}
+            onChange={(e) => setInterestRate(e.target.value)}
+          />
+        </div>
+        <div>
+          <label className="block text-gray-400 mb-2">Loan Term (Years)</label>
+          <input
+            type="number"
+            placeholder="Enter loan term"
+            className="w-full px-4 py-3 bg-[#141414] border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] text-white"
+            value={loanTerm}
+            onChange={(e) => setLoanTerm(e.target.value)}
+          />
+        </div>
         <button
           onClick={calculateMortgage}
-          className="w-full bg-[#CDB937] text-black font-bold px-4 py-2 rounded-md hover:bg-[#b49b2e] transition duration-200"
+          className="w-full bg-[#CDB937] text-black font-bold px-6 py-3 rounded-md hover:bg-[#B5A230] transition duration-300 mt-4"
         >
-          Calculate Mortgage
+          Calculate Monthly Payment
         </button>
         {monthlyPayment && (
-          <div className="text-lg font-bold text-[#CDB937]">
-            Monthly Payment: ${monthlyPayment}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-6 p-4 bg-[#141414] rounded-lg"
+          >
+            <h4 className="text-lg font-semibold text-[#CDB937] mb-2">
+              Estimated Monthly Payment
+            </h4>
+            <p className="text-2xl font-bold text-white">${monthlyPayment}</p>
+          </motion.div>
         )}
       </div>
-    </div>
+    </motion.div>
   );
 };
 
@@ -421,98 +443,32 @@ export default function PropertyPage() {
           {/* 
             5) MORTGAGE CALCULATOR
           */}
-          <section className="mb-10">
-            <MortgageCalculator />
-          </section>
-
-          {/* 
-            6) INQUIRY / CONTACT FORM
-          */}
-          <section className="mb-10">
-            <h2 className="text-2xl font-bold mb-4 text-[#CDB937]">
-              Inquire About Front Drive Homes
-            </h2>
-            <p className="text-gray-300 mb-4 max-w-2xl">
-              Reach out to learn about this property! Fill out the form below
-              and our real estate team will help you with any questions you
-              have.
-            </p>
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl">
-              <div>
-                <label className="block mb-2 text-sm font-semibold">
-                  First Name
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none"
-                  placeholder="Enter First Name"
-                />
-              </div>
-              <div>
-                <label className="block mb-2 text-sm font-semibold">
-                  Last Name
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none"
-                  placeholder="Enter Last Name"
-                />
-              </div>
-              <div>
-                <label className="block mb-2 text-sm font-semibold">
-                  Email
-                </label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none"
-                  placeholder="Enter Email"
-                />
-              </div>
-              <div>
-                <label className="block mb-2 text-sm font-semibold">
-                  Phone
-                </label>
-                <input
-                  type="tel"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none"
-                  placeholder="Enter Phone Number"
-                />
-              </div>
-              <div>
-                <label className="block mb-2 text-sm font-semibold">
-                  Selected Property
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none"
-                  placeholder="Enter Property Name"
-                />
-              </div>
-              <div>
-                <label className="block mb-2 text-sm font-semibold">
-                  Message
-                </label>
-                <textarea
-                  rows={4}
-                  className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none"
-                  placeholder="Enter your Message here"
-                />
-              </div>
-              <div className="md:col-span-2 flex items-center space-x-2">
-                <input type="checkbox" id="terms" />
-                <label htmlFor="terms" className="text-sm text-gray-300">
-                  I agree with Terms of Use and Privacy Policy
-                </label>
-              </div>
-              <div className="md:col-span-2">
-                <button
-                  type="submit"
-                  className="bg-[#CDB937] text-black px-6 py-2 rounded-full font-semibold hover:bg-[#e3cc50] transition duration-300"
+          <section className="py-16 bg-[#1A1A1A]">
+            <div className="container mx-auto px-6">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                  variants={fadeInUp}
+                  initial="initial"
+                  animate="animate"
+                  className="text-center md:text-left"
                 >
-                  Send Your Message
-                </button>
+                  <h2 className="text-3xl font-bold text-[#CDB937] mb-6">
+                    Calculate Your Mortgage
+                  </h2>
+                  <p className="text-gray-400 mb-8">
+                    Use our mortgage calculator to estimate your monthly
+                    payments and plan your investment in a Front Drive Home.
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="inline-block bg-[#CDB937] text-black px-8 py-3 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                  >
+                    Contact Us for More Information
+                  </Link>
+                </motion.div>
+                <MortgageCalculator />
               </div>
-            </form>
+            </div>
           </section>
 
           {/* 

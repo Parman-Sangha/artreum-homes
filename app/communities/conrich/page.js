@@ -52,7 +52,13 @@ const WaterfordEstates = () => {
   const { scrollYProgress } = useScroll();
   const logoScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
 
-  const navItems = ["Home", "About Us", "Properties", "Communities"];
+  const navItems = [
+    "Home",
+    "About Us",
+    "Properties",
+    "Communities",
+    "3D Modeler",
+  ];
 
   const stats = [
     { icon: Park, label: "Parks", count: "5+" },
@@ -117,6 +123,8 @@ const WaterfordEstates = () => {
                         ? "/about"
                         : item === "Properties"
                         ? "/property"
+                        : item === "3D Modeler"
+                        ? "/3d-modeler"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="hover:text-[#CDB937] transition duration-200 px-2 py-1 rounded-md hover:bg-[#222222]"
@@ -185,6 +193,8 @@ const WaterfordEstates = () => {
                       ? "/about"
                       : item === "Properties"
                       ? "/property"
+                      : item === "3D Modeler"
+                      ? "/3d-modeler"
                       : `/${item.toLowerCase().replace(" ", "-")}`
                   }
                   className="hover:text-[#CDB937] transition duration-200"
@@ -315,18 +325,18 @@ const WaterfordEstates = () => {
               {[
                 {
                   title: "Parks & Recreation",
-                  content: `Conrich offers a blend of natural beauty and recreational spaces, making it a great place for outdoor enthusiasts and families. The community features open green spaces, playgrounds, and nearby parks, providing plenty of opportunities for relaxation and outdoor activities. With walking trails, sports fields, and picnic areas, Conrich encourages an active lifestyle while maintaining its peaceful, rural charm. Whether it’s a casual stroll or a day out with family, residents can enjoy a refreshing outdoor experience close to home.`,
+                  content: `Conrich offers a blend of natural beauty and recreational spaces, making it a great place for outdoor enthusiasts and families. The community features open green spaces, playgrounds, and nearby parks, providing plenty of opportunities for relaxation and outdoor activities. With walking trails, sports fields, and picnic areas, Conrich encourages an active lifestyle while maintaining its peaceful, rural charm. Whether it's a casual stroll or a day out with family, residents can enjoy a refreshing outdoor experience close to home.`,
                 },
                 {
                   title: "Shopping & Dining",
                   content: `Convenience and leisure come together in Waterford with a selection of nearby shopping
                     and dining options. Local shops, grocery stores, and cafes are within easy reach, offering
                     everything from daily essentials to charming eateries for a night out. Located close to
-                    Chestermere&apos;s commercial hubs, Waterford makes day-to-day errands and dining options easily accessible.`,
+                    Chestermere's commercial hubs, Waterford makes day-to-day errands and dining options easily accessible.`,
                 },
                 {
                   title: "Schools",
-                  content: `Conrich is served by reputable schools, making it a great choice for families seeking quality education close to home. Nearby institutions offer a range of academic programs, ensuring students have access to excellent learning opportunities. Schools in the area provide strong educational foundations, while Calgary’s top-rated schools and specialized programs are just a short drive away. With a focus on academic excellence and community support, Conrich ensures families have access to quality education in a peaceful setting.`,
+                  content: `Conrich is served by reputable schools, making it a great choice for families seeking quality education close to home. Nearby institutions offer a range of academic programs, ensuring students have access to excellent learning opportunities. Schools in the area provide strong educational foundations, while Calgary's top-rated schools and specialized programs are just a short drive away. With a focus on academic excellence and community support, Conrich ensures families have access to quality education in a peaceful setting.`,
                 },
               ].map((feature, index) => (
                 <motion.div
@@ -566,12 +576,12 @@ const WaterfordEstates = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="text-gray-300 text-xl leading-relaxed"
               >
-                Your dream property is just a click away. Whether you&apos;re
-                looking for a new home, a strategic investment, or expert real
-                estate advice, Artreum is here to assist you every step of the
-                way. Take the first step towards your real estate goals and
-                explore our available properties or get in touch with our team
-                for personalized assistance.
+                Your dream property is just a click away. Whether you're looking
+                for a new home, a strategic investment, or expert real estate
+                advice, Artreum is here to assist you every step of the way.
+                Take the first step towards your real estate goals and explore
+                our available properties or get in touch with our team for
+                personalized assistance.
               </motion.p>
             </div>
             <motion.div

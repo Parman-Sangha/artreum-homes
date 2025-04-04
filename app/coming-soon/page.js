@@ -23,7 +23,13 @@ const fadeIn = {
 };
 
 const ComingSoonPage = () => {
-  const navItems = ["Home", "About Us", "Properties", "Communities"];
+  const navItems = [
+    "Home",
+    "About Us",
+    "Properties",
+    "Communities",
+    "3D Modeler",
+  ];
 
   const { ref: contentRef, inView: contentInView } = useInView({
     triggerOnce: true,
@@ -72,6 +78,8 @@ const ComingSoonPage = () => {
                         ? "/about"
                         : item === "Properties"
                         ? "/property"
+                        : item === "3D Modeler"
+                        ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"

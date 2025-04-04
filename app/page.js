@@ -35,7 +35,13 @@ const fadeIn = {
   animate: { opacity: 1, transition: { duration: 0.8 } },
 };
 
-const navItems = ["Home", "About Us", "Properties", "Communities"];
+const navItems = [
+  "Home",
+  "About Us",
+  "Properties",
+  "Communities",
+  "3D Modeler",
+];
 
 const testimonials = [
   {
@@ -311,6 +317,8 @@ const HomePage = () => {
                         ? "/about"
                         : item === "Properties"
                         ? "/property"
+                        : item === "3D Modeler"
+                        ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"
@@ -469,7 +477,8 @@ const HomePage = () => {
               }
               transition={{ duration: 0.6 }}
               whileHover={{ scale: 1.03 }}
-              className="bg-[#1A1A1A] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              clas
+              sName="bg-[#1A1A1A] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
             >
               <div className="relative h-64">
                 <Image

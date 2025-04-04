@@ -52,7 +52,13 @@ const WaterfordEstates = () => {
   const { scrollYProgress } = useScroll();
   const logoScale = useTransform(scrollYProgress, [0, 0.2], [1, 0.8]);
 
-  const navItems = ["Home", "About Us", "Properties", "Communities"];
+  const navItems = [
+    "Home",
+    "About Us",
+    "Properties",
+    "Communities",
+    "3D Modeler",
+  ];
 
   const stats = [
     { icon: Park, label: "Parks", count: "5+" },
@@ -117,6 +123,8 @@ const WaterfordEstates = () => {
                         ? "/about"
                         : item === "Properties"
                         ? "/property"
+                        : item === "3D Modeler"
+                        ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="hover:text-[#CDB937] transition duration-200 px-2 py-1 rounded-md hover:bg-[#222222]"
@@ -185,6 +193,8 @@ const WaterfordEstates = () => {
                       ? "/about"
                       : item === "Properties"
                       ? "/property"
+                      : item === "3D Modeler"
+                      ? "/3d-builder"
                       : `/${item.toLowerCase().replace(" ", "-")}`
                   }
                   className="hover:text-[#CDB937] transition duration-200"

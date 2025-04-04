@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -30,6 +30,21 @@ import {
   User,
 } from "lucide-react";
 
+const fadeInUp = {
+  initial: {
+    opacity: 0,
+    y: 20,
+  },
+  animate: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: "easeOut",
+    },
+  },
+};
+
 const CanvasHouse = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -47,7 +62,13 @@ const CanvasHouse = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
 
-  const navItems = ["Home", "About Us", "Properties", "Communities"];
+  const navItems = [
+    "Home",
+    "About Us",
+    "Properties",
+    "Communities",
+    "3D Modeler",
+  ];
 
   const propertyImages = [
     { path: "/images/extcan.jpg", dimension: "1344x768", title: "Exterior" },
@@ -164,16 +185,120 @@ const CanvasHouse = () => {
     });
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Auto advance the slideshow
-      setCurrentImageIndex(
-        (prevIndex) => (prevIndex + 1) % propertyImages.length
-      );
-    }, 7000);
+  // Mortgage Calculator Component
+  const MortgageCalculator = () => {
+    const [downPayment, setDownPayment] = useState("");
+    const [interestRate, setInterestRate] = useState("");
+    const [loanTerm, setLoanTerm] = useState("");
+    const [monthlyPayment, setMonthlyPayment] = useState(null);
+    const housePrice = 1250000;
 
-    return () => clearInterval(interval);
-  }, [propertyImages.length]);
+    const formatNumber = (value) => {
+      const numericValue = value.replace(/[^0-9]/g, "");
+      if (!numericValue) return "";
+      const number = parseFloat(numericValue) / 100;
+      return number.toLocaleString("en-US", {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2,
+      });
+    };
+
+    const handleDownPaymentChange = (e) => {
+      const value = e.target.value;
+      const cleanValue = value.replace(/[^0-9]/g, "");
+      const formattedValue = formatNumber(cleanValue);
+      setDownPayment(formattedValue);
+    };
+
+    const calculateMortgage = () => {
+      const downPaymentAmount = parseFloat(downPayment);
+      const principal = housePrice - downPaymentAmount;
+      const rate = parseFloat(interestRate) / 100 / 12;
+      const term = parseFloat(loanTerm) * 12;
+
+      if (!downPaymentAmount || !rate || !term) {
+        alert("Please enter valid values.");
+        return;
+      }
+
+      const payment = (principal * rate) / (1 - Math.pow(1 + rate, -term));
+      setMonthlyPayment(payment.toFixed(2));
+    };
+
+    return (
+      <motion.div
+        variants={fadeInUp}
+        initial="initial"
+        animate="animate"
+        className="bg-[#1A1A1A] p-8 rounded-lg shadow-xl"
+      >
+        <h3 className="text-2xl font-bold text-[#CDB937] mb-6">
+          Mortgage Calculator
+        </h3>
+        <div className="space-y-4">
+          <div>
+            <label className="block text-gray-400 mb-2">Down Payment ($)</label>
+            <input
+              type="text"
+              placeholder="Enter down payment amount"
+              className="w-full px-4 py-3 bg-[#141414] border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] text-white"
+              value={downPayment}
+              onChange={handleDownPaymentChange}
+            />
+            <p className="text-sm text-gray-500 mt-1">
+              House Price: ${housePrice.toLocaleString()}
+            </p>
+          </div>
+          <div>
+            <label className="block text-gray-400 mb-2">
+              Interest Rate (%)
+            </label>
+            <input
+              type="number"
+              placeholder="Enter interest rate"
+              className="w-full px-4 py-3 bg-[#141414] border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] text-white"
+              value={interestRate}
+              onChange={(e) => setInterestRate(e.target.value)}
+            />
+          </div>
+          <div>
+            <label className="block text-gray-400 mb-2">
+              Loan Term (Years)
+            </label>
+            <input
+              type="number"
+              placeholder="Enter loan term"
+              className="w-full px-4 py-3 bg-[#141414] border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] text-white"
+              value={loanTerm}
+              onChange={(e) => setLoanTerm(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={calculateMortgage}
+            className="w-full bg-[#CDB937] text-black font-bold px-6 py-3 rounded-md hover:bg-[#B5A230] transition duration-300 mt-4"
+          >
+            Calculate Monthly Payment
+          </button>
+          {monthlyPayment && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-6 p-4 bg-[#141414] rounded-lg"
+            >
+              <h4 className="text-lg font-semibold text-[#CDB937] mb-2">
+                Estimated Monthly Payment
+              </h4>
+              <p className="text-2xl font-bold text-white">${monthlyPayment}</p>
+              <p className="text-sm text-gray-500 mt-2">
+                * This is an estimate only. Actual payments may vary based on
+                credit score, insurance, taxes, and other factors.
+              </p>
+            </motion.div>
+          )}
+        </div>
+      </motion.div>
+    );
+  };
 
   return (
     <div className="bg-[#141414] text-white min-h-screen">
@@ -218,6 +343,8 @@ const CanvasHouse = () => {
                         ? "/about"
                         : item === "Properties"
                         ? "/property"
+                        : item === "3D Modeler"
+                        ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"
@@ -557,204 +684,31 @@ const CanvasHouse = () => {
       </section>
 
       {/* Inquiry Form Section */}
-      <section ref={formRef} className="py-16 bg-[#141414]">
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={formInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.8 }}
-            className="max-w-4xl mx-auto"
-          >
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#CDB937] text-center">
-              Inquire About Front Drive Homes
-            </h2>
-            <p className="text-lg text-gray-300 leading-relaxed mb-10 text-center">
-              Interested in this property? Fill out the form below, and our real
-              estate experts will get back to you with more details, including
-              scheduling a viewing and answering any questions you may have.
-            </p>
-
-            <motion.form
-              initial={{ opacity: 0, y: 20 }}
-              animate={formInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              onSubmit={handleSubmit}
-              className="bg-[#1A1A1A] p-8 rounded-lg shadow-xl"
+      <section ref={formRef} className="py-16 bg-[#1A1A1A]">
+        <div className="container mx-auto px-6">
+          <div className="grid md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              variants={fadeInUp}
+              initial="initial"
+              animate={formInView ? "animate" : "initial"}
+              className="text-center md:text-left"
             >
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-                <div>
-                  <label
-                    htmlFor="firstName"
-                    className="block text-gray-300 mb-2"
-                  >
-                    First Name
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User size={18} className="text-gray-500" />
-                    </div>
-                    <input
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full bg-[#0A0A0A] border border-gray-700 rounded-md py-3 pl-10 pr-4 text-white focus:outline-none focus:border-[#CDB937] transition duration-300"
-                      placeholder="John"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label
-                    htmlFor="lastName"
-                    className="block text-gray-300 mb-2"
-                  >
-                    Last Name
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <User size={18} className="text-gray-500" />
-                    </div>
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full bg-[#0A0A0A] border border-gray-700 rounded-md py-3 pl-10 pr-4 text-white focus:outline-none focus:border-[#CDB937] transition duration-300"
-                      placeholder="Doe"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="block text-gray-300 mb-2">
-                    Email
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Mail size={18} className="text-gray-500" />
-                    </div>
-                    <input
-                      type="email"
-                      id="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full bg-[#0A0A0A] border border-gray-700 rounded-md py-3 pl-10 pr-4 text-white focus:outline-none focus:border-[#CDB937] transition duration-300"
-                      placeholder="john.doe@example.com"
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="block text-gray-300 mb-2">
-                    Phone
-                  </label>
-                  <div className="relative">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Phone size={18} className="text-gray-500" />
-                    </div>
-                    <input
-                      type="tel"
-                      id="phone"
-                      name="phone"
-                      value={formData.phone}
-                      onChange={handleInputChange}
-                      required
-                      className="w-full bg-[#0A0A0A] border border-gray-700 rounded-md py-3 pl-10 pr-4 text-white focus:outline-none focus:border-[#CDB937] transition duration-300"
-                      placeholder="(123) 456-7890"
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <label
-                  htmlFor="selectedProperty"
-                  className="block text-gray-300 mb-2"
-                >
-                  Selected Property
-                </label>
-                <div className="relative">
-                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                    <Home size={18} className="text-gray-500" />
-                  </div>
-                  <select
-                    id="selectedProperty"
-                    name="selectedProperty"
-                    value={formData.selectedProperty}
-                    onChange={handleInputChange}
-                    className="w-full bg-[#0A0A0A] border border-gray-700 rounded-md py-3 pl-10 pr-4 text-white focus:outline-none focus:border-[#CDB937] transition duration-300 appearance-none"
-                  >
-                    <option value="The Canvas House">The Canvas House</option>
-                    <option value="The Oasis">The Oasis</option>
-                    <option value="The Pinnacle">The Pinnacle</option>
-                    <option value="The Horizon">The Horizon</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="mb-6">
-                <label htmlFor="message" className="block text-gray-300 mb-2">
-                  Message
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleInputChange}
-                  rows={5}
-                  className="w-full bg-[#0A0A0A] border border-gray-700 rounded-md py-3 px-4 text-white focus:outline-none focus:border-[#CDB937] transition duration-300"
-                  placeholder="I'm interested in this property and would like to schedule a viewing..."
-                ></textarea>
-              </div>
-
-              <div className="mb-6">
-                <label className="flex items-center space-x-3">
-                  <input
-                    type="checkbox"
-                    name="agreeTerms"
-                    checked={formData.agreeTerms}
-                    onChange={handleInputChange}
-                    required
-                    className="form-checkbox h-5 w-5 text-[#CDB937] rounded focus:ring-[#CDB937] border-gray-700 bg-[#0A0A0A]"
-                  />
-                  <span className="text-gray-300 text-lg">
-                    I agree with the{" "}
-                    <Link
-                      href="/terms"
-                      className="text-[#CDB937] hover:underline"
-                    >
-                      Terms of Use
-                    </Link>{" "}
-                    and{" "}
-                    <Link
-                      href="/privacy"
-                      className="text-[#CDB937] hover:underline"
-                    >
-                      Privacy Policy
-                    </Link>
-                  </span>
-                </label>
-              </div>
-
-              <div className="text-center">
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  type="submit"
-                  className="bg-[#CDB937] text-black px-10 py-4 text-lg rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-                >
-                  Submit Inquiry
-                </motion.button>
-              </div>
-            </motion.form>
-          </motion.div>
+              <h2 className="text-3xl font-bold text-[#CDB937] mb-6">
+                Calculate Your Mortgage
+              </h2>
+              <p className="text-gray-400 mb-8">
+                Use our mortgage calculator to estimate your monthly payments
+                and plan your investment in The Canvas House.
+              </p>
+              <Link
+                href="/contact"
+                className="inline-block bg-[#CDB937] text-black px-8 py-3 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              >
+                Contact Us for More Information
+              </Link>
+            </motion.div>
+            <MortgageCalculator />
+          </div>
         </div>
       </section>
 

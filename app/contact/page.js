@@ -32,7 +32,13 @@ const fadeIn = {
   animate: { opacity: 1, transition: { duration: 0.8 } },
 };
 
-const navItems = ["Home", "About Us", "Properties", "Communities"];
+const navItems = [
+  "Home",
+  "About Us",
+  "Properties",
+  "Communities",
+  "3D Modeler",
+];
 
 // Reusable Button Component
 const Button = ({ children, onClick, className = "" }) => (
@@ -101,6 +107,8 @@ const ContactPage = () => {
                         ? "/about"
                         : item === "Properties"
                         ? "/property"
+                        : item === "3D Modeler"
+                        ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"
@@ -161,7 +169,7 @@ const ContactPage = () => {
             animate={heroInView ? "animate" : "initial"}
             className="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8"
           >
-            We’re here to help you find your dream home. Reach out today!
+            We're here to help you find your dream home. Reach out today!
           </motion.p>
           <motion.div
             variants={fadeIn}
@@ -187,11 +195,11 @@ const ContactPage = () => {
             className="text-center mb-12"
           >
             <h2 className="text-4xl font-bold text-[#CDB937] mb-4">
-              Let’s Connect
+              Let's Connect
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
               Whether you have questions about properties, communities, or
-              services, we’d love to hear from you.
+              services, we'd love to hear from you.
             </p>
           </motion.div>
 

@@ -67,7 +67,13 @@ const Langdon = () => {
     { path: "/images/Lang21.jpg", dimension: "533x400" },
   ];
 
-  const navItems = ["Home", "About Us", "Properties", "Communities"];
+  const navItems = [
+    "Home",
+    "About Us",
+    "Properties",
+    "Communities",
+    "3D Modeler",
+  ];
 
   const { ref: pathwaysRef, inView: pathwaysInView } = useInView({
     triggerOnce: true,
@@ -182,6 +188,8 @@ const Langdon = () => {
                         ? "/about"
                         : item === "Properties"
                         ? "/property"
+                        : item === "3D Modeler"
+                        ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
                     className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"
