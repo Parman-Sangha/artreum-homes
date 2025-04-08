@@ -1,8 +1,6 @@
-/* eslint-disable */
-
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -18,16 +16,14 @@ import {
   SquareIcon as SquareFoot,
   ChevronLeft,
   ChevronRight,
-  Home,
   Check,
   CuboidIcon as Cube,
   FileText,
   Facebook,
   Instagram,
   Twitter,
-  Mail,
-  Phone,
-  User,
+  Menu,
+  X,
 } from "lucide-react";
 
 const fadeInUp = {
@@ -48,6 +44,7 @@ const fadeInUp = {
 const CanvasHouse = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -61,6 +58,7 @@ const CanvasHouse = () => {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
+  const headerRef = useRef(null);
 
   const navItems = [
     "Home",
@@ -143,6 +141,50 @@ const CanvasHouse = () => {
     threshold: 0.2,
   });
 
+  // Handle scroll effect for header
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (headerRef.current && !headerRef.current.contains(event.target)) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenuOpen]);
+
   const nextImage = () => {
     setCurrentImageIndex(
       (prevIndex) => (prevIndex + 1) % propertyImages.length
@@ -196,7 +238,7 @@ const CanvasHouse = () => {
     const formatNumber = (value) => {
       const numericValue = value.replace(/[^0-9]/g, "");
       if (!numericValue) return "";
-      const number = parseFloat(numericValue) / 100;
+      const number = Number.parseFloat(numericValue) / 100;
       return number.toLocaleString("en-US", {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
@@ -211,10 +253,12 @@ const CanvasHouse = () => {
     };
 
     const calculateMortgage = () => {
-      const downPaymentAmount = parseFloat(downPayment);
+      const downPaymentAmount = Number.parseFloat(
+        downPayment.replace(/,/g, "")
+      );
       const principal = housePrice - downPaymentAmount;
-      const rate = parseFloat(interestRate) / 100 / 12;
-      const term = parseFloat(loanTerm) * 12;
+      const rate = Number.parseFloat(interestRate) / 100 / 12;
+      const term = Number.parseFloat(loanTerm) * 12;
 
       if (!downPaymentAmount || !rate || !term) {
         alert("Please enter valid values.");
@@ -300,75 +344,235 @@ const CanvasHouse = () => {
     );
   };
 
+  // Navigation link component with hover effects
+  const NavLink = ({ href, children, isMobile = false }) => {
+    return (
+      <Link href={href}>
+        <motion.div
+          className={`relative ${
+            isMobile
+              ? "text-2xl font-medium py-4 border-b border-gray-800"
+              : "px-3 py-2"
+          }`}
+          whileHover="hover"
+          initial="initial"
+        >
+          <motion.span
+            className={`relative z-10 ${
+              isMobile ? "text-white" : "text-gray-200"
+            } hover:text-[#CDB937] transition-colors duration-300`}
+          >
+            {children}
+          </motion.span>
+          {!isMobile && (
+            <motion.div
+              className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#CDB937] origin-left"
+              variants={{
+                initial: { scaleX: 0 },
+                hover: { scaleX: 1 },
+              }}
+              transition={{ duration: 0.3 }}
+            />
+          )}
+        </motion.div>
+      </Link>
+    );
+  };
+
   return (
     <div className="bg-[#141414] text-white min-h-screen">
       {/* Header */}
       <motion.header
+        ref={headerRef}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-[#1A1A1A] shadow-md sticky top-0 z-50"
+        className={`fixed w-full z-50 transition-all duration-500 ${
+          scrolled
+            ? "bg-black bg-opacity-90 backdrop-blur-md py-3 shadow-xl"
+            : "bg-gradient-to-b from-black to-transparent py-6"
+        }`}
       >
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-6 flex flex-col md:flex-row justify-between items-center">
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 flex justify-between items-center">
+          {/* Logo */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex items-center space-x-4 mb-4 md:mb-0"
+            className="z-20"
           >
-            <Link href="/" className="hover:opacity-80 transition duration-200">
+            <Link href="/" className="block">
               <Image
                 src="/images/logo1.png"
                 alt="Artreum Homes"
-                width={180}
-                height={72}
+                width={scrolled ? 150 : 180}
+                height={scrolled ? 60 : 72}
+                className="transition-all duration-300"
               />
             </Link>
           </motion.div>
 
-          <nav className="flex justify-center flex-1">
-            <ul className="flex flex-wrap justify-center space-x-4 md:space-x-8 font-medium text-lg">
-              {navItems.map((item, index) => (
-                <motion.li
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navItems.map((item, index) => (
+              <motion.div
+                key={item}
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+              >
+                <NavLink
+                  href={
+                    item === "Home"
+                      ? "/"
+                      : item === "About Us"
+                      ? "/about"
+                      : item === "Properties"
+                      ? "/property"
+                      : item === "3D Modeler"
+                      ? "/3d-builder"
+                      : `/${item.toLowerCase().replace(" ", "-")}`
+                  }
                 >
-                  <Link
-                    href={
-                      item === "Home"
-                        ? "/"
-                        : item === "About Us"
-                        ? "/about"
-                        : item === "Properties"
-                        ? "/property"
-                        : item === "3D Modeler"
-                        ? "/3d-builder"
-                        : `/${item.toLowerCase().replace(" ", "-")}`
-                    }
-                    className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"
-                  >
-                    {item}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
+                  {item}
+                </NavLink>
+              </motion.div>
+            ))}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link
+                href="/contact"
+                className="bg-[#CDB937] text-black px-6 py-2.5 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 inline-block"
+              >
+                Contact Us
+              </Link>
+            </motion.div>
           </nav>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mt-4 md:mt-0"
+          {/* Mobile Menu Button */}
+          <motion.button
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.5 }}
+            className="md:hidden z-20 p-2 text-white focus:outline-none"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
-            <Link
-              href="/contact"
-              className="bg-[#CDB937] text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
-            >
-              Contact Us
-            </Link>
-          </motion.div>
+            <AnimatePresence mode="wait">
+              {isMenuOpen ? (
+                <motion.div
+                  key="close"
+                  initial={{ rotate: -90, opacity: 0 }}
+                  animate={{ rotate: 0, opacity: 1 }}
+                  exit={{ rotate: 90, opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <X size={28} className="text-white" />
+                </motion.div>
+              ) : (
+                <motion.div
+                  key="menu"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <Menu size={28} className="text-white" />
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </motion.button>
+
+          {/* Mobile Menu */}
+          <AnimatePresence>
+            {isMenuOpen && (
+              <motion.div
+                initial={{ opacity: 0, x: "100%" }}
+                animate={{ opacity: 1, x: 0 }}
+                exit={{ opacity: 0, x: "100%" }}
+                transition={{ type: "spring", damping: 25, stiffness: 200 }}
+                className="fixed inset-0 bg-black bg-opacity-95 z-10 flex flex-col md:hidden"
+              >
+                <div className="h-24" /> {/* Spacer for header */}
+                <div className="flex flex-col px-8 py-6 overflow-y-auto">
+                  <nav className="flex flex-col space-y-2 mt-8">
+                    {navItems.map((item, index) => (
+                      <motion.div
+                        key={item}
+                        initial={{ opacity: 0, x: 50 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          duration: 0.3,
+                          delay: index * 0.1,
+                        }}
+                        onClick={() => setIsMenuOpen(false)}
+                      >
+                        <NavLink
+                          href={
+                            item === "Home"
+                              ? "/"
+                              : item === "About Us"
+                              ? "/about"
+                              : item === "Properties"
+                              ? "/property"
+                              : item === "3D Modeler"
+                              ? "/3d-builder"
+                              : `/${item.toLowerCase().replace(" ", "-")}`
+                          }
+                          isMobile={true}
+                        >
+                          {item}
+                        </NavLink>
+                      </motion.div>
+                    ))}
+                  </nav>
+                  <motion.div
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.6 }}
+                    className="mt-12"
+                  >
+                    <Link
+                      href="/contact"
+                      className="block w-full bg-[#CDB937] text-black py-4 rounded-full text-center text-xl font-semibold hover:bg-[#e3cc50] transition-all duration-300"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Contact Us
+                    </Link>
+                  </motion.div>
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.8 }}
+                    className="mt-12 flex justify-center space-x-6"
+                  >
+                    {[
+                      { icon: Facebook, href: "https://facebook.com" },
+                      { icon: Instagram, href: "https://instagram.com" },
+                      { icon: Twitter, href: "https://twitter.com" },
+                    ].map(({ icon: Icon, href }) => (
+                      <motion.a
+                        key={href}
+                        href={href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        whileHover={{ scale: 1.1, y: -5 }}
+                        whileTap={{ scale: 0.9 }}
+                        className="text-gray-400 hover:text-[#CDB937] transition duration-200"
+                      >
+                        <Icon size={28} />
+                      </motion.a>
+                    ))}
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </motion.header>
 
@@ -426,6 +630,7 @@ const CanvasHouse = () => {
                   <Image
                     src={
                       propertyImages[currentImageIndex].path ||
+                      "/placeholder.svg" ||
                       "/placeholder.svg"
                     }
                     alt={propertyImages[currentImageIndex].title}
@@ -437,28 +642,37 @@ const CanvasHouse = () => {
               </AnimatePresence>
 
               {/* Navigation Arrows */}
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.7)" }}
+                whileTap={{ scale: 0.9 }}
                 onClick={prevImage}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition duration-300"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full transition duration-300"
                 aria-label="Previous image"
               >
                 <ChevronLeft size={24} />
-              </button>
+              </motion.button>
 
-              <button
+              <motion.button
+                whileHover={{ scale: 1.1, backgroundColor: "rgba(0,0,0,0.7)" }}
+                whileTap={{ scale: 0.9 }}
                 onClick={nextImage}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-70 text-white p-3 rounded-full transition duration-300"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 text-white p-3 rounded-full transition duration-300"
                 aria-label="Next image"
               >
                 <ChevronRight size={24} />
-              </button>
+              </motion.button>
 
               {/* Image Title */}
-              <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 text-white p-4 rounded-b-lg">
+              <motion.div
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 backdrop-blur-sm text-white p-4 rounded-b-lg"
+              >
                 <h3 className="text-xl font-semibold">
                   {propertyImages[currentImageIndex].title}
                 </h3>
-              </div>
+              </motion.div>
             </div>
 
             {/* Thumbnails */}
@@ -466,7 +680,7 @@ const CanvasHouse = () => {
               {propertyImages.map((image, index) => (
                 <motion.div
                   key={index}
-                  whileHover={{ scale: 1.05 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
                   whileTap={{ scale: 0.95 }}
                   className={`relative flex-shrink-0 cursor-pointer rounded-md overflow-hidden transition duration-300 ${
                     currentImageIndex === index
@@ -505,7 +719,7 @@ const CanvasHouse = () => {
                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#CDB937]">
                   Description
                 </h2>
-                <p className="text-2xl text-gray-300 leading-relaxed">
+                <p className="text-lg md:text-xl lg:text-2xl text-gray-300 leading-relaxed">
                   The Canvas House is a minimalist's dream, offering a blank
                   slate for personal expression. Clean lines, open spaces, and
                   abundant natural light make it versatile and stylish. It's an
@@ -515,35 +729,46 @@ const CanvasHouse = () => {
               </div>
 
               <div className="flex flex-wrap justify-between gap-6 mt-8">
-                <div className="flex items-center space-x-4">
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  className="flex items-center space-x-4"
+                >
                   <div className="bg-[#1A1A1A] p-4 rounded-full">
-                    <Bed size={48} className="text-[#CDB937]" />
+                    <Bed size={36} className="text-[#CDB937]" />
                   </div>
                   <div>
-                    <p className="text-xl text-gray-400">Bedrooms</p>
-                    <p className="text-xl font-bold">04</p>
+                    <p className="text-lg md:text-xl text-gray-400">Bedrooms</p>
+                    <p className="text-xl md:text-2xl font-bold">04</p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex items-center space-x-4">
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  className="flex items-center space-x-4"
+                >
                   <div className="bg-[#1A1A1A] p-4 rounded-full">
-                    <Bath size={48} className="text-[#CDB937]" />
+                    <Bath size={36} className="text-[#CDB937]" />
                   </div>
                   <div>
-                    <p className="text-xl text-gray-400">Bathrooms</p>
-                    <p className="text-xl font-bold">04</p>
+                    <p className="text-lg md:text-xl text-gray-400">
+                      Bathrooms
+                    </p>
+                    <p className="text-xl md:text-2xl font-bold">04</p>
                   </div>
-                </div>
+                </motion.div>
 
-                <div className="flex items-center space-x-4">
+                <motion.div
+                  whileHover={{ y: -5 }}
+                  className="flex items-center space-x-4"
+                >
                   <div className="bg-[#1A1A1A] p-4 rounded-full">
-                    <SquareFoot size={48} className="text-[#CDB937]" />
+                    <SquareFoot size={36} className="text-[#CDB937]" />
                   </div>
                   <div>
-                    <p className="text-xl text-gray-400">Area</p>
-                    <p className="text-xl font-bold">3,500 sq ft</p>
+                    <p className="text-lg md:text-xl text-gray-400">Area</p>
+                    <p className="text-xl md:text-2xl font-bold">3,500 sq ft</p>
                   </div>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
 
@@ -556,7 +781,7 @@ const CanvasHouse = () => {
               <h3 className="text-2xl font-bold mb-6 text-[#CDB937]">
                 Key Features and Amenities
               </h3>
-              <ul className="space-y-4 text-xl">
+              <ul className="space-y-4 text-lg md:text-xl">
                 {amenities.map((amenity, index) => (
                   <motion.li
                     key={index}
@@ -601,7 +826,7 @@ const CanvasHouse = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
                 Build 3D Model
               </h2>
-              <p className="text-xl text-gray-300 leading-relaxed mb-10">
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed mb-10">
                 Build your dream home with our integrated 3D Modeler, allowing
                 you to design, customize, and visualize every detail in stunning
                 realism before construction begins.
@@ -639,7 +864,7 @@ const CanvasHouse = () => {
             <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#CDB937]">
               Floor Plan
             </h2>
-            <p className="text-xl text-gray-300 leading-relaxed">
+            <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
               Explore our collection of pre-designed floor plans with our
               integrated tool, allowing you to easily visualize and choose the
               perfect layout for your future home.
@@ -661,19 +886,21 @@ const CanvasHouse = () => {
             </div>
 
             <div className="mt-6 text-center">
-              <a
+              <motion.a
+                whileHover={{ scale: 1.05, backgroundColor: "#444" }}
+                whileTap={{ scale: 0.95 }}
                 href="/images/floorplan.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center bg-[#333] text-white px-6 py-3 rounded-lg hover:bg-[#444] transition duration-300"
+                className="inline-flex items-center bg-[#333] text-white px-6 py-3 rounded-lg transition duration-300"
               >
                 <FileText className="mr-2 h-5 w-5" />
                 Download Floor Plan PDF
-              </a>
+              </motion.a>
             </div>
           </motion.div>
 
-          <div className="mt-8 text-center text-gray-400 text-lg">
+          <div className="mt-8 text-center text-gray-400 text-sm md:text-base">
             <p>
               <strong>Note:</strong> The figures provided above are estimates
               and may vary depending on the property, location, and individual
@@ -683,7 +910,7 @@ const CanvasHouse = () => {
         </div>
       </section>
 
-      {/* Inquiry Form Section */}
+      {/* Mortgage Calculator Section */}
       <section ref={formRef} className="py-16 bg-[#1A1A1A]">
         <div className="container mx-auto px-6">
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -696,16 +923,21 @@ const CanvasHouse = () => {
               <h2 className="text-3xl font-bold text-[#CDB937] mb-6">
                 Calculate Your Mortgage
               </h2>
-              <p className="text-gray-400 mb-8">
+              <p className="text-gray-400 mb-8 text-lg">
                 Use our mortgage calculator to estimate your monthly payments
                 and plan your investment in The Canvas House.
               </p>
-              <Link
-                href="/contact"
-                className="inline-block bg-[#CDB937] text-black px-8 py-3 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Contact Us for More Information
-              </Link>
+                <Link
+                  href="/contact"
+                  className="inline-block bg-[#CDB937] text-black px-8 py-3 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                >
+                  Contact Us for More Information
+                </Link>
+              </motion.div>
             </motion.div>
             <MortgageCalculator />
           </div>
@@ -729,7 +961,7 @@ const CanvasHouse = () => {
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-white">
                 Build your Dream with Artreum
               </h2>
-              <p className="text-xl text-gray-300 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-300 leading-relaxed">
                 Your dream property is just a click away. Whether you're looking
                 for a new home, a strategic investment, or expert real estate
                 advice, Artreum is here to assist you every step of the way.
@@ -783,9 +1015,13 @@ const CanvasHouse = () => {
                   placeholder="Enter your email"
                   className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] transition duration-300"
                 />
-                <button className="px-4 py-2 bg-[#CDB937] text-black font-bold rounded-md hover:bg-[#e3cc50] transition duration-200">
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 bg-[#CDB937] text-black font-bold rounded-md hover:bg-[#e3cc50] transition duration-200"
+                >
                   Subscribe
-                </button>
+                </motion.button>
               </form>
             </div>
 
@@ -897,7 +1133,7 @@ const CanvasHouse = () => {
                     href={href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1 }}
+                    whileHover={{ scale: 1.1, y: -5 }}
                     whileTap={{ scale: 0.9 }}
                     className="text-gray-400 hover:text-[#CDB937] transition duration-200"
                   >
