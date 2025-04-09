@@ -5,11 +5,18 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        primary: "#CDB937",
+        "primary-hover": "#e3cc50",
+        "dark-bg": "#141414",
+        "dark-surface": "#1A1A1A",
+        "dark-surface-hover": "#222222",
+        "light-bg": "#FFFFFF",
+        "light-surface": "#F5F5F5",
+        "light-surface-hover": "#E5E5E5",
       },
       fontFamily: {
         sans: ["var(--font-dm-sans)", "sans-serif"],

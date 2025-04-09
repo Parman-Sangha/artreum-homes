@@ -25,7 +25,11 @@ import {
   ChevronDown,
   Menu,
   X,
+  ArrowDown,
+  Sun,
+  Moon,
 } from "lucide-react";
+import { useTheme } from "./context/ThemeContext";
 
 // Animation Variants
 const fadeInUp = {
@@ -129,7 +133,7 @@ const PropertyCard = ({
         <p className="text-gray-400 mb-4 text-sm">{description}</p>
         <div className="flex items-center space-x-4 text-[#CDB937] mb-4">
           <div className="flex items-center">
-            <Home className="w-5 h-5 mr-1" />${price.toLocaleString()}
+            <House className="w-5 h-5 mr-1" />${price.toLocaleString()}
           </div>
           <div className="flex items-center">
             <BedDouble className="w-5 h-5 mr-1" />
@@ -161,6 +165,7 @@ const HomePage = () => {
   const { scrollYProgress } = useScroll();
   const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
+  const { theme, toggleTheme } = useTheme();
 
   const { ref: testimonialRef, inView: testimonialInView } = useInView({
     triggerOnce: true,
@@ -296,14 +301,14 @@ const HomePage = () => {
   };
 
   return (
-    <div className="bg-[#141414] text-white min-h-screen">
+    <div className="bg-light-bg dark:bg-dark-bg text-gray-900 dark:text-white min-h-screen">
       {/* Header */}
       <motion.header
         ref={headerRef}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className={`fixed w-full z-50 transition-all duration-500 ${
+        className={`bg-light-surface dark:bg-dark-surface shadow-md sticky top-0 z-50 fixed w-full z-50 transition-all duration-500 ${
           scrolled ? "bg-[#1A1A1A] py-3 shadow-xl" : "bg-[#1A1A1A] py-6"
         }`} // Changed to always use #1A1A1A
       >
@@ -355,7 +360,7 @@ const HomePage = () => {
                           ? "/3d-builder"
                           : `/${item.toLowerCase().replace(" ", "-")}`
                       }
-                      className="px-2 sm:px-3 lg:px-4 py-2 rounded-md inline-block transition-all duration-300"
+                      className="text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-all duration-300 px-3 sm:px-4 py-2 rounded-md inline-block hover:bg-light-surface-hover dark:hover:bg-dark-surface-hover"
                     >
                       {item}
                     </Link>
@@ -525,7 +530,7 @@ const HomePage = () => {
             className="font-serif text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6 drop-shadow-lg"
           >
             Build Your Dream with{" "}
-            <span className="text-[#CDB937]">Artreum Homes</span>
+            <span className="text-primary">Artreum Homes</span>
           </motion.h1>
           <motion.p
             variants={fadeIn}
@@ -648,6 +653,7 @@ const HomePage = () => {
                   fill
                   className="object-cover"
                 />
+                <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-0 transition-opacity duration-300" />
               </div>
               <div className="p-4 sm:p-6">
                 <h4 className="font-serif text-lg sm:text-xl font-bold text-white mb-2">
@@ -672,7 +678,7 @@ const HomePage = () => {
               }
               transition={{ duration: 0.8, delay: 0.2 }}
               whileHover={{ scale: 1.03 }}
-              className="bg-[#1A1A1A] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+              className="bg-light-surface dark:bg-dark-surface rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
             >
               <div className="relative h-48 sm:h-56 md:h-64">
                 <Image
@@ -681,6 +687,7 @@ const HomePage = () => {
                   fill
                   className="object-cover"
                 />
+                <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-0 transition-opacity duration-300" />
               </div>
               <div className="p-4 sm:p-6">
                 <h4 className="font-serif text-lg sm:text-xl font-bold text-white mb-2">

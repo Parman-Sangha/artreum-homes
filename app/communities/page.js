@@ -12,7 +12,13 @@ import {
   Twitter,
   ArrowRight,
   ArrowDown,
+  Home,
+  MapPin,
+  Sun,
+  Moon,
 } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
+import Button from "../components/Button";
 
 const fadeInUp = {
   initial: { y: 60, opacity: 0 },
@@ -38,36 +44,48 @@ const navItems = [
 
 const communities = [
   {
+    id: 1,
     name: "Waterford Estates",
     description:
       "Waterford Estates offers a suburban retreat with tree-lined roads and minimal traffic. Enjoy a calm commute with peaceful, green surroundings, ideal for a low-stress lifestyle.",
     price: "$1,000,000",
     image: "/images/com.png",
     link: "/communities/waterford",
+    homes: 150,
+    location: "Waterford, AB",
   },
   {
+    id: 2,
     name: "Langdon",
     description:
       "Langdon provides a scenic escape through open countryside with quiet roads and stunning rural landscapes. Perfect for those seeking tranquility away from urban congestion.",
     price: "$650,000",
     image: "/images/con3.png",
     link: "/communities/langdon",
+    homes: 200,
+    location: "Langdon, AB",
   },
   {
+    id: 3,
     name: "Sattlepeace",
     description:
       "Sattlepeace blends urban and suburban vibes with smooth access to main roads. Moderate traffic and scenic sections make it a balanced choice for work and leisure.",
     price: "$700,000",
     image: "/images/c2.jpeg",
     link: "/coming-soon",
+    homes: 175,
+    location: "Sattlepeace, AB",
   },
   {
+    id: 4,
     name: "Condridge - Knights Bridge",
     description:
       "Condridge via Knights Bridge offers city convenience with scenic bridge views. Steady traffic meets parks and shops, creating a charming, semi-urban commute.",
     price: "$1,250,000",
     image: "/images/c1.jpeg",
     link: "/communities/conrich",
+    homes: 125,
+    location: "Condridge, AB",
   },
 ];
 
@@ -81,8 +99,8 @@ const CommunityCard = ({ community }) => {
       initial={{ opacity: 0, y: 40 }}
       animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
       transition={{ duration: 0.6 }}
-      whileHover={{ scale: 1.03 }}
-      className="bg-[#1A1A1A] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
+      whileHover={{ scale: 1.03, translateZ: 0 }}
+      className="bg-light-surface dark:bg-dark-surface rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 will-change-transform"
     >
       <div className="relative h-64">
         <Image
@@ -94,14 +112,28 @@ const CommunityCard = ({ community }) => {
         <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-0 transition-opacity duration-300" />
       </div>
       <div className="p-6">
-        <h4 className="text-xl font-bold text-white mb-2">{community.name}</h4>
-        <p className="text-gray-400 mb-4">{community.description}</p>
-        <p className="text-[#CDB937] font-bold text-lg mb-4">
-          {community.price}
+        <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+          {community.name}
+        </h3>
+        <p className="text-gray-700 dark:text-gray-300 mb-4">
+          {community.description}
+        </p>
+        <div className="flex items-center space-x-4 text-primary mb-4">
+          <div className="flex items-center">
+            <Home className="w-5 h-5 mr-1" />
+            <span>{community.homes} Homes</span>
+          </div>
+          <div className="flex items-center">
+            <MapPin className="w-5 h-5 mr-1" />
+            <span>{community.location}</span>
+          </div>
+        </div>
+        <p className="text-primary font-bold text-lg mb-4">
+          Starting from {community.price}
         </p>
         <Link
           href={community.link}
-          className="block w-full px-6 py-3 bg-[#CDB937] text-black font-bold rounded-md text-center hover:bg-[#e3cc50] transition duration-300 shadow-md hover:shadow-lg"
+          className="block w-full px-6 py-3 bg-primary text-black font-bold rounded-md text-center hover:bg-[#e3cc50] transition duration-300 shadow-md hover:shadow-lg"
         >
           View Community
         </Link>
@@ -111,6 +143,7 @@ const CommunityCard = ({ community }) => {
 };
 
 const CommunitiesPage = () => {
+  const { theme, toggleTheme } = useTheme();
   const { ref: heroRef, inView: heroInView } = useInView({ triggerOnce: true });
   const { ref: communitiesRef, inView: communitiesInView } = useInView({
     triggerOnce: true,
@@ -126,13 +159,13 @@ const CommunitiesPage = () => {
   };
 
   return (
-    <div className="bg-[#141414] text-white min-h-screen">
+    <div className="bg-light-bg dark:bg-dark-bg text-gray-900 dark:text-white min-h-screen">
       {/* Header */}
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-[#1A1A1A] shadow-md sticky top-0 z-50"
+        className="bg-light-surface dark:bg-dark-surface shadow-md sticky top-0 z-50"
       >
         <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-6 flex flex-col md:flex-row justify-between items-center">
           <motion.div
@@ -150,6 +183,7 @@ const CommunitiesPage = () => {
               />
             </Link>
           </motion.div>
+
           <nav className="flex justify-center flex-1">
             <ul className="flex flex-wrap justify-center space-x-4 md:space-x-8 font-medium text-lg">
               {navItems.map((item, index) => (
@@ -171,7 +205,7 @@ const CommunitiesPage = () => {
                         ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
-                    className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"
+                    className="text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition duration-200 px-3 py-2 rounded-md hover:bg-light-surface-hover dark:hover:bg-dark-surface-hover"
                   >
                     {item}
                   </Link>
@@ -179,19 +213,23 @@ const CommunitiesPage = () => {
               ))}
             </ul>
           </nav>
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mt-4 md:mt-0"
-          >
-            <Link
-              href="/contact"
-              className="bg-[#CDB937] text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-light-surface-hover dark:bg-dark-surface-hover hover:bg-light-surface dark:hover:bg-dark-surface transition-colors duration-200"
+              aria-label="Toggle theme"
             >
+              {theme === "light" ? (
+                <Moon className="w-5 h-5 text-gray-800" />
+              ) : (
+                <Sun className="w-5 h-5 text-white" />
+              )}
+            </button>
+            <Button href="/contact" className="px-8 py-3 text-lg">
               Contact Us
-            </Link>
-          </motion.div>
+            </Button>
+          </div>
         </div>
       </motion.header>
 
@@ -249,30 +287,29 @@ const CommunitiesPage = () => {
       </section>
 
       {/* Communities Section */}
-      <section id="communities" className="py-20 bg-[#141414]">
-        <div className="container mx-auto px-6">
-          <motion.div
-            ref={communitiesRef}
-            variants={fadeInUp}
-            initial="initial"
-            animate={communitiesInView ? "animate" : "initial"}
-            className="text-center mb-12"
-          >
-            <h3 className="text-4xl font-bold text-[#CDB937] mb-4">
-              Our Communities
-            </h3>
-            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
-              From serene suburban retreats to dynamic urban settings, find the
-              perfect place to call home.
-            </p>
-          </motion.div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-            {communities.map((community, index) => (
-              <CommunityCard key={index} community={community} />
-            ))}
-          </div>
+      <main className="container mx-auto px-6 py-20" id="communities">
+        <motion.div
+          variants={fadeInUp}
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="text-center mb-12"
+        >
+          <h1 className="text-5xl font-bold text-primary mb-4">
+            Our Communities
+          </h1>
+          <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+            Discover our carefully planned communities, each offering unique
+            living experiences and amenities.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {communities.map((community) => (
+            <CommunityCard key={community.id} community={community} />
+          ))}
         </div>
-      </section>
+      </main>
 
       {/* Footer */}
       <footer className="bg-black py-12">

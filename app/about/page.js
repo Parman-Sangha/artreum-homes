@@ -5,8 +5,17 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Star, Facebook, Instagram, Twitter, ArrowRight } from "lucide-react";
+import {
+  Star,
+  Facebook,
+  Instagram,
+  Twitter,
+  ArrowRight,
+  Sun,
+  Moon,
+} from "lucide-react";
 import { useInView } from "react-intersection-observer";
+import { useTheme } from "../context/ThemeContext";
 
 const fadeInUp = {
   initial: { y: 60, opacity: 0 },
@@ -24,6 +33,7 @@ const fadeIn = {
 
 const AboutPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
   const { ref: aboutRef, inView: aboutInView } = useInView({
     triggerOnce: true,
   });
@@ -70,13 +80,13 @@ const AboutPage = () => {
   ];
 
   return (
-    <div className="bg-[#141414] text-white min-h-screen">
+    <div className="bg-light-bg dark:bg-dark-bg text-gray-900 dark:text-white min-h-screen">
       {/* Header */}
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-[#1A1A1A] shadow-md sticky top-0 z-50"
+        className="bg-light-surface dark:bg-dark-surface shadow-md sticky top-0 z-50"
       >
         <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-6 flex flex-col md:flex-row justify-between items-center">
           <motion.div
@@ -116,7 +126,7 @@ const AboutPage = () => {
                         ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
-                    className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"
+                    className="text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition duration-200 px-3 py-2 rounded-md hover:bg-light-surface-hover dark:hover:bg-dark-surface-hover"
                   >
                     {item}
                   </Link>
@@ -125,19 +135,25 @@ const AboutPage = () => {
             </ul>
           </nav>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mt-4 md:mt-0"
-          >
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-light-surface-hover dark:bg-dark-surface-hover hover:bg-light-surface dark:hover:bg-dark-surface transition-colors duration-200"
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? (
+                <Moon className="w-5 h-5 text-gray-800" />
+              ) : (
+                <Sun className="w-5 h-5 text-white" />
+              )}
+            </button>
             <Link
               href="/contact"
               className="bg-[#CDB937] text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Contact Us
             </Link>
-          </motion.div>
+          </div>
         </div>
       </motion.header>
 
@@ -176,7 +192,7 @@ const AboutPage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-[#1A1A1A]">
+      <section className="py-20 bg-light-surface dark:bg-dark-surface">
         <div className="container mx-auto px-6">
           <motion.div
             ref={testimonialRef}
@@ -185,10 +201,10 @@ const AboutPage = () => {
             variants={fadeInUp}
             className="max-w-2xl mb-12"
           >
-            <h2 className="text-4xl font-bold mb-4 text-[#CDB937]">
+            <h2 className="text-4xl font-bold mb-4 text-primary">
               Testimonials
             </h2>
-            <p className="text-gray-400 text-lg">
+            <p className="text-gray-700 dark:text-gray-300 text-lg">
               Read the success stories and heartfelt testimonials from our
               valued clients. Discover why they chose Artreum for their real
               estate needs.
@@ -198,35 +214,28 @@ const AboutPage = () => {
             {testimonials.map((testimonial, index) => (
               <motion.div
                 key={index}
-                varriants={fadeInUp}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
                 initial={{ opacity: 0, y: 20 }}
                 animate={
                   testimonialInView
                     ? { opacity: 1, y: 0 }
                     : { opacity: 0, y: 20 }
                 }
-                transition={{
-                  duration: 0.1,
-
-                  hover: { duration: 0.1 },
-                }}
-                className="bg-[#222222] rounded-lg transform hover:shadow-xl"
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-light-surface dark:bg-dark-surface rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
               >
                 <div className="p-6">
                   <div className="flex justify-start mb-4">
                     {[...Array(5)].map((_, i) => (
                       <Star
                         key={i}
-                        className="w-5 h-5 text-[#CDB937] fill-[#CDB937] filter drop-shadow-lg mr-1"
+                        className="w-5 h-5 text-primary fill-primary mr-1"
                       />
                     ))}
                   </div>
-                  <h3 className="text-xl font-bold mb-4 text-[#CDB937]">
+                  <h3 className="text-xl font-bold mb-4 text-gray-900 dark:text-white">
                     {testimonial.title}
                   </h3>
-                  <p className="text-gray-300 mb-6 italic">
+                  <p className="text-gray-700 dark:text-gray-300 mb-6 italic">
                     "{testimonial.text}"
                   </p>
                   <div className="flex items-center space-x-4">
@@ -239,7 +248,7 @@ const AboutPage = () => {
                         className="object-cover"
                       />
                     </div>
-                    <span className="font-medium text-white">
+                    <span className="font-medium text-gray-900 dark:text-white">
                       {testimonial.author}
                     </span>
                   </div>
@@ -251,7 +260,7 @@ const AboutPage = () => {
       </section>
 
       {/* Build Dream Section */}
-      <section className="py-20 bg-[#141414]">
+      <section className="py-20 bg-light-bg dark:bg-dark-bg">
         <div className="container mx-auto px-6">
           <motion.div
             ref={buildDreamRef}
