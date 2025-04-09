@@ -16,7 +16,10 @@ import {
   Twitter,
   ArrowRight,
   ArrowDown,
+  Sun,
+  Moon,
 } from "lucide-react";
+import { useTheme } from "../context/ThemeContext";
 
 // Animation Variants
 const fadeInUp = {
@@ -42,6 +45,7 @@ const navItems = [
 ];
 
 const PropertiesPage = () => {
+  const { theme, toggleTheme } = useTheme();
   const properties = [
     { type: "Front-Garage Houses", prefix: "front-garage-house" },
     { type: "Laned Houses", prefix: "laned-house" },
@@ -100,7 +104,7 @@ const PropertiesPage = () => {
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
         transition={{ duration: 0.6 }}
         whileHover={{ scale: 1.03, translateZ: 0 }}
-        className="bg-[#1A1A1A] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 will-change-transform"
+        className="bg-light-surface dark:bg-dark-surface rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 will-change-transform"
       >
         <div className="relative h-64">
           <Image
@@ -114,11 +118,13 @@ const PropertiesPage = () => {
           <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-0 transition-opacity duration-300" />
         </div>
         <div className="p-6">
-          <h3 className="text-xl font-bold text-white mb-2">
+          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
             {type} {house.id}
           </h3>
-          <p className="text-gray-400 mb-4">{house.description}</p>
-          <div className="flex items-center space-x-4 text-[#CDB937] mb-4">
+          <p className="text-gray-700 dark:text-gray-300 mb-4">
+            {house.description}
+          </p>
+          <div className="flex items-center space-x-4 text-primary mb-4">
             <div className="flex items-center">
               <Bed className="w-5 h-5 mr-1" />
               <span>{house.beds}</span>
@@ -132,10 +138,10 @@ const PropertiesPage = () => {
               <span>{house.sqft} sqft</span>
             </div>
           </div>
-          <p className="text-[#CDB937] font-bold text-lg mb-4">{house.price}</p>
+          <p className="text-primary font-bold text-lg mb-4">{house.price}</p>
           <Link
             href={linkHref}
-            className="block w-full px-6 py-3 bg-[#CDB937] text-black font-bold rounded-md text-center hover:bg-[#e3cc50] transition duration-300 shadow-md hover:shadow-lg"
+            className="block w-full px-6 py-3 bg-primary text-black font-bold rounded-md text-center hover:bg-[#e3cc50] transition duration-300 shadow-md hover:shadow-lg"
           >
             View Details
           </Link>
@@ -145,13 +151,13 @@ const PropertiesPage = () => {
   };
 
   return (
-    <div className="bg-[#141414] text-white min-h-screen">
+    <div className="bg-light-bg dark:bg-dark-bg text-gray-900 dark:text-white min-h-screen">
       {/* Header */}
       <motion.header
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className="bg-[#1A1A1A] shadow-md sticky top-0 z-50"
+        className="bg-light-surface dark:bg-dark-surface shadow-md sticky top-0 z-50"
       >
         <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-6 flex flex-col md:flex-row justify-between items-center">
           <motion.div
@@ -191,7 +197,7 @@ const PropertiesPage = () => {
                         ? "/3d-builder"
                         : `/${item.toLowerCase().replace(" ", "-")}`
                     }
-                    className="hover:text-[#CDB937] transition duration-200 px-3 py-2 rounded-md hover:bg-[#222222]"
+                    className="text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition duration-200 px-3 py-2 rounded-md hover:bg-light-surface-hover dark:hover:bg-dark-surface-hover"
                   >
                     {item}
                   </Link>
@@ -200,19 +206,25 @@ const PropertiesPage = () => {
             </ul>
           </nav>
 
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="mt-4 md:mt-0"
-          >
+          <div className="flex items-center space-x-4">
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-full bg-light-surface-hover dark:bg-dark-surface-hover hover:bg-light-surface dark:hover:bg-dark-surface transition-colors duration-200"
+              aria-label="Toggle theme"
+            >
+              {theme === "light" ? (
+                <Moon className="w-5 h-5 text-gray-800" />
+              ) : (
+                <Sun className="w-5 h-5 text-white" />
+              )}
+            </button>
             <Link
               href="/contact"
               className="bg-[#CDB937] text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
             >
               Contact Us
             </Link>
-          </motion.div>
+          </div>
         </div>
       </motion.header>
 
@@ -278,10 +290,10 @@ const PropertiesPage = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <h1 className="text-5xl font-bold text-[#CDB937] mb-4">
+          <h1 className="text-5xl font-bold text-primary mb-4">
             Explore Our Properties
           </h1>
-          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+          <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
             Discover a range of stunning homes tailored to modern living, from
             spacious front-garage houses to elegant townhouses.
           </p>
@@ -294,7 +306,7 @@ const PropertiesPage = () => {
               initial="initial"
               whileInView="animate"
               viewport={{ once: true }}
-              className="text-3xl font-bold text-[#CDB937] mb-8"
+              className="text-3xl font-bold text-primary mb-8"
             >
               {type}
             </motion.h2>
