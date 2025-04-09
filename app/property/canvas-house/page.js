@@ -30,18 +30,8 @@ import {
 } from "lucide-react";
 
 const fadeInUp = {
-  initial: {
-    opacity: 0,
-    y: 20,
-  },
-  animate: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.6,
-      ease: "easeOut",
-    },
-  },
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 const CanvasHouse = () => {
@@ -62,6 +52,44 @@ const CanvasHouse = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.1], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.1], [1, 0.8]);
   const headerRef = useRef(null);
+
+  // smooth scrolling behavior
+  useEffect(() => {
+    document.documentElement.style.scrollBehavior = "smooth";
+    return () => {
+      document.documentElement.style.scrollBehavior = "";
+    };
+  }, []);
+
+  // custom scrollbar styles
+  useEffect(() => {
+    const style = document.createElement("style");
+    style.textContent = `
+      ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #1A1A1A;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #CDB937;
+        border-radius: 5px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #e3cc50;
+      }
+      html, body {
+        background-color: #141414 !important;
+        overflow-x: hidden !important;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
 
   const navItems = [
     "Home",
@@ -160,7 +188,6 @@ const CanvasHouse = () => {
   }, []);
 
   useEffect(() => {
-    // Disable body scroll when menu is open
     if (isMenuOpen) {
       document.body.style.overflow = "hidden";
     } else {
@@ -199,10 +226,8 @@ const CanvasHouse = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Form submission logic would go here
     console.log("Form submitted:", formData);
     alert("Thank you for your inquiry! Our team will contact you soon.");
-    // Reset form
     setFormData({
       firstName: "",
       lastName: "",
@@ -340,11 +365,7 @@ const CanvasHouse = () => {
     closed: {
       opacity: 0,
       x: "100%",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-      },
+      transition: { type: "spring", stiffness: 400, damping: 40 },
     },
     open: {
       opacity: 1,
@@ -370,11 +391,7 @@ const CanvasHouse = () => {
     hover: {
       scale: 1.05,
       color: "#CDB937",
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10,
-      },
+      transition: { type: "spring", stiffness: 400, damping: 10 },
     },
     tap: { scale: 0.95 },
   };
@@ -388,10 +405,8 @@ const CanvasHouse = () => {
         animate={{ y: 0 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
         className={`fixed w-full z-50 transition-all duration-500 ${
-          scrolled
-            ? "bg-black/90 backdrop-blur-md py-3 shadow-xl"
-            : "bg-[#1A1A1A] py-6"
-        }`}
+          scrolled ? "bg-[#1A1A1A] py-3 shadow-xl" : "bg-[#1A1A1A] py-6"
+        }`} // Changed to always use #1A1A1A
       >
         <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 flex justify-between items-center">
           <motion.div
@@ -640,6 +655,12 @@ const CanvasHouse = () => {
             >
               <motion.a
                 href="#gallery"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document
+                    .getElementById("gallery")
+                    .scrollIntoView({ behavior: "smooth" });
+                }}
                 whileHover={{ y: -5 }}
                 whileTap={{ y: 0 }}
                 className="inline-flex items-center text-white hover:text-[#CDB937] transition-colors duration-300"
@@ -670,7 +691,6 @@ const CanvasHouse = () => {
                   <Image
                     src={
                       propertyImages[currentImageIndex].path ||
-                      "/placeholder.svg" ||
                       "/placeholder.svg"
                     }
                     alt={propertyImages[currentImageIndex].title}
@@ -759,7 +779,7 @@ const CanvasHouse = () => {
                 <h2 className="text-3xl md:text-4xl font-bold mb-6 text-[#CDB937]">
                   Description
                 </h2>
-                <p className="text-2xl text-gray-300 leading-relaxed">
+                <p className="text-lg sm:text-xl md:text-2xl text-gray-300 leading-relaxed">
                   The Canvas House is a minimalist's dream, offering a blank
                   slate for personal expression. Clean lines, open spaces, and
                   abundant natural light make it versatile and stylish. It's an
@@ -807,10 +827,10 @@ const CanvasHouse = () => {
               transition={{ duration: 0.8, delay: 0.2 }}
               className="bg-[#1A1A1A] p-8 rounded-lg shadow-xl backdrop-blur-sm bg-opacity-90"
             >
-              <h3 className="text-2xl font-bold mb-6 text-[#CDB937]">
+              <h3 className="text-xl sm:text-2xl font-bold mb-6 text-[#CDB937]">
                 Key Features and Amenities
               </h3>
-              <ul className="space-y-4 text-xl">
+              <ul className="space-y-4 text-base sm:text-lg md:text-xl">
                 {amenities.map((amenity, index) => (
                   <motion.li
                     key={index}
@@ -915,7 +935,7 @@ const CanvasHouse = () => {
                 src="/images/floorplan.pdf"
                 className="w-full h-[600px] border-0 rounded-lg"
                 title="Floor Plan PDF"
-              ></iframe>
+              />
             </div>
 
             <div className="mt-6 text-center">
@@ -935,15 +955,15 @@ const CanvasHouse = () => {
                 Download Floor Plan PDF
               </motion.a>
             </div>
-          </motion.div>
 
-          <div className="mt-8 text-center text-gray-400 text-lg">
-            <p>
-              <strong>Note:</strong> The figures provided above are estimates
-              and may vary depending on the property, location, and individual
-              circumstances.
-            </p>
-          </div>
+            <div className="mt-8 text-center text-gray-400 text-lg">
+              <p>
+                <strong>Note:</strong> The figures provided above are estimates
+                and may vary depending on the property, location, and individual
+                circumstances.
+              </p>
+            </div>
+          </motion.div>
         </div>
       </section>
 
