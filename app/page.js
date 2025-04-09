@@ -133,7 +133,7 @@ const PropertyCard = ({
         <p className="text-gray-400 mb-4 text-sm">{description}</p>
         <div className="flex items-center space-x-4 text-[#CDB937] mb-4">
           <div className="flex items-center">
-            <House className="w-5 h-5 mr-1" />${price.toLocaleString()}
+            <Home className="w-5 h-5 mr-1" />${price.toLocaleString()}
           </div>
           <div className="flex items-center">
             <BedDouble className="w-5 h-5 mr-1" />
@@ -301,14 +301,14 @@ const HomePage = () => {
   };
 
   return (
-    <div className="bg-light-bg dark:bg-dark-bg text-gray-900 dark:text-white min-h-screen">
+    <div className="bg-[#141414] text-white min-h-screen">
       {/* Header */}
       <motion.header
         ref={headerRef}
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className={`bg-light-surface dark:bg-dark-surface shadow-md sticky top-0 z-50 fixed w-full z-50 transition-all duration-500 ${
+        className={`fixed w-full z-50 transition-all duration-500 ${
           scrolled ? "bg-[#1A1A1A] py-3 shadow-xl" : "bg-[#1A1A1A] py-6"
         }`} // Changed to always use #1A1A1A
       >
@@ -329,10 +329,9 @@ const HomePage = () => {
               />
             </Link>
           </motion.div>
-
           {/* Desktop Navigation */}
           <nav className="hidden md:flex justify-center flex-1">
-            <ul className="flex flex-wrap justify-center space-x-1 lg:space-x-2 font-medium text-sm sm:text-base lg:text-lg">
+            <ul className="flex flex-wrap justify-center space-x-1 lg:space-x-2 font-medium text-lg">
               {navItems.map((item, index) => (
                 <motion.li
                   key={item}
@@ -360,7 +359,7 @@ const HomePage = () => {
                           ? "/3d-builder"
                           : `/${item.toLowerCase().replace(" ", "-")}`
                       }
-                      className="text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition-all duration-300 px-3 sm:px-4 py-2 rounded-md inline-block hover:bg-light-surface-hover dark:hover:bg-dark-surface-hover"
+                      className="px-4 py-2 rounded-md inline-block transition-all duration-300"
                     >
                       {item}
                     </Link>
