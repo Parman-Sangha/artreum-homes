@@ -518,6 +518,7 @@ const HomePage = () => {
             muted
             className="object-cover w-full h-full brightness-75"
             src="/videos/vid.mp4"
+            playsInline
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent opacity-90" />
         </motion.div>
