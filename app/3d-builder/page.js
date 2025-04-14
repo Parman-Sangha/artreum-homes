@@ -1,11 +1,13 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useTheme } from "../context/ThemeContext";
-import { Sun, Moon, Facebook, Instagram, Twitter } from "lucide-react";
+import { Sun, Moon, Facebook, Instagram, Twitter, X, Menu } from "lucide-react";
 import Button from "../components/Button";
 import Footer from "../components/Footer";
+import Navbar from "../components/Navbar";
+import { useState, useEffect, useRef } from "react";
 
 // Animation Variants
 const fadeInUp = {
@@ -32,81 +34,62 @@ const navItems = [
 
 const ThreeDBuilderPage = () => {
   const { theme, toggleTheme } = useTheme();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = isMenuOpen ? "hidden" : "unset";
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenuOpen]);
+
+  const menuVariants = {
+    closed: {
+      opacity: 0,
+      x: "100%",
+      transition: { type: "spring", stiffness: 400, damping: 40 },
+    },
+    open: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        type: "spring",
+        stiffness: 400,
+        damping: 40,
+        staggerChildren: 0.1,
+        delayChildren: 0.2,
+      },
+    },
+  };
+
+  const menuItemVariants = {
+    closed: { opacity: 0, x: 20 },
+    open: { opacity: 1, x: 0 },
+  };
+
+  const navButtonVariants = {
+    initial: { scale: 1 },
+    hover: {
+      scale: 1.05,
+      color: "#CDB937",
+      transition: { type: "spring", stiffness: 400, damping: 10 },
+    },
+    tap: { scale: 0.95 },
+  };
 
   return (
-    <div className="bg-light-bg dark:bg-dark-bg text-gray-900 dark:text-white min-h-screen">
-      {/* Header */}
-      <motion.header
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="bg-light-surface dark:bg-dark-surface shadow-md sticky top-0 z-50"
-      >
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 py-6 flex flex-col md:flex-row justify-between items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center space-x-4 mb-4 md:mb-0"
-          >
-            <Link href="/" className="hover:opacity-80 transition duration-200">
-              <Image
-                src="/images/logo1.png"
-                alt="Artreum Homes"
-                width={180}
-                height={72}
-              />
-            </Link>
-          </motion.div>
-
-          <nav className="flex justify-center flex-1">
-            <ul className="flex flex-wrap justify-center space-x-4 md:space-x-8 font-medium text-lg">
-              {navItems.map((item, index) => (
-                <motion.li
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Link
-                    href={
-                      item === "Home"
-                        ? "/"
-                        : item === "About Us"
-                        ? "/about"
-                        : item === "Properties"
-                        ? "/property"
-                        : item === "3D Modeler"
-                        ? "/3d-builder"
-                        : `/${item.toLowerCase().replace(" ", "-")}`
-                    }
-                    className="text-gray-900 dark:text-white hover:text-primary dark:hover:text-primary transition duration-200 px-3 py-2 rounded-md hover:bg-light-surface-hover dark:hover:bg-dark-surface-hover"
-                  >
-                    {item}
-                  </Link>
-                </motion.li>
-              ))}
-            </ul>
-          </nav>
-
-          <div className="flex items-center space-x-4">
-            <button
-              onClick={toggleTheme}
-              className="p-2 rounded-full bg-light-surface-hover dark:bg-dark-surface-hover hover:bg-light-surface dark:hover:bg-dark-surface transition-colors duration-200"
-              aria-label="Toggle theme"
-            >
-              {theme === "light" ? (
-                <Moon className="w-5 h-5 text-gray-800" />
-              ) : (
-                <Sun className="w-5 h-5 text-white" />
-              )}
-            </button>
-            <Button href="/contact" className="px-8 py-3 text-lg">
-              Contact Us
-            </Button>
-          </div>
-        </div>
-      </motion.header>
+    <div className="min-h-screen transition-theme bg-white dark:bg-[#141414] text-gray-900 dark:text-white">
+      <Navbar />
 
       {/* Main Content */}
       <main className="container mx-auto px-6 py-20">
