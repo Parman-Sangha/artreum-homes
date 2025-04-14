@@ -4,6 +4,7 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "@/app/components/Footer";
 import {
   motion,
   useScroll,
@@ -549,7 +550,7 @@ const Conridge = () => {
               className="lg:w-1/3"
             >
               <Image
-                src="/images/waterford3.png"
+                src="/images/Waterford3.png"
                 alt="Conrich Features"
                 width={703}
                 height={2036}
@@ -607,7 +608,7 @@ const Conridge = () => {
             <h2 className="text-4xl font-bold mb-12 text-[#CDB937]">Lot Map</h2>
             <div className="relative h-[600px] rounded-lg overflow-hidden shadow-2xl">
               <Image
-                src="/images/waterford4.jpg"
+                src="/images/Waterford4.jpg"
                 alt="Conrich via Knightsbridge Lot Map"
                 fill
                 className="object-contain"
@@ -889,149 +890,7 @@ const Conridge = () => {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="py-12 transition-theme bg-gradient-to-b from-gray-100 to-white dark:bg-gradient-to-b dark:from-black dark:to-black border-t dark:border-gray-700">
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
-            <div className="lg:col-span-2">
-              <Image
-                src="/images/logo1.png"
-                alt="Artreum Homes"
-                width={120}
-                height={48}
-                className="mb-6"
-              />
-              <h4 className="text-lg font-bold text-[#CDB937] mb-4">
-                Subscribe to Our Newsletter
-              </h4>
-              <form className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="px-4 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] transition duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.05, backgroundColor: "#e3cc50" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 bg-[#CDB937] text-black font-bold rounded-md hover:bg-[#e3cc50] transition duration-200"
-                >
-                  Subscribe
-                </motion.button>
-              </form>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 col-span-1 lg:col-span-4 gap-8">
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">Home</h4>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  {[
-                    "Hero Section",
-                    "Features",
-                    "Properties",
-                    "Testimonials",
-                    "FAQs",
-                  ].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">About Us</h4>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  {[
-                    "Our Story",
-                    "Our Work",
-                    "How It Works",
-                    "Our Team",
-                    "Our Clients",
-                  ].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">Properties</h4>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  {["Portfolio", "Categories"].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">Services</h4>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  {[
-                    "Valuation Mastery",
-                    "Strategic Marketing",
-                    "Negotiation Wizardry",
-                    "Closing Success",
-                    "Property Management",
-                  ].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-300 dark:border-gray-700 pt-8 mt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm text-gray-600 dark:text-gray-400 mb-4 md:mb-0">
-                <Link
-                  href="/terms"
-                  className="hover:text-[#CDB937] transition duration-200"
-                >
-                  Terms & Conditions
-                </Link>
-              </div>
-              <div className="flex space-x-6">
-                {[
-                  { icon: Facebook, href: "https://facebook.com" },
-                  { icon: Instagram, href: "https://instagram.com" },
-                  { icon: Twitter, href: "https://x.com" },
-                ].map(({ icon: Icon, href }) => (
-                  <motion.a
-                    key={href}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, color: "#CDB937" }}
-                    whileTap={{ scale: 0.9 }}
-                    className="text-gray-600 dark:text-gray-400 hover:text-[#CDB937] transition duration-200"
-                  >
-                    <Icon size={24} />
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
