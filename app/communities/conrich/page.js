@@ -865,7 +865,7 @@ const Conridge = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 transition-theme bg-gray-800 dark:bg-black">
+      <footer className="bg-black py-12">
         <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
             <div className="lg:col-span-2">
@@ -883,7 +883,7 @@ const Conridge = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="px-4 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] transition duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                  className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] transition duration-300"
                 />
                 <motion.button
                   whileHover={{ scale: 1.05, backgroundColor: "#e3cc50" }}
@@ -975,7 +975,7 @@ const Conridge = () => {
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-600 dark:border-gray-700 pt-8 mt-8">
+          <div className="border-t border-gray-800 pt-8 mt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
               <div className="text-sm text-gray-500 mb-4 md:mb-0">
                 <Link

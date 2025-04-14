@@ -28,6 +28,8 @@ import {
   X,
   ChevronDown,
 } from "lucide-react";
+import Navbar from "@/app/components/Navbar";
+import Footer from "@/app/components/Footer";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -80,8 +82,10 @@ const CanvasHouse = () => {
         background: #e3cc50;
       }
       html, body {
-        background-color: #141414 !important;
         overflow-x: hidden !important;
+      }
+      .transition-theme {
+        transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
       }
     `;
     document.head.appendChild(style);
@@ -218,10 +222,10 @@ const CanvasHouse = () => {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData({
-      ...formData,
+    setFormData((prev) => ({
+      ...prev,
       [name]: type === "checkbox" ? checked : value,
-    });
+    }));
   };
 
   const handleSubmit = (e) => {
@@ -397,213 +401,8 @@ const CanvasHouse = () => {
   };
 
   return (
-    <div className="bg-[#141414] text-white min-h-screen">
-      {/* Header */}
-      <motion.header
-        ref={headerRef}
-        initial={{ y: -100 }}
-        animate={{ y: 0 }}
-        transition={{ duration: 0.5, type: "spring", stiffness: 100 }}
-        className={`fixed w-full z-50 transition-all duration-500 ${
-          scrolled ? "bg-[#1A1A1A] py-3 shadow-xl" : "bg-[#1A1A1A] py-6"
-        }`} // Changed to always use #1A1A1A
-      >
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 flex justify-between items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="flex items-center z-50"
-          >
-            <Link href="/" className="hover:opacity-80 transition duration-200">
-              <Image
-                src="/images/logo1.png"
-                alt="Artreum Homes"
-                width={scrolled ? 150 : 180}
-                height={scrolled ? 60 : 72}
-                className="transition-all duration-300"
-              />
-            </Link>
-          </motion.div>
-
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex justify-center flex-1">
-            <ul className="flex flex-wrap justify-center space-x-1 lg:space-x-2 font-medium text-lg">
-              {navItems.map((item, index) => (
-                <motion.li
-                  key={item}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                  className="relative group"
-                >
-                  <motion.div
-                    variants={navButtonVariants}
-                    initial="initial"
-                    whileHover="hover"
-                    whileTap="tap"
-                    className="relative"
-                  >
-                    <Link
-                      href={
-                        item === "Home"
-                          ? "/"
-                          : item === "About Us"
-                          ? "/about"
-                          : item === "Properties"
-                          ? "/property"
-                          : item === "3D Modeler"
-                          ? "/3d-builder"
-                          : `/${item.toLowerCase().replace(" ", "-")}`
-                      }
-                      className="px-4 py-2 rounded-md inline-block transition-all duration-300"
-                    >
-                      {item}
-                    </Link>
-                    <motion.div
-                      className="absolute bottom-0 left-0 h-0.5 bg-[#CDB937] w-0 group-hover:w-full transition-all duration-300"
-                      layoutId={`underline-${item}`}
-                    />
-                  </motion.div>
-                </motion.li>
-              ))}
-            </ul>
-          </nav>
-
-          {/* Contact Button */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5 }}
-            className="hidden md:block"
-          >
-            <motion.div
-              whileHover={{
-                scale: 1.05,
-                boxShadow: "0 10px 25px -5px rgba(205, 185, 55, 0.4)",
-              }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 400, damping: 17 }}
-            >
-              <Link
-                href="/contact"
-                className="bg-[#CDB937] text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg"
-              >
-                Contact Us
-              </Link>
-            </motion.div>
-          </motion.div>
-
-          {/* Mobile Menu Button */}
-          <motion.button
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5 }}
-            onClick={() => setIsMenuOpen(!isMenuOpen)}
-            className="md:hidden z-50 p-2 rounded-full bg-[#1A1A1A] hover:bg-[#252525] transition-colors duration-300"
-            aria-label="Toggle menu"
-          >
-            <AnimatePresence mode="wait">
-              {isMenuOpen ? (
-                <motion.div
-                  key="close"
-                  initial={{ rotate: -90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: 90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <X size={24} className="text-[#CDB937]" />
-                </motion.div>
-              ) : (
-                <motion.div
-                  key="menu"
-                  initial={{ rotate: 90, opacity: 0 }}
-                  animate={{ rotate: 0, opacity: 1 }}
-                  exit={{ rotate: -90, opacity: 0 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <Menu size={24} className="text-white" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </motion.button>
-
-          {/* Mobile Menu */}
-          <AnimatePresence>
-            {isMenuOpen && (
-              <motion.div
-                variants={menuVariants}
-                initial="closed"
-                animate="open"
-                exit="closed"
-                className="fixed inset-0 bg-black/95 backdrop-blur-lg z-40 flex flex-col md:hidden"
-              >
-                <div className="h-24" /> {/* Spacer for header */}
-                <div className="flex flex-col items-center justify-center flex-1 p-8">
-                  <ul className="flex flex-col items-center space-y-6 w-full">
-                    {navItems.map((item, index) => (
-                      <motion.li
-                        key={item}
-                        variants={menuItemVariants}
-                        className="w-full text-center"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        <Link
-                          href={
-                            item === "Home"
-                              ? "/"
-                              : item === "About Us"
-                              ? "/about"
-                              : item === "Properties"
-                              ? "/property"
-                              : item === "3D Modeler"
-                              ? "/3d-builder"
-                              : `/${item.toLowerCase().replace(" ", "-")}`
-                          }
-                          className="text-2xl font-medium py-3 px-6 block w-full hover:text-[#CDB937] transition-colors duration-300"
-                        >
-                          {item}
-                        </Link>
-                      </motion.li>
-                    ))}
-                    <motion.li
-                      variants={menuItemVariants}
-                      className="w-full pt-6"
-                    >
-                      <Link
-                        href="/contact"
-                        className="bg-[#CDB937] text-black py-4 px-8 rounded-full text-xl font-semibold block mx-auto w-max hover:bg-[#e3cc50] transition-all duration-300 shadow-lg"
-                        onClick={() => setIsMenuOpen(false)}
-                      >
-                        Contact Us
-                      </Link>
-                    </motion.li>
-                  </ul>
-                </div>
-                <div className="p-8 flex justify-center space-x-6">
-                  {[
-                    { icon: Facebook, href: "https://facebook.com" },
-                    { icon: Instagram, href: "https://instagram.com" },
-                    { icon: Twitter, href: "https://twitter.com" },
-                  ].map(({ icon: Icon, href }) => (
-                    <motion.a
-                      key={href}
-                      href={href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.1, color: "#CDB937" }}
-                      whileTap={{ scale: 0.9 }}
-                      className="text-gray-400 hover:text-[#CDB937] transition duration-200"
-                    >
-                      <Icon size={24} />
-                    </motion.a>
-                  ))}
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
-        </div>
-      </motion.header>
+    <div className="min-h-screen transition-theme bg-white dark:bg-[#141414] text-gray-900 dark:text-white">
+      <Navbar />
 
       {/* Hero Section */}
       <section className="relative h-[60vh] md:h-[70vh] lg:h-[80vh] overflow-hidden pt-24">
@@ -1058,158 +857,7 @@ const CanvasHouse = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-black py-12">
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
-            {/* Newsletter Section */}
-            <div className="lg:col-span-2">
-              <Image
-                src="/images/logo1.png"
-                alt="Artreum Homes"
-                width={120}
-                height={48}
-                className="mb-6"
-              />
-              <h4 className="text-lg font-bold text-[#CDB937] mb-4">
-                Subscribe to Our Newsletter
-              </h4>
-              <form className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="px-4 py-2 bg-gray-800 border border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] transition duration-300"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.05, backgroundColor: "#e3cc50" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 bg-[#CDB937] text-black font-bold rounded-md hover:bg-[#e3cc50] transition duration-200"
-                >
-                  Subscribe
-                </motion.button>
-              </form>
-            </div>
-
-            {/* Footer Links */}
-            <div className="grid grid-cols-2 lg:grid-cols-4 col-span-1 lg:col-span-4 gap-8">
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">Home</h4>
-                <ul className="space-y-2 text-gray-400">
-                  {[
-                    "Hero Section",
-                    "Features",
-                    "Properties",
-                    "Testimonials",
-                    "FAQs",
-                  ].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">About Us</h4>
-                <ul className="space-y-2 text-gray-400">
-                  {[
-                    "Our Story",
-                    "Our Work",
-                    "How It Works",
-                    "Our Team",
-                    "Our Clients",
-                  ].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">Properties</h4>
-                <ul className="space-y-2 text-gray-400">
-                  {["Portfolio", "Categories"].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">Services</h4>
-                <ul className="space-y-2 text-gray-400">
-                  {[
-                    "Valuation Mastery",
-                    "Strategic Marketing",
-                    "Negotiation Wizardry",
-                    "Closing Success",
-                    "Property Management",
-                  ].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Section */}
-          <div className="border-t border-gray-800 pt-8 mt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm text-gray-500 mb-4 md:mb-0">
-                <Link
-                  href="/terms"
-                  className="hover:text-[#CDB937] transition duration-200"
-                >
-                  Terms & Conditions
-                </Link>
-              </div>
-              <div className="flex space-x-6">
-                {[
-                  { icon: Facebook, href: "https://facebook.com" },
-                  { icon: Instagram, href: "https://instagram.com" },
-                  { icon: Twitter, href: "https://twitter.com" },
-                ].map(({ icon: Icon, href }) => (
-                  <motion.a
-                    key={href}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, color: "#CDB937" }}
-                    whileTap={{ scale: 0.9 }}
-                    className="text-gray-400 hover:text-[#CDB937] transition duration-200"
-                  >
-                    <Icon size={24} />
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };
