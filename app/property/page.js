@@ -19,6 +19,7 @@ import {
   Moon,
   Menu,
   X,
+  ChevronUp,
 } from "lucide-react";
 import { useTheme } from "../context/ThemeContext";
 
@@ -37,6 +38,15 @@ const fadeIn = {
   animate: { opacity: 1, transition: { duration: 0.8 } },
 };
 
+const staggerContainer = {
+  initial: {},
+  animate: {
+    transition: {
+      staggerChildren: 0.2,
+    },
+  },
+};
+
 const navItems = [
   "Home",
   "About Us",
@@ -45,10 +55,79 @@ const navItems = [
   "3D Modeler",
 ];
 
+// Mobile menu animation variants
+const menuVariants = {
+  closed: {
+    opacity: 0,
+    x: "100%",
+    transition: { type: "spring", stiffness: 400, damping: 40 },
+  },
+  open: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      type: "spring",
+      stiffness: 400,
+      damping: 40,
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const menuItemVariants = {
+  closed: { opacity: 0, x: 20 },
+  open: { opacity: 1, x: 0 },
+};
+
+const navButtonVariants = {
+  initial: { scale: 1 },
+  hover: {
+    scale: 1.05,
+    color: "#CDB937",
+    transition: { type: "spring", stiffness: 400, damping: 10 },
+  },
+  tap: { scale: 0.95 },
+};
+
+// Reusable Button Component
+const Button = ({
+  children,
+  variant = "primary",
+  onClick,
+  href,
+  className = "",
+  ...props
+}) => {
+  const baseStyles =
+    "inline-flex items-center justify-center px-8 sm:px-10 py-3.5 rounded-full font-semibold transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5";
+  const variants = {
+    primary: "bg-[#CDB937] text-black hover:bg-[#e3cc50]",
+    secondary:
+      "border border-[#CDB937] text-[#CDB937] hover:bg-[#CDB937] hover:text-black",
+  };
+
+  const buttonContent = (
+    <motion.button
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      transition={{ type: "spring", stiffness: 400, damping: 17 }}
+      className={`${baseStyles} ${variants[variant]} ${className}`}
+      onClick={onClick}
+      {...props}
+    >
+      {children}
+    </motion.button>
+  );
+
+  return href ? <Link href={href}>{buttonContent}</Link> : buttonContent;
+};
+
 const PropertiesPage = () => {
   const { theme, toggleTheme } = useTheme();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   const properties = [
     { type: "Front-Garage Houses", prefix: "front-garage-house" },
@@ -65,6 +144,7 @@ const PropertiesPage = () => {
       baths: 3,
       sqft: 2200,
       image: "/images/properties/front-garage-house-1.jpg.webp",
+      featured: true,
     },
     {
       id: 2,
@@ -87,16 +167,21 @@ const PropertiesPage = () => {
   ];
 
   const handleScrollToProperties = () => {
-    const communitiesSection = document.getElementById("properties");
-    if (communitiesSection) {
-      communitiesSection.scrollIntoView({ behavior: "smooth" });
+    const propertiesSection = document.getElementById("properties");
+    if (propertiesSection) {
+      propertiesSection.scrollIntoView({ behavior: "smooth" });
     }
+  };
+
+  const handleBackToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   // Scroll handler
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      setShowBackToTop(window.scrollY > 300);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -110,7 +195,7 @@ const PropertiesPage = () => {
     };
   }, [isMenuOpen]);
 
-  // Custom scrollbar
+  // Custom scrollbar and smooth scroll
   useEffect(() => {
     document.documentElement.style.scrollBehavior = "smooth";
     const style = document.createElement("style");
@@ -135,6 +220,11 @@ const PropertiesPage = () => {
       .transition-theme {
         transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
       }
+      .parallax-bg {
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+      }
     `;
     document.head.appendChild(style);
     return () => {
@@ -142,41 +232,6 @@ const PropertiesPage = () => {
       document.documentElement.style.scrollBehavior = "";
     };
   }, [theme]);
-
-  // Mobile menu animation variants
-  const menuVariants = {
-    closed: {
-      opacity: 0,
-      x: "100%",
-      transition: { type: "spring", stiffness: 400, damping: 40 },
-    },
-    open: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 40,
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const menuItemVariants = {
-    closed: { opacity: 0, x: 20 },
-    open: { opacity: 1, x: 0 },
-  };
-
-  const navButtonVariants = {
-    initial: { scale: 1 },
-    hover: {
-      scale: 1.05,
-      color: "#CDB937",
-      transition: { type: "spring", stiffness: 400, damping: 10 },
-    },
-    tap: { scale: 0.95 },
-  };
 
   // Property Card Component
   const PropertyCard = ({ house, type, prefix }) => {
@@ -192,9 +247,18 @@ const PropertiesPage = () => {
         initial={{ opacity: 0, y: 40 }}
         animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 40 }}
         transition={{ duration: 0.6 }}
-        whileHover={{ scale: 1.03 }}
-        className="bg-gray-50 dark:bg-[#222222] rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 transition-theme"
+        whileHover={{
+          scale: 1.03,
+          y: -10,
+          boxShadow: "0 20px 40px rgba(0, 0, 0, 0.2)",
+        }}
+        className="relative bg-gray-50 dark:bg-[#222222] rounded-xl overflow-hidden shadow-lg transition-all duration-300 transition-theme"
       >
+        {house.featured && (
+          <div className="absolute top-4 left-4 bg-[#CDB937] text-black px-3 py-1 rounded-full text-sm font-semibold z-10">
+            Featured
+          </div>
+        )}
         <div className="relative h-64">
           <Image
             src={
@@ -202,9 +266,13 @@ const PropertiesPage = () => {
             }
             alt={`${type} ${house.id}`}
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-500 hover:scale-105"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-0 transition-opacity duration-300" />
+          <motion.div
+            className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"
+            whileHover={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+          />
         </div>
         <div className="p-6">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
@@ -228,19 +296,16 @@ const PropertiesPage = () => {
             </div>
           </div>
           <p className="text-[#CDB937] font-bold text-lg mb-4">{house.price}</p>
-          <Link
-            href={linkHref}
-            className="block w-full px-6 py-3 bg-[#CDB937] text-black font-bold rounded-md text-center hover:bg-[#e3cc50] transition duration-300 shadow-md hover:shadow-lg"
-          >
+          <Button href={linkHref} className="w-full text-center">
             View Details
-          </Link>
+          </Button>
         </div>
       </motion.div>
     );
   };
 
   return (
-    <div className="min-h-screen transition-theme bg-white dark:bg-[#141414] text-gray-900 dark:text-white">
+    <div className="min-h-screen transition-theme bg-gray-50 dark:bg-[#141414] text-gray-900 dark:text-white">
       {/* Header */}
       <motion.header
         initial={{ y: -100 }}
@@ -358,7 +423,7 @@ const PropertiesPage = () => {
             >
               <Link
                 href="/contact"
-                className="bg-[#CDB937] text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-base lg:text-lg font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg"
+                className="bg-[#CDB937] text-black px-4 sm:px-6 lg:px-8 py-2 sm:py-3 rounded-full text-sm sm:text-base lg:text-lg font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
               >
                 Contact Us
               </Link>
@@ -408,7 +473,7 @@ const PropertiesPage = () => {
                 <div className="h-24" />
                 <div className="flex flex-col items-center justify-center flex-1 p-8">
                   <ul className="flex flex-col items-center space-y-6 w-full">
-                    {navItems.map((item, index) => (
+                    {navItems.map((item) => (
                       <motion.li
                         key={item}
                         variants={menuItemVariants}
@@ -444,19 +509,50 @@ const PropertiesPage = () => {
                         className="p-2 rounded-full bg-gray-200 dark:bg-[#252525] hover:bg-gray-300 dark:hover:bg-[#333333] transition-colors duration-200"
                         aria-label="Toggle theme"
                       >
-                        {theme === "light" ? (
-                          <Moon className="w-6 h-6 text-gray-800 dark:text-[#CDB937]" />
-                        ) : (
-                          <Sun className="w-6 h-6 text-gray-800 dark:text-[#CDB937]" />
-                        )}
+                        <AnimatePresence mode="wait">
+                          {theme === "light" ? (
+                            <motion.div
+                              key="moon"
+                              initial={{ rotate: -90, opacity: 0 }}
+                              animate={{ rotate: 0, opacity: 1 }}
+                              exit={{ rotate: 90, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Moon className="w-6 h-6 text-gray-800 dark:text-[#CDB937]" />
+                            </motion.div>
+                          ) : (
+                            <motion.div
+                              key="sun"
+                              initial={{ rotate: 90, opacity: 0 }}
+                              animate={{ rotate: 0, opacity: 1 }}
+                              exit={{ rotate: -90, opacity: 0 }}
+                              transition={{ duration: 0.2 }}
+                            >
+                              <Sun className="w-6 h-6 text-gray-800 dark:text-[#CDB937]" />
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
                       </motion.button>
-                      <Link
-                        href="/contact"
-                        className="bg-[#CDB937] text-black py-4 px-8 rounded-full text-xl font-semibold block mx-auto w-max hover:bg-[#e3cc50] transition-all duration-300 shadow-lg"
-                        onClick={() => setIsMenuOpen(false)}
+                      <motion.div
+                        whileHover={{
+                          scale: 1.05,
+                          boxShadow: "0 10px 25px -5px rgba(205, 185, 55, 0.4)",
+                        }}
+                        whileTap={{ scale: 0.95 }}
+                        transition={{
+                          type: "spring",
+                          stiffness: 400,
+                          damping: 17,
+                        }}
                       >
-                        Contact Us
-                      </Link>
+                        <Link
+                          href="/contact"
+                          className="bg-[#CDB937] text-black px-8 py-4 rounded-full text-xl font-semibold block mx-auto w-max hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                          onClick={() => setIsMenuOpen(false)}
+                        >
+                          Contact Us
+                        </Link>
+                      </motion.div>
                     </motion.li>
                   </ul>
                 </div>
@@ -464,7 +560,7 @@ const PropertiesPage = () => {
                   {[
                     { icon: Facebook, href: "https://facebook.com" },
                     { icon: Instagram, href: "https://instagram.com" },
-                    { icon: Twitter, href: "https://twitter.com" },
+                    { icon: Twitter, href: "https://x.com" },
                   ].map(({ icon: Icon, href }) => (
                     <motion.a
                       key={href}
@@ -486,36 +582,35 @@ const PropertiesPage = () => {
       </motion.header>
 
       {/* Hero Section */}
-      <section className="relative h-[80vh]">
+      <section className="relative h-[90vh] pt-16 sm:pt-20">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="absolute inset-0"
+          className="absolute inset-0 parallax-bg"
+          style={{ backgroundImage: `url(/images/coming1.jpg)` }}
         >
-          <Image
-            src="/images/coming1.jpg"
-            alt="Properties Hero"
-            fill
-            className="object-cover"
-            priority
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1.2 }}
+            className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60 transition-theme"
           />
-          <div className="absolute inset-0 bg-black bg-opacity-50" />
         </motion.div>
-        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white z-10">
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white z-10 px-4 sm:px-6">
           <motion.h2
             variants={fadeInUp}
             initial="initial"
             animate="animate"
-            className="text-5xl md:text-6xl font-bold mb-6"
+            className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 drop-shadow-2xl"
           >
-            Discover Your Perfect Home
+            Discover Your <span className="text-[#CDB937]">Perfect Home</span>
           </motion.h2>
           <motion.p
             variants={fadeIn}
             initial="initial"
             animate="animate"
-            className="text-xl md:text-2xl text-gray-300 max-w-2xl mb-8"
+            className="text-lg sm:text-xl md:text-2xl text-gray-200 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-xl lg:max-w-2xl mb-8 drop-shadow-md"
           >
             Explore our curated collection of modern properties designed for
             luxury, comfort, and style.
@@ -524,66 +619,103 @@ const PropertiesPage = () => {
             variants={fadeIn}
             initial="initial"
             animate="animate"
-            className="mt-6"
+            className="mt-6 flex flex-col sm:flex-row gap-4"
           >
-            <button
+            <Button
               onClick={handleScrollToProperties}
-              className="inline-flex items-center bg-[#CDB937] text-black px-8 py-4 rounded-full font-semibold hover:bg-[#e3cc50] transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+              className="text-sm sm:text-base md:text-lg gap-2"
             >
               Browse Properties
-              <ArrowDown className="ml-2 h-5 w-5" />
-            </button>
+              <ArrowDown className="h-5 w-5" />
+            </Button>
+            <Button
+              href="/contact"
+              variant="secondary"
+              className="text-sm sm:text-base md:text-lg gap-2"
+            >
+              Contact Us
+              <ArrowRight className="h-5 w-5" />
+            </Button>
           </motion.div>
         </div>
       </section>
 
       {/* Properties Section */}
       <main
-        className="container mx-auto px-6 py-20 transition-theme bg-white dark:bg-[#1A1A1A]"
+        className="relative py-24 transition-theme bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A]"
         id="properties"
       >
-        <motion.div
-          variants={fadeInUp}
-          initial="initial"
-          whileInView="animate"
-          viewport={{ once: true }}
-          className="text-center mb-12"
-        >
-          <h1 className="text-5xl font-bold text-[#CDB937] mb-4">
-            Explore Our Properties
-          </h1>
-          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            Discover a range of stunning homes tailored to modern living, from
-            spacious front-garage houses to elegant townhouses.
-          </p>
-        </motion.div>
-        {properties.map(({ type, prefix }) => (
-          <section key={type} className="mb-16">
-            <motion.h2
-              variants={fadeIn}
-              initial="initial"
-              whileInView="animate"
-              viewport={{ once: true }}
-              className="text-3xl font-bold text-[#CDB937] mb-8"
-            >
-              {type}
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {houseItems.map((house) => (
-                <PropertyCard
-                  key={`${prefix}-${house.id}`}
-                  house={house}
-                  type={type}
-                  prefix={prefix}
-                />
-              ))}
-            </div>
-          </section>
-        ))}
+        <div className="absolute inset-0 bg-[url('/images/commun.jpg')] bg-cover bg-center opacity-10" />
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 relative z-10">
+          <motion.div
+            variants={fadeInUp}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h1 className="font-serif text-5xl md:text-6xl font-bold text-[#CDB937] mb-4">
+              Explore Our Properties
+            </h1>
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Discover a range of stunning homes tailored to modern living, from
+              spacious front-garage houses to elegant townhouses.
+            </p>
+          </motion.div>
+          {properties.map(({ type, prefix }, index) => (
+            <section key={type} className="mb-20">
+              <motion.h2
+                variants={fadeIn}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true }}
+                className="text-3xl md:text-4xl font-bold text-[#CDB937] mb-8 text-center"
+              >
+                {type}
+              </motion.h2>
+              {index < properties.length - 1 && (
+                <div className="w-24 h-1 bg-[#CDB937] mx-auto mb-12 rounded-full" />
+              )}
+              <motion.div
+                variants={staggerContainer}
+                initial="initial"
+                whileInView="animate"
+                viewport={{ once: true }}
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+              >
+                {houseItems.map((house) => (
+                  <PropertyCard
+                    key={`${prefix}-${house.id}`}
+                    house={house}
+                    type={type}
+                    prefix={prefix}
+                  />
+                ))}
+              </motion.div>
+            </section>
+          ))}
+        </div>
       </main>
 
+      {/* Back to Top Button */}
+      <AnimatePresence>
+        {showBackToTop && (
+          <motion.button
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+            transition={{ duration: 0.3 }}
+            onClick={handleBackToTop}
+            className="fixed bottom-8 right-8 p-4 bg-[#CDB937] text-black rounded-full shadow-lg hover:bg-[#e3cc50] transition-all duration-300 z-50"
+            aria-label="Back to top"
+          >
+            <ChevronUp size={24} />
+          </motion.button>
+        )}
+      </AnimatePresence>
+
       {/* Footer */}
-      <footer className="py-12 transition-theme bg-gray-800 dark:bg-black">
+      <footer className="py-12 transition-theme bg-gradient-to-b from-gray-100 to-white dark:from-black dark:to-black border-t dark:border-gray-700">
         <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
             <div className="lg:col-span-2">
@@ -615,7 +747,7 @@ const PropertiesPage = () => {
             <div className="grid grid-cols-2 lg:grid-cols-4 col-span-1 lg:col-span-4 gap-8">
               <div className="space-y-4">
                 <h4 className="text-lg font-bold text-[#CDB937]">Home</h4>
-                <ul className="space-y-2 text-gray-400">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   {[
                     "Hero Section",
                     "Features",
@@ -636,7 +768,7 @@ const PropertiesPage = () => {
               </div>
               <div className="space-y-4">
                 <h4 className="text-lg font-bold text-[#CDB937]">About Us</h4>
-                <ul className="space-y-2 text-gray-400">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   {[
                     "Our Story",
                     "Our Work",
@@ -657,7 +789,7 @@ const PropertiesPage = () => {
               </div>
               <div className="space-y-4">
                 <h4 className="text-lg font-bold text-[#CDB937]">Properties</h4>
-                <ul className="space-y-2 text-gray-400">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   {["Portfolio", "Categories"].map((item) => (
                     <li key={item}>
                       <Link
@@ -672,7 +804,7 @@ const PropertiesPage = () => {
               </div>
               <div className="space-y-4">
                 <h4 className="text-lg font-bold text-[#CDB937]">Services</h4>
-                <ul className="space-y-2 text-gray-400">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   {[
                     "Valuation Mastery",
                     "Strategic Marketing",
@@ -693,9 +825,9 @@ const PropertiesPage = () => {
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-600 dark:border-gray-700 pt-8 mt-8">
+          <div className="border-t border-gray-300 dark:border-gray-700 pt-8 mt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm text-gray-500 mb-4 md:mb-0">
+              <div className="text-sm text-gray-600 dark:text-gray-400 mb-4 md:mb-0">
                 <Link
                   href="/terms"
                   className="hover:text-[#CDB937] transition duration-200"
@@ -707,7 +839,7 @@ const PropertiesPage = () => {
                 {[
                   { icon: Facebook, href: "https://facebook.com" },
                   { icon: Instagram, href: "https://instagram.com" },
-                  { icon: Twitter, href: "https://twitter.com" },
+                  { icon: Twitter, href: "https://x.com" },
                 ].map(({ icon: Icon, href }) => (
                   <motion.a
                     key={href}
@@ -716,7 +848,7 @@ const PropertiesPage = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, color: "#CDB937" }}
                     whileTap={{ scale: 0.9 }}
-                    className="text-gray-400 hover:text-[#CDB937] transition duration-200"
+                    className="text-gray-600 dark:text-gray-400 hover:text-[#CDB937] transition duration-200"
                   >
                     <Icon size={24} />
                   </motion.a>

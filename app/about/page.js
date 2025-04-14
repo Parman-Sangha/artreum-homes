@@ -545,7 +545,7 @@ const AboutPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="py-12 transition-theme bg-gray-800 dark:bg-black">
+      <footer className="py-12 transition-theme bg-gradient-to-b from-gray-100 to-white dark:bg-gradient-to-b dark:from-black dark:to-black border-t dark:border-gray-700">
         <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
             <div className="lg:col-span-2">
@@ -577,7 +577,7 @@ const AboutPage = () => {
             <div className="grid grid-cols-2 lg:grid-cols-4 col-span-1 lg:col-span-4 gap-8">
               <div className="space-y-4">
                 <h4 className="text-lg font-bold text-[#CDB937]">Home</h4>
-                <ul className="space-y-2 text-gray-400">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   {[
                     "Hero Section",
                     "Features",
@@ -598,7 +598,7 @@ const AboutPage = () => {
               </div>
               <div className="space-y-4">
                 <h4 className="text-lg font-bold text-[#CDB937]">About Us</h4>
-                <ul className="space-y-2 text-gray-400">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   {[
                     "Our Story",
                     "Our Work",
@@ -619,7 +619,7 @@ const AboutPage = () => {
               </div>
               <div className="space-y-4">
                 <h4 className="text-lg font-bold text-[#CDB937]">Properties</h4>
-                <ul className="space-y-2 text-gray-400">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   {["Portfolio", "Categories"].map((item) => (
                     <li key={item}>
                       <Link
@@ -634,7 +634,7 @@ const AboutPage = () => {
               </div>
               <div className="space-y-4">
                 <h4 className="text-lg font-bold text-[#CDB937]">Services</h4>
-                <ul className="space-y-2 text-gray-400">
+                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
                   {[
                     "Valuation Mastery",
                     "Strategic Marketing",
@@ -655,9 +655,9 @@ const AboutPage = () => {
               </div>
             </div>
           </div>
-          <div className="border-t border-gray-600 dark:border-gray-700 pt-8 mt-8">
+          <div className="border-t border-gray-300 dark:border-gray-700 pt-8 mt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm text-gray-500 mb-4 md:mb-0">
+              <div className="text-sm text-gray-600 dark:text-gray-400 mb-4 md:mb-0">
                 <Link
                   href="/terms"
                   className="hover:text-[#CDB937] transition duration-200"
@@ -678,7 +678,7 @@ const AboutPage = () => {
                     rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, color: "#CDB937" }}
                     whileTap={{ scale: 0.9 }}
-                    className="text-gray-400 hover:text-[#CDB937] transition duration-200"
+                    className="text-gray-600 dark:text-gray-400 hover:text-[#CDB937] transition duration-200"
                   >
                     <Icon size={24} />
                   </motion.a>
