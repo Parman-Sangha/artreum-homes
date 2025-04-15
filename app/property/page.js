@@ -229,7 +229,7 @@ const PropertiesPage = () => {
       }
       .parallax-bg {
         background-attachment: fixed;
-        background-size: auto 100%;
+        background-size: cover;
         background-position: center;
       }
       
@@ -592,8 +592,8 @@ const PropertiesPage = () => {
         </div>
       </motion.header>
 
-      {/* Hero Section */}
-      <section className="relative h-[90vh] pt-16 sm:pt-20">
+      {/* Hero Section for Laptop/Desktop */}
+      <section className="relative h-[90vh] pt-16 sm:pt-20 hidden md:block">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -648,6 +648,48 @@ const PropertiesPage = () => {
               <ArrowRight className="h-5 w-5" />
             </Button>
           </motion.div>
+        </div>
+      </section>
+
+      {/* Hero Section for Mobile Only */}
+      <section className="relative h-[100vh] pt-16 sm:pt-20 block md:hidden overflow-hidden">
+        <div className="absolute inset-0 w-full h-full z-0">
+          <Image
+            src="/images/propnew.jpg"
+            alt="Hero Background"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60 transition-theme" />
+        </div>
+
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white z-10 px-4 sm:px-6">
+          <h2 className="font-serif text-4xl sm:text-5xl font-bold mb-6 drop-shadow-2xl">
+            Discover Your <span className="text-[#CDB937]">Perfect Home</span>
+          </h2>
+          <p className="text-base sm:text-lg text-gray-200 dark:text-gray-300 max-w-xs sm:max-w-md mb-8 drop-shadow-md">
+            Explore our curated collection of modern properties designed for
+            luxury, comfort, and style.
+          </p>
+          <div className="mt-6 flex flex-col gap-4 w-full max-w-xs sm:max-w-sm">
+            <Button
+              onClick={handleScrollToProperties}
+              className="text-sm gap-2"
+            >
+              Browse Properties
+              <ArrowDown className="h-5 w-5" />
+            </Button>
+            <Button
+              href="/contact"
+              variant="secondary"
+              className="text-sm gap-2"
+            >
+              Contact Us
+              <ArrowRight className="h-5 w-5" />
+            </Button>
+          </div>
         </div>
       </section>
 
