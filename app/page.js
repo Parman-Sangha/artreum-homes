@@ -650,7 +650,7 @@ const HomePage = () => {
             <h2 className="font-serif text-4xl lg:text-6xl font-bold text-[#CDB937] mb-4 mt-4">
               What We Build
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-950 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
               Discover our handpicked selection of properties, blending modern
               design with timeless comfort.
             </p>
@@ -717,7 +717,7 @@ const HomePage = () => {
             <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#CDB937] mb-4 mt-4">
               Our Communities
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-950 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
               Experience vibrant neighborhoods designed for connection,
               convenience, and tranquility.
             </p>
@@ -837,7 +837,7 @@ const HomePage = () => {
             <h2 className="font-serif text-4xl lg:text-6xl font-bold text-[#CDB937] mb-4 mt-4">
               Testimonials
             </h2>
-            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-950 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
               Hear from our valued clients about their exceptional experiences
               with Artreum Homes.
             </p>
