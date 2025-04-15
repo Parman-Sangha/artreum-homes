@@ -229,15 +229,10 @@ const PropertiesPage = () => {
       }
       .parallax-bg {
         background-attachment: fixed;
-        background-size: cover;
+        background-size: auto 100%;
         background-position: center;
       }
-        /* Fix for iPhones and small screens */
-  @media (max-width: 767px) {
-    .parallax-bg {
-      background-size: auto 100%;
-    }
-  }
+      
     `;
     document.head.appendChild(style);
     return () => {
