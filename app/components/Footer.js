@@ -12,10 +12,10 @@ const Footer = () => {
     {
       title: "Our Homes",
       links: [
-        { name: "Front Drive Homes", href: "/front-drive-homes" },
-        { name: "Laned Homes", href: "/laned-homes" },
-        { name: "Town Houses", href: "/town-houses" },
-        { name: "Custom Builds", href: "/custom-builds" },
+        { name: "Front Drive Homes", href: "/property#Front-Garage-Houses" },
+        { name: "Laned Homes", href: "/property#laned-house" },
+        { name: "Town Houses", href: "/property#town-house" },
+        { name: "Custom Builds", href: "/coming-soon" },
         { name: "3D Modeler", href: "/3d-builder" },
       ],
     },
@@ -36,7 +36,7 @@ const Footer = () => {
         { name: "Our Process", href: "/about#process" },
         { name: "Our Team", href: "/about#team" },
         { name: "Testimonials", href: "/about#testimonials" },
-        { name: "Careers", href: "/careers" },
+        { name: "Careers", href: "/coming-soon" },
       ],
     },
     {
