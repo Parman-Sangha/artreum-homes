@@ -630,17 +630,28 @@ const HomePage = () => {
       </section>
 
       {/* Properties Section */}
-      <section
-        className="py-12 sm:py-20 bg-fixed bg-cover bg-center relative mb-6 sm:mb-0 transition-theme bg-white dark:bg-[#141414]"
-        style={{ backgroundImage: 'url("/images/coming1.jpg")' }}
-      >
+      <section className="py-12 sm:py-20 relative mb-6 sm:mb-0 transition-theme bg-transparent">
+        {/* Fixed Background Image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat z-0"
+          style={{
+            backgroundImage: 'url("/images/coming1.jpg")',
+            position: "fixed",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            height: "100vh",
+          }}
+        />
+        {/* Overlay */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="absolute inset-0 bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-60 backdrop-blur-sm transition-theme"
+          className="absolute inset-0 bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-60 backdrop-blur-sm transition-theme z-10"
         />
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl relative z-10">
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl relative z-20">
           <motion.div
             ref={propertiesRef}
             variants={fadeInUp}
