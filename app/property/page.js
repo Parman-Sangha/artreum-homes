@@ -588,9 +588,15 @@ const PropertiesPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="absolute inset-0 parallax-bg"
-          style={{ backgroundImage: `url(/images/coming1.jpg)` }}
+          className="absolute inset-0"
         >
+          <Image
+            src="/images/coming1.jpg"
+            alt="Hero Background"
+            fill
+            className="object-contain object-center"
+            priority
+          />
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
