@@ -48,14 +48,6 @@ const staggerContainer = {
   },
 };
 
-const navItems = [
-  "Home",
-  "About Us",
-  "Properties",
-  "Communities",
-  "3D Modeler",
-];
-
 // Mobile menu animation variants
 const menuVariants = {
   closed: {
@@ -79,16 +71,6 @@ const menuVariants = {
 const menuItemVariants = {
   closed: { opacity: 0, x: 20 },
   open: { opacity: 1, x: 0 },
-};
-
-const navButtonVariants = {
-  initial: { scale: 1 },
-  hover: {
-    scale: 1.05,
-    color: "#CDB937",
-    transition: { type: "spring", stiffness: 400, damping: 10 },
-  },
-  tap: { scale: 0.95 },
 };
 
 // Reusable Button Component
@@ -130,6 +112,24 @@ const PropertiesPage = () => {
   const [scrolled, setScrolled] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
 
+  const navButtonVariants = {
+    initial: { scale: 1 },
+    hover: {
+      scale: 1.05,
+      color: "#CDB937",
+      transition: { type: "spring", stiffness: 400, damping: 10 },
+    },
+    tap: { scale: 0.95 },
+  };
+
+  const navItems = [
+    "Home",
+    "About Us",
+    "Properties",
+    "Communities",
+    "3D Modeler",
+  ];
+
   const properties = [
     { type: "Front-Garage Houses", prefix: "front-garage-house" },
     { type: "Laned Houses", prefix: "laned-house" },
@@ -139,30 +139,36 @@ const PropertiesPage = () => {
   const houseItems = [
     {
       id: 1,
-      description: "Spacious 4-bedroom home with a modern garage.",
-      price: "$450,000",
-      beds: 4,
-      baths: 3,
-      sqft: 2200,
+      name: "The Willow",
+      description:
+        "Modern family home with spacious living areas and contemporary amenities.",
+      price: "$749,900",
+      beds: 1,
+      baths: "1 full + 1 half",
+      sqft: 2650,
       image: "/images/properties/front-garage-house-1.jpg.webp",
       featured: true,
     },
     {
       id: 2,
-      description: "Elegant 3-bedroom house with luxurious interiors.",
-      price: "$400,000",
-      beds: 3,
-      baths: 2.5,
-      sqft: 1800,
-      image: "/images/properties/laned-house-2.jpg.webp",
+      name: "The Ridgeview",
+      description:
+        "Luxurious 5-bedroom home with premium features and spacious layout.",
+      price: "$869,900",
+      beds: 5,
+      baths: 4,
+      sqft: 3200,
+      image: "/images/properties/front-garage-house-2.jpg.webp",
     },
     {
       id: 3,
-      description: "Affordable 2-bedroom house in a prime location.",
-      price: "$350,000",
-      beds: 2,
-      baths: 2,
-      sqft: 1500,
+      name: "The Summit",
+      description:
+        "Elegant home featuring dual master suites and modern amenities.",
+      price: "$819,900",
+      beds: 5,
+      baths: 4,
+      sqft: 2850,
       image: "/images/properties/town-house-3.jpg.webp",
     },
   ];
@@ -243,10 +249,15 @@ const PropertiesPage = () => {
   // Property Card Component
   const PropertyCard = ({ house, type, prefix }) => {
     const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-    const linkHref =
-      type === "Town Houses" && house.id === 1
-        ? "/property/canvas-house"
-        : `/coming-soon/`;
+    const linkHref = house.isComingSoon
+      ? "/coming-soon"
+      : type === "Front-Garage Houses" && house.id === 1
+      ? "/property/front-drive-homes/willow"
+      : type === "Front-Garage Houses" && house.id === 2
+      ? "/property/front-drive-homes/ridgeview"
+      : type === "Laned Houses" && house.id === 3
+      ? "/property/front-drive-homes/summit"
+      : "/coming-soon";
 
     return (
       <motion.div
@@ -268,10 +279,8 @@ const PropertiesPage = () => {
         )}
         <div className="relative h-64">
           <Image
-            src={
-              house.image || `/images/properties/${prefix}-${house.id}.jpg.webp`
-            }
-            alt={`${type} ${house.id}`}
+            src={house.image}
+            alt={house.name || `House ${house.id}`}
             fill
             className="object-cover transition-transform duration-500 hover:scale-105"
           />
@@ -283,7 +292,7 @@ const PropertiesPage = () => {
         </div>
         <div className="p-6">
           <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
-            {type} {house.id}
+            {house.name || `House ${house.id}`}
           </h3>
           <p className="text-gray-600 dark:text-gray-300 mb-4">
             {house.description}
@@ -690,14 +699,107 @@ const PropertiesPage = () => {
                 viewport={{ once: true }}
                 className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
               >
-                {houseItems.map((house) => (
-                  <PropertyCard
-                    key={`${prefix}-${house.id}`}
-                    house={house}
-                    type={type}
-                    prefix={prefix}
-                  />
-                ))}
+                {[
+                  // Front-Garage Houses
+                  ...(type === "Front-Garage Houses"
+                    ? [
+                        houseItems.find((house) => house.id === 1), // The Willow
+                        houseItems.find((house) => house.id === 2), // The Ridgeview
+                        {
+                          id: "coming-soon-1",
+                          name: "Coming Soon",
+                          description:
+                            "Exciting new property coming soon. Stay tuned for updates!",
+                          price: "TBD",
+                          beds: 0,
+                          baths: 0,
+                          sqft: 0,
+                          image: "/images/properties/coming-soon.jpg.webp",
+                          isComingSoon: true,
+                        },
+                      ]
+                    : []),
+                  // Laned Houses
+                  ...(type === "Laned Houses"
+                    ? [
+                        houseItems.find((house) => house.id === 3), // Town House
+                        {
+                          id: "coming-soon-2",
+                          name: "Coming Soon",
+                          description:
+                            "Exciting new property coming soon. Stay tuned for updates!",
+                          price: "TBD",
+                          beds: 0,
+                          baths: 0,
+                          sqft: 0,
+                          image: "/images/properties/coming-soon.jpg.webp",
+                          isComingSoon: true,
+                        },
+                        {
+                          id: "coming-soon-3",
+                          name: "Coming Soon",
+                          description:
+                            "Exciting new property coming soon. Stay tuned for updates!",
+                          price: "TBD",
+                          beds: 0,
+                          baths: 0,
+                          sqft: 0,
+                          image: "/images/properties/coming-soon.jpg.webp",
+                          isComingSoon: true,
+                        },
+                      ]
+                    : []),
+                  // Town Houses
+                  ...(type === "Town Houses"
+                    ? [
+                        {
+                          id: "coming-soon-4",
+                          name: "Coming Soon",
+                          description:
+                            "Exciting new property coming soon. Stay tuned for updates!",
+                          price: "TBD",
+                          beds: 0,
+                          baths: 0,
+                          sqft: 0,
+                          image: "/images/properties/coming-soon.jpg.webp",
+                          isComingSoon: true,
+                        },
+                        {
+                          id: "coming-soon-5",
+                          name: "Coming Soon",
+                          description:
+                            "Exciting new property coming soon. Stay tuned for updates!",
+                          price: "TBD",
+                          beds: 0,
+                          baths: 0,
+                          sqft: 0,
+                          image: "/images/properties/coming-soon.jpg.webp",
+                          isComingSoon: true,
+                        },
+                        {
+                          id: "coming-soon-6",
+                          name: "Coming Soon",
+                          description:
+                            "Exciting new property coming soon. Stay tuned for updates!",
+                          price: "TBD",
+                          beds: 0,
+                          baths: 0,
+                          sqft: 0,
+                          image: "/images/properties/coming-soon.jpg.webp",
+                          isComingSoon: true,
+                        },
+                      ]
+                    : []),
+                ]
+                  .filter(Boolean)
+                  .map((house) => (
+                    <PropertyCard
+                      key={`${prefix}-${house.id}`}
+                      house={house}
+                      type={type}
+                      prefix={prefix}
+                    />
+                  ))}
               </motion.div>
             </section>
           ))}
