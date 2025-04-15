@@ -595,8 +595,8 @@ const CommunitiesPage = () => {
         </div>
       </motion.header>
 
-      {/* Hero Section */}
-      <section className="relative h-[90vh] pt-16 sm:pt-20">
+      {/* Hero Section – Laptop/Desktop */}
+      <section className="relative h-[90vh] pt-16 sm:pt-20 hidden md:block">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -655,9 +655,51 @@ const CommunitiesPage = () => {
         </div>
       </section>
 
+      {/* Hero Section – Mobile */}
+      <section className="relative h-[100vh] pt-16 sm:pt-20 block md:hidden overflow-hidden">
+        <div className="absolute inset-0 w-full h-full z-0">
+          <Image
+            src="/images/comunew.jpg"
+            alt="Communities Background"
+            fill
+            sizes="100vw"
+            priority
+            className="object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/40 to-black/60 transition-theme" />
+        </div>
+
+        <div className="absolute inset-0 flex flex-col justify-center items-center text-center text-white z-10 px-4 sm:px-6">
+          <h2 className="font-serif text-4xl sm:text-5xl font-bold mb-6 drop-shadow-2xl">
+            Explore Our <span className="text-[#CDB937]">Communities</span>
+          </h2>
+          <p className="text-base sm:text-lg text-gray-200 dark:text-gray-300 max-w-xs sm:max-w-md mb-8 drop-shadow-md">
+            Discover vibrant neighborhoods designed for connection, comfort, and
+            modern living.
+          </p>
+          <div className="mt-6 flex flex-col gap-4 w-full max-w-xs sm:max-w-sm">
+            <Button
+              onClick={handleScrollToCommunities}
+              className="text-sm gap-2"
+            >
+              Browse Communities
+              <ArrowDown className="h-5 w-5" />
+            </Button>
+            <Button
+              href="/contact"
+              variant="secondary"
+              className="text-sm gap-2"
+            >
+              Contact Us
+              <ArrowRight className="h-5 w-5" />
+            </Button>
+          </div>
+        </div>
+      </section>
+
       {/* Communities Section */}
       <main
-        className="relative py-24 transition-theme bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A]"
+        className="relative py-24 transition-theme mb-0 bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A]"
         id="communities"
       >
         <div className="absolute inset-0 bg-[url('/images/communbg.jpg')] bg-cover bg-center opacity-10" />

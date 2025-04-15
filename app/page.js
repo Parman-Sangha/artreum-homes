@@ -630,7 +630,7 @@ const HomePage = () => {
 
       {/* Properties Section */}
       <section className="relative py-24 transition-theme bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A] md:py-12 sm:md:py-20 md:bg-fixed md:bg-cover md:bg-center md:bg-[url('/images/coming1.jpg')] mb-6 sm:mb-0">
-        <div className="absolute inset-0 bg-[url('/images/communbg.jpg')] bg-cover bg-center opacity-15 md:static md:opacity-100 md:inset-auto md:bg-none" />
+        <div className="absolute inset-0 bg-[url('/images/commun.jpg')] bg-cover bg-center opacity-10 md:static md:opacity-100 md:inset-auto md:bg-none" />
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -697,7 +697,7 @@ const HomePage = () => {
         id="communities"
         className="relative py-24 transition-theme bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A] md:py-12 sm:md:py-20 md:bg-fixed md:bg-cover md:bg-center md:bg-[url('/images/commun.jpg')] mb-6 sm:mb-0"
       >
-        <div className="absolute inset-0 bg-[url('/images/communbg.jpg')] bg-cover bg-center opacity-15 md:static md:opacity-100 md:inset-auto md:bg-none" />
+        <div className="absolute inset-0 bg-[url('/images/commun.jpg')] bg-cover bg-center opacity-10 md:static md:opacity-100 md:inset-auto md:bg-none" />
 
         <motion.div
           initial={{ opacity: 0 }}
@@ -816,8 +816,8 @@ const HomePage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section className="relative py-24 transition-theme bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A] md:py-12 sm:md:py-20 md:bg-fixed md:bg-cover md:bg-center md:bg-[url('/images/testimony.jpg')] mb-12 sm:mb-0">
-        <div className="absolute inset-0 bg-[url('/images/communbg.jpg')] bg-cover bg-center opacity-15 md:static md:opacity-100 md:inset-auto md:bg-none" />
+      <section className="relative py-24 transition-theme bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A] md:py-12 sm:md:py-20 md:bg-fixed md:bg-cover md:bg-center md:bg-[url('/images/testimony.jpg')] mb-6 sm:mb-0">
+        <div className="absolute inset-0 bg-[url('/images/commun.jpg')] bg-cover bg-center opacity-10 md:static md:opacity-100 md:inset-auto md:bg-none" />
 
         <motion.div
           initial={{ opacity: 0 }}
