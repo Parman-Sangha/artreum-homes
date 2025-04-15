@@ -7,6 +7,7 @@ import React, { useEffect, useState, useRef } from "react";
 import Link from "next/link";
 import { db } from "./firebase/firebaseConfig";
 import { collection, getDocs } from "firebase/firestore";
+import Footer from "./components/Footer";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -577,7 +578,6 @@ const HomePage = () => {
             className="object-cover w-full h-full brightness-75"
             src="/videos/vid.mp4"
             playsInline
-            // poster="/images/livingcan.jpeg"
           />
           <motion.div
             initial={{ opacity: 0 }}
@@ -620,7 +620,7 @@ const HomePage = () => {
             <Button
               href="/contact"
               variant="secondary"
-              className="px-8 sm:px-10 py-3.5 text-sm sm:text-base md:text-lg"
+              className="px-8 sm:px-10 py-3.5 text-sm sm:text-base md:text-lg text-white"
             >
               Contact Us
             </Button>
@@ -629,17 +629,17 @@ const HomePage = () => {
       </section>
 
       {/* Properties Section */}
-      <section
-        className="py-12 sm:py-20 bg-fixed bg-cover bg-center relative mb-6 sm:mb-0 transition-theme bg-white dark:bg-[#141414]"
-        style={{ backgroundImage: 'url("/images/communbg.jpg")' }}
-      >
+      <section className="relative py-24 transition-theme bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A] md:py-12 sm:md:py-20 md:bg-fixed md:bg-cover md:bg-center md:bg-[url('/images/coming1.jpg')] mb-6 sm:mb-0">
+        <div className="absolute inset-0 bg-[url('/images/communbg.jpg')] bg-cover bg-center opacity-15 md:static md:opacity-100 md:inset-auto md:bg-none" />
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="absolute inset-0 bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-60 backdrop-blur-sm transition-theme"
+          className="md:absolute md:inset-0 md:bg-white md:bg-opacity-30 md:dark:bg-black md:dark:bg-opacity-60 md:backdrop-blur-sm md:transition-theme"
         />
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl relative z-10">
+
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 relative z-10">
           <motion.div
             ref={propertiesRef}
             variants={fadeInUp}
@@ -647,10 +647,10 @@ const HomePage = () => {
             animate={propertiesInView ? "animate" : "initial"}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="font-serif text-4xl lg:text-6xl font-bold text-[#CDB937] mb-4">
+            <h2 className="font-serif text-4xl lg:text-6xl font-bold text-[#CDB937] mb-4 mt-4">
               What We Build
             </h2>
-            <p className="text-lg sm:text-xl text-gray-950 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
               Discover our handpicked selection of properties, blending modern
               design with timeless comfort.
             </p>
@@ -695,16 +695,18 @@ const HomePage = () => {
       {/* Communities Section */}
       <section
         id="communities"
-        className="py-12 sm:py-20 bg-fixed bg-cover bg-center relative mb-6 sm:mb-0 transition-theme bg-white dark:bg-[#141414]"
-        style={{ backgroundImage: 'url("/images/commun.jpg")' }}
+        className="relative py-24 transition-theme bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A] md:py-12 sm:md:py-20 md:bg-fixed md:bg-cover md:bg-center md:bg-[url('/images/commun.jpg')] mb-6 sm:mb-0"
       >
+        <div className="absolute inset-0 bg-[url('/images/communbg.jpg')] bg-cover bg-center opacity-15 md:static md:opacity-100 md:inset-auto md:bg-none" />
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="absolute inset-0 bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-60 backdrop-blur-sm transition-theme"
+          className="md:absolute md:inset-0 md:bg-white md:bg-opacity-30 md:dark:bg-black md:dark:bg-opacity-60 md:backdrop-blur-sm md:transition-theme"
         />
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl relative z-10">
+
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 relative z-10">
           <motion.div
             ref={communitiesRef}
             variants={fadeInUp}
@@ -712,10 +714,10 @@ const HomePage = () => {
             animate={communitiesInView ? "animate" : "initial"}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="font-serif text-4xl lg:text-6xl font-bold text-[#CDB937] mb-4">
+            <h2 className="font-serif text-4xl md:text-5xl lg:text-6xl font-bold text-[#CDB937] mb-4 mt-4">
               Our Communities
             </h2>
-            <p className="text-lg sm:text-xl text-gray-950 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
               Experience vibrant neighborhoods designed for connection,
               convenience, and tranquility.
             </p>
@@ -814,17 +816,17 @@ const HomePage = () => {
       </section>
 
       {/* Testimonials Section */}
-      <section
-        className="py-12 sm:py-20 bg-fixed bg-cover bg-center relative mb-12 sm:mb-0 transition-theme bg-white dark:bg-[#141414]"
-        style={{ backgroundImage: 'url("/images/testimony.jpg")' }}
-      >
+      <section className="relative py-24 transition-theme bg-gradient-to-b from-gray-50 to-gray-100 dark:from-[#141414] dark:to-[#1A1A1A] md:py-12 sm:md:py-20 md:bg-fixed md:bg-cover md:bg-center md:bg-[url('/images/testimony.jpg')] mb-12 sm:mb-0">
+        <div className="absolute inset-0 bg-[url('/images/communbg.jpg')] bg-cover bg-center opacity-15 md:static md:opacity-100 md:inset-auto md:bg-none" />
+
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="absolute inset-0 bg-white bg-opacity-30 dark:bg-black dark:bg-opacity-60 backdrop-blur-sm transition-theme"
+          className="md:absolute md:inset-0 md:bg-white md:bg-opacity-30 md:dark:bg-black md:dark:bg-opacity-60 md:backdrop-blur-sm md:transition-theme"
         />
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl relative z-10">
+
+        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 relative z-10">
           <motion.div
             ref={testimonialRef}
             variants={fadeInUp}
@@ -832,10 +834,10 @@ const HomePage = () => {
             animate={testimonialInView ? "animate" : "initial"}
             className="text-center mb-12 sm:mb-16"
           >
-            <h2 className="font-serif text-4xl lg:text-6xl font-bold text-[#CDB937] mb-4">
+            <h2 className="font-serif text-4xl lg:text-6xl font-bold text-[#CDB937] mb-4 mt-4">
               Testimonials
             </h2>
-            <p className="text-lg sm:text-xl text-gray-950 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
+            <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-3xl mx-auto">
               Hear from our valued clients about their exceptional experiences
               with Artreum Homes.
             </p>
@@ -911,149 +913,7 @@ const HomePage = () => {
       </AnimatePresence>
 
       {/* Footer */}
-      <footer className="py-12 transition-theme bg-gradient-to-b from-gray-100 to-white dark:bg-gradient-to-b dark:from-black dark:to-black border-t dark:border-gray-700">
-        <div className="container mx-auto px-4 md:px-8 lg:px-12 xl:px-16 max-w-screen-2xl">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 mb-8">
-            <div className="lg:col-span-2">
-              <Image
-                src="/images/logo1.png"
-                alt="Artreum Homes"
-                width={120}
-                height={48}
-                className="mb-6"
-              />
-              <h4 className="text-lg font-bold text-[#CDB937] mb-4">
-                Subscribe to Our Newsletter
-              </h4>
-              <form className="flex flex-col sm:flex-row gap-2">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="px-4 py-2 bg-gray-200 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-md focus:outline-none focus:border-[#CDB937] transition duration-300 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.05, backgroundColor: "#e3cc50" }}
-                  whileTap={{ scale: 0.95 }}
-                  className="px-4 py-2 bg-[#CDB937] text-black font-bold rounded-md hover:bg-[#e3cc50] transition duration-200"
-                >
-                  Subscribe
-                </motion.button>
-              </form>
-            </div>
-            <div className="grid grid-cols-2 lg:grid-cols-4 col-span-1 lg:col-span-4 gap-8">
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">Home</h4>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  {[
-                    "Hero Section",
-                    "Features",
-                    "Properties",
-                    "Testimonials",
-                    "FAQs",
-                  ].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">About Us</h4>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  {[
-                    "Our Story",
-                    "Our Work",
-                    "How It Works",
-                    "Our Team",
-                    "Our Clients",
-                  ].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">Properties</h4>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  {["Portfolio", "Categories"].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="space-y-4">
-                <h4 className="text-lg font-bold text-[#CDB937]">Services</h4>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-                  {[
-                    "Valuation Mastery",
-                    "Strategic Marketing",
-                    "Negotiation Wizardry",
-                    "Closing Success",
-                    "Property Management",
-                  ].map((item) => (
-                    <li key={item}>
-                      <Link
-                        href="#"
-                        className="hover:text-[#CDB937] transition duration-200"
-                      >
-                        {item}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          </div>
-          <div className="border-t border-gray-300 dark:border-gray-700 pt-8 mt-8">
-            <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm text-gray-600 dark:text-gray-400 mb-4 md:mb-0">
-                <Link
-                  href="/terms"
-                  className="hover:text-[#CDB937] transition duration-200"
-                >
-                  Terms & Conditions
-                </Link>
-              </div>
-              <div className="flex space-x-6">
-                {[
-                  { icon: Facebook, href: "https://facebook.com" },
-                  { icon: Instagram, href: "https://instagram.com" },
-                  { icon: Twitter, href: "https://x.com" },
-                ].map(({ icon: Icon, href }) => (
-                  <motion.a
-                    key={href}
-                    href={href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    whileHover={{ scale: 1.1, color: "#CDB937" }}
-                    whileTap={{ scale: 0.9 }}
-                    className="text-gray-600 dark:text-gray-400 hover:text-[#CDB937] transition duration-200"
-                  >
-                    <Icon size={24} />
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
   );
 };

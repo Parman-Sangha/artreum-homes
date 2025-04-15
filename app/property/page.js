@@ -226,6 +226,12 @@ const PropertiesPage = () => {
         background-size: cover;
         background-position: center;
       }
+        /* Fix for iPhones and small screens */
+  @media (max-width: 767px) {
+    .parallax-bg {
+      background-size: auto 100%;
+    }
+  }
     `;
     document.head.appendChild(style);
     return () => {
@@ -588,15 +594,9 @@ const PropertiesPage = () => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1 }}
-          className="absolute inset-0"
+          className="absolute inset-0 parallax-bg"
+          style={{ backgroundImage: `url(/images/coming1.jpg)` }}
         >
-          <Image
-            src="/images/coming1.jpg"
-            alt="Hero Background"
-            fill
-            className="object-contain object-center"
-            priority
-          />
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
