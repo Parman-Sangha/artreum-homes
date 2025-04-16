@@ -1023,7 +1023,7 @@ const RidgeviewHouse = () => {
           >
             <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
               <iframe
-                src="/images/summit.pdf"
+                src="/images/Summit.pdf"
                 className="w-full h-[600px] border-0 rounded-lg"
                 title="Floor Plan PDF"
               />
