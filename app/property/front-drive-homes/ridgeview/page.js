@@ -206,7 +206,7 @@ const RidgeviewHouse = () => {
     "Two pantries in kitchen",
   ];
 
-  const housePrice = 869900;
+  const housePrice = 1250000;
 
   const { ref: descriptionRef, inView: descriptionInView } = useInView({
     triggerOnce: true,
@@ -716,7 +716,7 @@ const RidgeviewHouse = () => {
               transition={{ delay: 0.5, duration: 0.8 }}
               className="text-2xl md:text-3xl lg:text-4xl font-light text-[#CDB937] drop-shadow-md"
             >
-              $869,900
+              $1,250,000
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
@@ -937,7 +937,7 @@ const RidgeviewHouse = () => {
               </ul>
               <div className="mt-8 pt-6 border-t border-gray-300 dark:border-gray-700">
                 <p className="text-2xl font-bold text-[#CDB937]">
-                  Starting at $869,900
+                  Starting at $1,250,000
                 </p>
               </div>
             </motion.div>
@@ -1023,7 +1023,7 @@ const RidgeviewHouse = () => {
           >
             <div className="aspect-w-16 aspect-h-9 rounded-lg overflow-hidden">
               <iframe
-                src="/images/floorplan.pdf"
+                src="/images/summit.pdf"
                 className="w-full h-[600px] border-0 rounded-lg"
                 title="Floor Plan PDF"
               />

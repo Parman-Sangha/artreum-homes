@@ -154,7 +154,7 @@ const PropertiesPage = () => {
       name: "The Ridgeview",
       description:
         "Luxurious 5-bedroom home with premium features and spacious layout.",
-      price: "$869,900",
+      price: "$1,250,000",
       beds: 5,
       baths: 4,
       sqft: 3200,
