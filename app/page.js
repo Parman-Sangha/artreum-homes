@@ -734,7 +734,7 @@ const HomePage = () => {
                 scale: 1.03,
                 boxShadow: "0 10px 25px -5px rgba(205, 185, 55, 0.4)",
               }}
-              className="bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-70 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700 transition-theme"
+              className="bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-70 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700 transition-theme flex flex-col h-full"
             >
               <div className="relative h-56 sm:h-64 md:h-72">
                 <Image
@@ -747,11 +747,11 @@ const HomePage = () => {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-0 transition-opacity duration-300" />
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h4 className="font-serif text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
                   Waterford Estates
                 </h4>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base line-clamp-2">
+                <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base line-clamp-2 flex-grow">
                   A suburban oasis with tree-lined roads and minimal traffic,
                   perfect for a peaceful lifestyle.
                 </p>
@@ -769,7 +769,7 @@ const HomePage = () => {
                 scale: 1.03,
                 boxShadow: "0 10px 25px -5px rgba(205, 185, 55, 0.4)",
               }}
-              className="bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-70 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700 transition-theme"
+              className="bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-70 rounded-lg overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700 transition-theme flex flex-col h-full"
             >
               <div className="relative h-56 sm:h-64 md:h-72">
                 <Image
@@ -782,11 +782,11 @@ const HomePage = () => {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-20 hover:bg-opacity-0 transition-opacity duration-300" />
               </div>
-              <div className="p-6">
+              <div className="p-6 flex flex-col flex-grow">
                 <h4 className="font-serif text-xl sm:text-2xl font-bold text-gray-900 dark:text-white mb-2">
                   Langdon
                 </h4>
-                <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base line-clamp-2">
+                <p className="text-gray-600 dark:text-gray-300 mb-4 text-sm sm:text-base line-clamp-2 flex-grow">
                   A scenic retreat with quiet roads and rural charm, blending
                   convenience with serenity.
                 </p>
