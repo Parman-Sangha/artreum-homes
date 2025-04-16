@@ -140,7 +140,7 @@ const ThreeDBuilderPage = () => {
           className="absolute inset-0"
         >
           <Image
-            src="/images/Screenshot 2025-04-15 212835 (1).png"
+            src="/images/3d.jpg"
             alt="3D Builder Preview"
             fill
             className="object-cover brightness-75"
