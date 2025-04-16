@@ -2,6 +2,7 @@ import { Playfair_Display, DM_Sans } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "./context/AuthContext"; // Ensure AuthProvider is imported
 import { ThemeProvider } from "./context/ThemeContext";
+import ChatBot from "./components/ChatBot";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -73,7 +74,10 @@ export default function RootLayout({ children }) {
         className={`${playfair.variable} ${dmSans.variable} font-sans antialiased`}
       >
         <AuthProvider>
-          <ThemeProvider>{children}</ThemeProvider>
+          <ThemeProvider>
+            {children}
+            <ChatBot />
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>
