@@ -63,7 +63,7 @@ const ChatBot = () => {
     <>
       <motion.button
         onClick={() => setIsOpen(!isOpen)}
-        className="fixed bottom-6 right-6 z-50 bg-[#CDB937] text-black p-4 rounded-full shadow-lg hover:bg-[#e3cc50] transition-all duration-300"
+        className="fixed bottom-36 right-7 z-50 bg-[#CDB937] text-black p-4 rounded-full shadow-lg hover:bg-[#e3cc50] transition-all duration-300"
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
       >
@@ -77,7 +77,7 @@ const ChatBot = () => {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ duration: 0.2 }}
-            className="fixed bottom-24 right-6 w-96 h-[600px] bg-white dark:bg-[#1A1A1A] rounded-lg shadow-xl z-50 flex flex-col"
+            className="fixed bottom-52 right-12 w-96 h-[600px] bg-white dark:bg-[#1A1A1A] rounded-lg shadow-xl z-50 flex flex-col"
           >
             <div className="p-4 border-b border-gray-200 dark:border-gray-700">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
