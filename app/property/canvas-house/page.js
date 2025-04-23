@@ -462,6 +462,8 @@ const CanvasHouse = () => {
                 width={scrolled ? 150 : 180}
                 height={scrolled ? 60 : 72}
                 className="transition-all duration-300"
+                priority
+                quality={90}
               />
             </Link>
           </motion.div>
@@ -762,9 +764,11 @@ const CanvasHouse = () => {
                       "/placeholder.svg"
                     }
                     alt={propertyImages[currentImageIndex].title}
-                    layout="fill"
-                    objectFit="cover"
-                    className="rounded-lg"
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
+                    className="object-cover rounded-lg"
+                    priority={currentImageIndex === 0}
+                    quality={85}
                   />
                 </motion.div>
               </AnimatePresence>
@@ -814,9 +818,10 @@ const CanvasHouse = () => {
                     <Image
                       src={image.path || "/placeholder.svg"}
                       alt={image.title}
-                      layout="fill"
-                      objectFit="cover"
-                      className="rounded-md"
+                      fill
+                      sizes="(max-width: 768px) 25vw, (max-width: 1200px) 20vw, 15vw"
+                      className="object-cover rounded-md"
+                      quality={75}
                     />
                   </div>
                 </motion.div>

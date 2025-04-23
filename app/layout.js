@@ -17,12 +17,23 @@ const dmSans = DM_Sans({
 });
 
 export const metadata = {
-  title: "Artreum Homes | Luxury Real Estate & Custom Home Builder",
+  metadataBase: new URL("https://artreumhomes.com"),
+  title: {
+    default: "Artreum Homes | Luxury Real Estate & Custom Home Builder",
+    template: "%s | Artreum Homes",
+  },
   description:
     "Discover luxury custom homes and premium real estate with Artreum Homes. We specialize in building and selling high-end properties with innovative designs and exceptional craftsmanship.",
   keywords:
-    "luxury homes, custom homes, real estate, home builder, luxury real estate, premium properties, Artreum Homes",
+    "luxury homes, custom homes, real estate, home builder, luxury real estate, premium properties, Artreum Homes, Calgary real estate, custom home builder Calgary",
   authors: [{ name: "Artreum Homes" }],
+  creator: "Artreum Homes",
+  publisher: "Artreum Homes",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   openGraph: {
     title: "Artreum Homes | Luxury Real Estate & Custom Home Builder",
     description:
@@ -60,7 +71,9 @@ export const metadata = {
     },
   },
   verification: {
-    google: "your-google-verification-code",
+    google: "your-google-site-verification",
+    yandex: "your-yandex-verification",
+    yahoo: "your-yahoo-verification",
   },
   alternates: {
     canonical: "https://artreumhomes.com",
