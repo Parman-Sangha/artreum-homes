@@ -751,7 +751,7 @@ const PropertiesPage = () => {
                           beds: 0,
                           baths: 0,
                           sqft: 0,
-                          image: "/images/properties/coming-soon.jpg.webp",
+                          image: "/images/comcard.PNG",
                           isComingSoon: true,
                         },
                       ]
@@ -769,7 +769,7 @@ const PropertiesPage = () => {
                           beds: 0,
                           baths: 0,
                           sqft: 0,
-                          image: "/images/properties/coming-soon.jpg.webp",
+                          image: "/images/comcard.PNG",
                           isComingSoon: true,
                         },
                         {
@@ -781,7 +781,7 @@ const PropertiesPage = () => {
                           beds: 0,
                           baths: 0,
                           sqft: 0,
-                          image: "/images/properties/coming-soon.jpg.webp",
+                          image: "/images/comcard.PNG",
                           isComingSoon: true,
                         },
                       ]
@@ -798,7 +798,7 @@ const PropertiesPage = () => {
                           beds: 0,
                           baths: 0,
                           sqft: 0,
-                          image: "/images/properties/coming-soon.jpg.webp",
+                          image: "/images/comcard.PNG",
                           isComingSoon: true,
                         },
                         {
@@ -810,7 +810,7 @@ const PropertiesPage = () => {
                           beds: 0,
                           baths: 0,
                           sqft: 0,
-                          image: "/images/properties/coming-soon.jpg.webp",
+                          image: "/images/comcard.PNG",
                           isComingSoon: true,
                         },
                         {
@@ -822,7 +822,7 @@ const PropertiesPage = () => {
                           beds: 0,
                           baths: 0,
                           sqft: 0,
-                          image: "/images/properties/coming-soon.jpg.webp",
+                          image: "/images/comcard.PNG",
                           isComingSoon: true,
                         },
                       ]
